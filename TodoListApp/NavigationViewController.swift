@@ -11,6 +11,7 @@ class NavigationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ttt")
 
         // Do any additional setup after loading the view.
     }
