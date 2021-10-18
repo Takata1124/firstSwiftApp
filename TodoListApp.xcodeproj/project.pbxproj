@@ -17,6 +17,7 @@
 		688895CE271B312A002102E7 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895CD271B312A002102E7 /* NavigationViewController.swift */; };
 		688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895D7271C9B18002102E7 /* TableViewCell.swift */; };
 		688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688895D8271C9B18002102E7 /* TableViewCell.xib */; };
+		688895DC271DA173002102E7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DB271DA173002102E7 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		688895CD271B312A002102E7 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		688895D7271C9B18002102E7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		688895D8271C9B18002102E7 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		688895DB271DA173002102E7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				688895BB271AE3F5002102E7 /* ViewController.swift */,
 				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				688895CD271B312A002102E7 /* NavigationViewController.swift */,
+				688895DB271DA173002102E7 /* SettingViewController.swift */,
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
 				688895C2271AE3F6002102E7 /* LaunchScreen.storyboard */,
 				688895C0271AE3F6002102E7 /* Assets.xcassets */,
@@ -156,6 +159,7 @@
 				688895B8271AE3F5002102E7 /* AppDelegate.swift in Sources */,
 				688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */,
 				688895CE271B312A002102E7 /* NavigationViewController.swift in Sources */,
+				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
 				688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

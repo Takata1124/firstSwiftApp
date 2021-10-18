@@ -36,17 +36,8 @@
                                     <action selector="selectfunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bd7-de-UgC"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="🗂新規リストの追加" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="huJ-Bu-6ie">
-                                <rect key="frame" x="0.0" y="418" width="414" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="PfV-PL-rD9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fis-BA-lZG">
-                                <rect key="frame" x="0.0" y="188" width="414" height="230"/>
+                                <rect key="frame" x="0.0" y="188" width="414" height="216"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
@@ -87,6 +78,7 @@
                                 </state>
                                 <connections>
                                     <action selector="deleteButtonfunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6gg-Va-vSU"/>
+                                    <action selector="settingfunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Jx-43-cYZ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -94,41 +86,30 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7sj-jA-XC0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0K6-pH-yJW"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Cr-Rv-GSF"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="top" secondItem="Fis-BA-lZG" secondAttribute="bottom" id="9fK-E1-ZkC"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="top" secondItem="Wts-Bs-8Og" secondAttribute="bottom" id="9k8-RU-uPH"/>
                             <constraint firstItem="Wts-Bs-8Og" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="BUQ-tt-GKt"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="top" secondItem="Fis-BA-lZG" secondAttribute="bottom" id="BlV-Dj-FVM"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="10" id="CE2-Lb-mJE"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ELH-Ou-vYl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wts-Bs-8Og" secondAttribute="trailing" id="EY2-aj-jhx"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="FyM-ky-Xij"/>
                             <constraint firstItem="6Rn-lw-Jo9" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="HqL-sC-MVo"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="J44-DU-6o8"/>
                             <constraint firstItem="7sj-jA-XC0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="SDi-Ga-EFb"/>
                             <constraint firstItem="7sj-jA-XC0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sn8-zx-vFd"/>
                             <constraint firstItem="6Rn-lw-Jo9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="150" id="Y8Y-hQ-ttG"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yaw-5e-pbJ"/>
                             <constraint firstItem="Wts-Bs-8Og" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aPk-iF-IVD"/>
                             <constraint firstItem="7sj-jA-XC0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="cOk-ae-uOu"/>
                             <constraint firstItem="7sj-jA-XC0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gC4-ff-jw5"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="top" secondItem="Fis-BA-lZG" secondAttribute="bottom" id="gMB-kx-Bcc"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hiS-i6-O4B"/>
                             <constraint firstItem="Wts-Bs-8Og" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hzE-e0-X8l"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="huJ-Bu-6ie" secondAttribute="trailing" id="ieD-cc-CrK"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-150" id="mSZ-pJ-KRf"/>
-                            <constraint firstItem="huJ-Bu-6ie" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rWg-Qn-E82"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="yum-bC-nWm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
-                        <outlet property="newText" destination="huJ-Bu-6ie" id="MwQ-VT-xHA"/>
                         <outlet property="selectButton" destination="7sj-jA-XC0" id="dDB-i8-2i4"/>
                         <outlet property="selectLabel" destination="Wts-Bs-8Og" id="Fcj-WH-kuh"/>
                         <outlet property="selectPicker" destination="Fis-BA-lZG" id="zYS-Wi-Tvj"/>
                         <segue destination="uh1-el-Pvj" kind="show" identifier="goNext" id="yrv-BS-qyw"/>
-                        <segue destination="Pug-S9-EdS" kind="show" id="LKg-Sc-Qcr"/>
+                        <segue destination="Pug-S9-EdS" kind="show" identifier="goSetting" id="LKg-Sc-Qcr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -195,21 +176,58 @@
             </objects>
             <point key="canvasLocation" x="1815.9420289855075" y="65.625"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting View Controller-->
         <scene sceneID="Bp5-qN-WWV">
             <objects>
-                <viewController id="Pug-S9-EdS" sceneMemberID="viewController">
+                <viewController id="Pug-S9-EdS" customClass="SettingViewController" customModule="TodoListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5G2-8A-IW1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="8a58e4a3bc04064a53bf0f3ac1a64cff_413ae506c2690be5fe553cada81c0e50_raw" translatesAutoresizingMaskIntoConstraints="NO" id="ITz-w6-j2t">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVS-iF-PFU">
+                                <rect key="frame" x="16" y="794" width="382" height="38"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="ToDoList"/>
+                                <connections>
+                                    <action selector="backbutton:" destination="Pug-S9-EdS" eventType="touchUpInside" id="dV8-wc-uWB"/>
+                                    <action selector="inputTextButton:" destination="uh1-el-Pvj" eventType="touchUpInside" id="3NJ-YM-LZf"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="🗂新規リストの追加" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LH3-pq-Dxm">
+                                <rect key="frame" x="100.5" y="408" width="213.5" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="kbq-Tw-x53"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="N0p-WG-Yyt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="N0p-WG-Yyt" firstAttribute="trailing" secondItem="JVS-iF-PFU" secondAttribute="trailing" constant="16" id="DNp-W8-wI4"/>
+                            <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="Jxm-ck-5F4"/>
+                            <constraint firstItem="N0p-WG-Yyt" firstAttribute="bottom" secondItem="JVS-iF-PFU" secondAttribute="bottom" constant="30" id="Zk7-4g-EkU"/>
+                            <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" id="d0H-Aw-guv"/>
+                            <constraint firstItem="JVS-iF-PFU" firstAttribute="leading" secondItem="N0p-WG-Yyt" secondAttribute="leading" constant="16" id="ggZ-c4-euM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="S0P-CT-HGf"/>
+                    <connections>
+                        <outlet property="newText" destination="LH3-pq-Dxm" id="Ymu-ip-ZWD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ciD-h2-HHP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="939" y="838"/>
+            <point key="canvasLocation" x="937.68115942028987" y="837.72321428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="keo-CQ-ogM">

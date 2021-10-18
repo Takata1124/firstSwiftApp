@@ -25,13 +25,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         // Do any additional setup after loading the view.
         
         selectButton.layer.cornerRadius = 100
-        selectButton.layer.borderColor = UIColor.lightGray.cgColor
+        selectButton.layer.borderColor = UIColor.black.cgColor
         selectButton.layer.borderWidth = 1.0
         selectButton.isEnabled = false
         
-        newText.layer.borderColor = UIColor.lightGray.cgColor
-        newText.layer.borderWidth = 1.0
-        newText.delegate = self
+//        newText.layer.borderColor = UIColor.lightGray.cgColor
+//        newText.layer.borderWidth = 1.0
+//        newText.delegate = self
+//        newText.isUserInteractionEnabled = false
+//        newText.isHidden = true
 //        newText.layer.cornerRadius = 20
         
 //        selectPicker.layer.borderColor = UIColor.black.cgColor
@@ -44,8 +46,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         selectPicker.selectRow(1, inComponent: 1, animated: false)
         
         selectLabel.text = "カテゴリー/タスク： "
-        selectLabel.layer.borderColor = UIColor.lightGray.cgColor
-        selectLabel.layer.borderWidth = 1.0
+//        selectLabel.layer.borderColor = UIColor.lightGray.cgColor
+//        selectLabel.layer.borderWidth = 1.0
         
         title = "ToDoList"
     }
@@ -56,6 +58,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBAction func selectfunc(_ sender: Any) {
         
         performSegue(withIdentifier: "goNext", sender: nil)
+    }
+    
+    @IBAction func settingfunc(_ sender: Any) {
+        
+        performSegue(withIdentifier: "goSetting", sender: nil)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,7 +81,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             
             dataList.append(searchkey)
         }
-        selectPicker.reloadAllComponents()
+        print(dataList)
+//        selectPicker.reloadAllComponents()
         textField.text = ""
         return true
     }
@@ -132,7 +141,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
         guard let select_00 = select_0 else {return}
         guard let select_11 = select_1 else {return}
-        selectLabel.text = "カテゴリー/タスク： \n\(select_00)/\(select_11)"
+        selectLabel.text = /*"カテゴリー/タスク： \n*/"\(select_00)/\(select_11)"
+    }
+    
+    func Printfunc() {
+        print("Hello")
     }
 }
 

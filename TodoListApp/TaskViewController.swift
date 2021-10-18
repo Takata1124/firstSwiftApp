@@ -15,7 +15,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     @IBAction func inputTextButton(_ sender: Any) {
         
         navigationController?.popViewController(animated: true)
-        
+
     }
     
     var textVC: String?
@@ -40,7 +40,6 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
