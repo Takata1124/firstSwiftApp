@@ -19,7 +19,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     }
     
     var textVC: String?
-    var TODO = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
+    var TODO: [String?] = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,11 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         messageText.layer.borderWidth = 1.0
         messageText.layer.cornerRadius = 20
         messageText.delegate = self
+        
         messageTable.delegate = self
         messageTable.dataSource = self
+        
+        messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         guard let untext = textVC else { return }
         
@@ -69,7 +72,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
 extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,8 +80,8 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "celled", for: indexPath)
-        cell.textLabel!.text = TODO[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
+        cell.cellText.text = TODO[indexPath.row]
         return cell
     }
 }
