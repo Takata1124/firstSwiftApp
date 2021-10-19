@@ -7,24 +7,37 @@
 
 import UIKit
 
-class SettingViewController: UIViewController, UITextFieldDelegate {
+class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate {
 
     @IBOutlet weak var newText: UITextField!
+    @IBOutlet weak var categoryText: UITextField!
+    @IBOutlet weak var navbar: UINavigationBar!
     
     let viewclass = ViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navbar?.delegate = self
         newText.delegate = viewclass
-        viewclass.Printfunc()
+//        viewclass.Printfunc()
         // Do any additional setup after loading the view.
+        
+        navbar.barTintColor = .rgb(red: 200, green: 200, blue: 200)
+        navbar.isTranslucent = true
+        navbar.titleTextAttributes = [
+            // 文字の色
+                .foregroundColor: UIColor.black
+            ]
     }
     
     @IBAction func backbutton(_ sender: Any) {
 
-        navigationController?.popViewController(animated: true)
-
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
     
     /*

@@ -14,7 +14,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func inputTextButton(_ sender: Any) {
         
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
 
     }
     
@@ -34,9 +34,9 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         
         messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
-        guard let untext = textVC else { return }
+//        guard let untext = textVC else { return }
         
-        title = "\(untext)"
+//        title = "\(untext)"
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
