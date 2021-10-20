@@ -20,6 +20,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3K-z7-rvz">
+                                <rect key="frame" x="292" y="633" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="aLr-0P-Qf4"/>
+                                    <constraint firstAttribute="height" constant="30" id="il6-g0-UsB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="折れ線と棒グラフのアイコン素材">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                            </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6i-ga-XPU">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
@@ -43,56 +56,58 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fis-BA-lZG">
-                                <rect key="frame" x="30" y="290" width="354" height="216"/>
+                                <rect key="frame" x="30" y="340" width="354" height="216"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wts-Bs-8Og">
-                                <rect key="frame" x="57" y="148" width="300" height="100"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UY9-IB-BlO">
+                                <rect key="frame" x="92" y="633" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="41V-YD-GsB"/>
-                                    <constraint firstAttribute="height" constant="100" id="vkE-2h-ueN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3K-z7-rvz">
-                                <rect key="frame" x="292" y="633" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="aLr-0P-Qf4"/>
-                                    <constraint firstAttribute="height" constant="30" id="il6-g0-UsB"/>
+                                    <constraint firstAttribute="width" constant="30" id="7g0-2I-ylx"/>
+                                    <constraint firstAttribute="height" constant="30" id="IWA-Rm-RX1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="折れ線と棒グラフのアイコン素材">
+                                <state key="normal" image="スタンダードなゴミ箱アイコン">
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="deleteButtonfunc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eS9-Tt-9qZ"/>
+                                </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5085302_s" translatesAutoresizingMaskIntoConstraints="NO" id="YRK-mn-7tc">
+                                <rect key="frame" x="30" y="173" width="354" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="XKK-FA-jOD"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5up-pt-sm7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YRK-mn-7tc" secondAttribute="trailing" constant="30" id="9hg-R7-cci"/>
                             <constraint firstItem="z3K-z7-rvz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="A2Y-Sd-VZr"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bbd-Q6-xVy"/>
+                            <constraint firstItem="YRK-mn-7tc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fwa-Mr-tFZ"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JdS-Nf-9uI"/>
-                            <constraint firstItem="Fis-BA-lZG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="JnA-98-8D3"/>
-                            <constraint firstItem="Wts-Bs-8Og" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Pbb-Jz-3Um"/>
-                            <constraint firstItem="Wts-Bs-8Og" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-250" id="SMV-Do-RWa"/>
+                            <constraint firstItem="UY9-IB-BlO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="NDn-Ar-Ssf"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TRE-wC-qKQ"/>
+                            <constraint firstItem="UY9-IB-BlO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="Vpn-sU-yio"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="aVK-yN-a71"/>
+                            <constraint firstItem="Fis-BA-lZG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bi1-BV-pmb"/>
+                            <constraint firstItem="YRK-mn-7tc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-200" id="k9h-21-F31"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oLB-CK-y7W"/>
+                            <constraint firstItem="YRK-mn-7tc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="ul9-OT-CBz"/>
                             <constraint firstItem="z3K-z7-rvz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="ycO-Rl-FcQ"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="yum-bC-nWm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
+                        <outlet property="delete_b" destination="UY9-IB-BlO" id="ExL-sp-aNi"/>
                         <outlet property="navbar_t" destination="g6i-ga-XPU" id="Cdg-GW-ahP"/>
-                        <outlet property="selectLabel" destination="Wts-Bs-8Og" id="Fcj-WH-kuh"/>
                         <outlet property="selectPicker" destination="Fis-BA-lZG" id="zYS-Wi-Tvj"/>
                         <segue destination="uh1-el-Pvj" kind="show" identifier="goNext" id="yrv-BS-qyw"/>
                         <segue destination="Pug-S9-EdS" kind="presentation" identifier="goSetting" id="Zks-3j-JqR"/>
@@ -183,15 +198,6 @@
                                 <rect key="frame" x="0.0" y="-54" width="414" height="950"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="🗂 新規リストの追加" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xHQ-2G-4O3">
-                                <rect key="frame" x="97.5" y="258" width="219" height="80"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="Mnn-iU-cAI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVS-iF-PFU">
                                 <rect key="frame" x="16" y="794" width="382" height="38"/>
                                 <color key="backgroundColor" red="0.78574085884353728" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -226,8 +232,6 @@
                         <constraints>
                             <constraint firstItem="N0p-WG-Yyt" firstAttribute="trailing" secondItem="JVS-iF-PFU" secondAttribute="trailing" constant="16" id="DNp-W8-wI4"/>
                             <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="Jxm-ck-5F4"/>
-                            <constraint firstItem="xHQ-2G-4O3" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" constant="-150" id="Msj-hL-3xa"/>
-                            <constraint firstItem="xHQ-2G-4O3" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="UBW-7O-Lyf"/>
                             <constraint firstItem="N0p-WG-Yyt" firstAttribute="bottom" secondItem="JVS-iF-PFU" secondAttribute="bottom" constant="30" id="Zk7-4g-EkU"/>
                             <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" id="d0H-Aw-guv"/>
                             <constraint firstItem="JVS-iF-PFU" firstAttribute="leading" secondItem="N0p-WG-Yyt" secondAttribute="leading" constant="16" id="ggZ-c4-euM"/>
@@ -235,7 +239,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="S0P-CT-HGf"/>
                     <connections>
-                        <outlet property="categoryText" destination="xHQ-2G-4O3" id="6tP-X6-9Li"/>
                         <outlet property="navbar" destination="448-5A-cw2" id="4JJ-PJ-DVO"/>
                         <outlet property="newText" destination="LH3-pq-Dxm" id="Ymu-ip-ZWD"/>
                     </connections>
@@ -246,8 +249,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="5085302_s" width="640" height="427"/>
         <image name="8a58e4a3bc04064a53bf0f3ac1a64cff_413ae506c2690be5fe553cada81c0e50_raw" width="1000" height="1500"/>
         <image name="Image" width="64" height="64"/>
+        <image name="スタンダードなゴミ箱アイコン" width="256" height="256"/>
         <image name="折れ線と棒グラフのアイコン素材" width="256" height="256"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

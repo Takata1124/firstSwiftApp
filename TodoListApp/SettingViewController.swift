@@ -10,7 +10,7 @@ import UIKit
 class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate {
 
     @IBOutlet weak var newText: UITextField!
-    @IBOutlet weak var categoryText: UITextField!
+//    @IBOutlet weak var categoryText: UITextField!
     @IBOutlet weak var navbar: UINavigationBar!
     
     let viewclass = ViewController()

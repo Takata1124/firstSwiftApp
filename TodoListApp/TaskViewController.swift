@@ -7,10 +7,11 @@
 
 import UIKit
 
-class TaskViewController: UIViewController, UITextViewDelegate {
+class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarDelegate {
     
     @IBOutlet weak var messageTable: UITableView!
     @IBOutlet weak var messageText: UITextView!
+    @IBOutlet weak var navbar_task: UINavigationBar!
     
     @IBAction func inputTextButton(_ sender: Any) {
         
@@ -20,6 +21,7 @@ class TaskViewController: UIViewController, UITextViewDelegate {
     
     var textVC: String?
     var TODO: [String?] = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
+    let viewclass = ViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,15 @@ class TaskViewController: UIViewController, UITextViewDelegate {
         
         messageTable.delegate = self
         messageTable.dataSource = self
-        
         messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
+        
+        navbar_task?.delegate = viewclass
+        navbar_task?.barTintColor = .rgb(red: 200, green: 200, blue: 200)
+        navbar_task?.isTranslucent = true
+        navbar_task?.titleTextAttributes = [
+            // 文字の色
+                .foregroundColor: UIColor.black
+            ]
         
 //        guard let untext = textVC else { return }
         

@@ -13,14 +13,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //    var categoryList : [String] = ["apple", "banana","chocolate"]
     var searchkey : String?
     var selectkey : String?
+    var delete_button: Bool = false
+    
+    var delete_count: Int = 0
 
 //    @IBOutlet weak var selectButton: UIButton!
 //    @IBOutlet weak var newText: UITextField!
     @IBOutlet weak var selectPicker: UIPickerView!
-    @IBOutlet weak var selectLabel: UILabel!
+//    @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var navbar_t: UINavigationBar!
+    @IBOutlet weak var delete_b: UIButton!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
@@ -47,11 +52,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        selectPicker.selectRow(0, inComponent: 0, animated: false)
 //        selectPicker.selectRow(1, inComponent: 1, animated: false)
         
-        selectLabel.text = "カテゴリー/タスク： "
+//        selectLabel.text = "カテゴリー"
 //        selectLabel.layer.borderColor = UIColor.lightGray.cgColor
 //        selectLabel.layer.borderWidth = 1.0
         
-        self.title = "ToDoList"
+        navbar_t.items![0].title = "Category"
         
         navbar_t?.delegate = self
         navbar_t.barTintColor = .rgb(red: 200, green: 200, blue: 200)
@@ -66,6 +71,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
     
     @IBAction func deleteButtonfunc(_ sender: Any) {
+        
+        if delete_count == 0 {
+            
+            delete_button = true
+            delete_b.backgroundColor = UIColor(red:0.96, green:0.55, blue:0.15, alpha:1.0)
+            delete_count = 1
+        }
+        else {
+            
+            delete_button = false
+            delete_b.backgroundColor = UIColor.clear
+            delete_count = 0
+        }
     }
     
     @IBAction func selectfunc(_ sender: Any) {
@@ -79,6 +97,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if (segue.identifier == "goNext") {
             let taskVC = segue.destination as! TaskViewController
             taskVC.textVC = selectkey
@@ -92,6 +111,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
+        
         if var searchkey = textField.text {
             dataList.append(searchkey)
         }
@@ -162,14 +182,54 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        guard let select_11 = select_1 else {return}
 //        selectLabel.text = /*"カテゴリー/タスク： \n*/"\(select_00)/\(select_11)"
         
-//        selectkey = dataList[row]
-        select_1 = dataList[row]
-        print(select_1)
-//        selectButton.isEnabled = true
+        if delete_button == false {
+            
+//            selectkey = dataList[row]
+            select_1 = dataList[row]
+//           print(select_1)
+//           selectButton.isEnabled = true
+           
+            guard let select_11 = select_1 else {return}
+//            selectLabel.text = select_11 /*"カテゴリー/タスク： \n"\(select_1)"*/
+            navbar_t.items![0].title = dataList[row]
+            performSegue(withIdentifier: "goNext", sender: nil)
+        }
         
-        guard let select_11 = select_1 else {return}
-        selectLabel.text = select_11 /*"カテゴリー/タスク： \n"\(select_1)"*/
-        performSegue(withIdentifier: "goNext", sender: nil)
+        if delete_button == true {
+            
+            select_1 = dataList[row]
+            test_alert(select_1)
+        }
+    }
+    
+    func test_alert(_ sender: String?) {
+        
+        print(select_1)
+        
+        let alert: UIAlertController = UIAlertController(title: select_1, message: "削除してもいいですか？", preferredStyle:  UIAlertController.Style.alert)
+
+                // ② Actionの設定
+                // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+                // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+                // OKボタン
+            let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                print("OK")
+            })
+            // キャンセルボタン
+            let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+                // ボタンが押された時の処理を書く（クロージャ実装）
+                (action: UIAlertAction!) -> Void in
+                print("Cancel")
+            })
+
+            // ③ UIAlertControllerにActionを追加
+            alert.addAction(cancelAction)
+            alert.addAction(defaultAction)
+
+            // ④ Alertを表示
+            present(alert, animated: true, completion: nil)
     }
     
 //    func Printfunc() {
