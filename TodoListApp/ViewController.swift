@@ -14,8 +14,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var searchkey : String?
     var selectkey : String?
     var delete_button: Bool = false
-    
     var delete_count: Int = 0
+    
+    let userDefaults = UserDefaults.standard
+    var testText: String = "default"
 
 //    @IBOutlet weak var selectButton: UIButton!
 //    @IBOutlet weak var newText: UITextField!
@@ -23,6 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //    @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var delete_b: UIButton!
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         
@@ -66,8 +69,31 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 .foregroundColor: UIColor.black
             ]
         
+        userDefaults.register(defaults: ["DataStore": "default"])
+        label.text = readData()
+        
 //        self.navigationItem.title = "Todo"
 //        self.navigationController?.navigationBar.backgroundColor = UIColor.purple
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        userDefaults.register(defaults: ["DataStore": "default"])
+        label.text = readData()
+    }
+    
+    func readData() -> String {
+        
+        let str: String = userDefaults.object(forKey: "DataStore") as! String
+        print(str)
+        return str
+    }
+    
+    func saveData(str: String?) {
+        
+        userDefaults.set(str, forKey: "DataStore")
     }
     
     @IBAction func deleteButtonfunc(_ sender: Any) {
@@ -112,9 +138,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
         textField.resignFirstResponder()
         
-        if var searchkey = textField.text {
-            dataList.append(searchkey)
-        }
+        testText = textField.text!
+        print(testText)
+        print(type(of: testText))
+        saveData(str: testText)
+        
+//        label.text = readData()
+        
+//        if var searchkey = textField.text {
+//            dataList.append(searchkey)
+//        }
 //        print(dataList)
 //        selectPicker.reloadAllComponents()
         textField.text = ""

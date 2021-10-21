@@ -82,6 +82,13 @@
                                     <constraint firstAttribute="height" constant="150" id="XKK-FA-jOD"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0j-w1-luF">
+                                <rect key="frame" x="124" y="752" width="167" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -107,6 +114,7 @@
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
                         <outlet property="delete_b" destination="UY9-IB-BlO" id="ExL-sp-aNi"/>
+                        <outlet property="label" destination="A0j-w1-luF" id="ohH-r2-9dt"/>
                         <outlet property="navbar_t" destination="g6i-ga-XPU" id="Cdg-GW-ahP"/>
                         <outlet property="selectPicker" destination="Fis-BA-lZG" id="zYS-Wi-Tvj"/>
                         <segue destination="uh1-el-Pvj" kind="show" identifier="goNext" id="yrv-BS-qyw"/>
