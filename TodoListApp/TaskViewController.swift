@@ -36,8 +36,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         navbar_task?.delegate = viewclass
-        
-        navbar_task?.items![0].title = "Plan"
         navbar_task?.barTintColor = .rgb(red: 200, green: 200, blue: 200)
 //        navbar_task?.isTranslucent = true
         navbar_task?.titleTextAttributes = [
@@ -45,7 +43,9 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
                 .foregroundColor: UIColor.black
             ]
         
-//        guard let untext = textVC else { return }
+        guard let untext = textVC else { return }
+        print(untext)
+        navbar_task?.items![0].title? = untext
         
 //        title = "\(untext)"
         

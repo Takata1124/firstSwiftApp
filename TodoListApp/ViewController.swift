@@ -100,7 +100,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
         if (segue.identifier == "goNext") {
             let taskVC = segue.destination as! TaskViewController
-            taskVC.textVC = selectkey
+            taskVC.textVC = select_1
         }
     }
     
@@ -199,7 +199,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             
             select_1 = dataList[row]
             test_alert(select_1)
-            print(row)
             
             self.memberVariable = row
         }
