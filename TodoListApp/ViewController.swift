@@ -199,12 +199,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             
             select_1 = dataList[row]
             test_alert(select_1)
+            print(row)
+            
+            self.memberVariable = row
         }
     }
     
+    var memberVariable: Int = 0
+    
     func test_alert(_ sender: String?) {
         
-        print(select_1)
+//        print(select_1)
         
         let alert: UIAlertController = UIAlertController(title: select_1, message: "削除してもいいですか？", preferredStyle:  UIAlertController.Style.alert)
 
@@ -216,6 +221,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 // ボタンが押された時の処理を書く（クロージャ実装）
                 (action: UIAlertAction!) -> Void in
                 print("OK")
+                print(self.memberVariable)
+                print(self.dataList[self.memberVariable])
+                self.dataList.remove(at: self.memberVariable)
+                self.selectPicker.reloadAllComponents()
+                
             })
             // キャンセルボタン
             let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{

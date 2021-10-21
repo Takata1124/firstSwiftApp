@@ -36,8 +36,10 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
         navbar_task?.delegate = viewclass
+        
+        navbar_task?.items![0].title = "Plan"
         navbar_task?.barTintColor = .rgb(red: 200, green: 200, blue: 200)
-        navbar_task?.isTranslucent = true
+//        navbar_task?.isTranslucent = true
         navbar_task?.titleTextAttributes = [
             // 文字の色
                 .foregroundColor: UIColor.black
@@ -51,6 +53,10 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+//    func position(for bar: UIBarPositioning) -> UIBarPosition {
+//        return .topAttached
+//    }
+//
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             TODO.append(textView.text)

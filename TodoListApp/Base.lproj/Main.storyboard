@@ -180,6 +180,7 @@
                     <connections>
                         <outlet property="messageTable" destination="SM6-7r-MjO" id="Hju-oM-MX9"/>
                         <outlet property="messageText" destination="wfS-o7-OgD" id="fnD-XQ-67H"/>
+                        <outlet property="navbar_task" destination="6Lq-Z8-WNu" id="xe7-wU-f1c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCN-cN-Wx3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

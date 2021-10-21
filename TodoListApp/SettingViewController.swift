@@ -23,6 +23,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
 //        viewclass.Printfunc()
         // Do any additional setup after loading the view.
         
+        navbar.items![0].title = "Task"
         navbar.barTintColor = .rgb(red: 200, green: 200, blue: 200)
         navbar.isTranslucent = true
         navbar.titleTextAttributes = [
