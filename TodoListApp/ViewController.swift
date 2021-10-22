@@ -17,7 +17,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var delete_button: Bool = false
     var data_bool: Bool = true
     var delete_count: Int = 0
-    
     var dataList: [String] = []
     
     let userDefaults = UserDefaults.standard
@@ -51,7 +50,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
 //        selectPicker.layer.borderColor = UIColor.black.cgColor
 //        selectPicker.layer.borderWidth = 1.0
-        selectPicker.layer.cornerRadius = 30
+        selectPicker.layer.cornerRadius = 50
         selectPicker.delegate = self
         selectPicker.dataSource = self
 //        selectPicker.center = self.view.center
@@ -96,8 +95,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        userDefaults.set(self.secondArray, forKey: "FirstArray")
         selectPicker.delegate = self
         selectPicker.dataSource = self
+        
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-        print(dataList)
+//        print(dataList)
 //        print(firstArray)
 //        label.text = getfirstArray[0]
     }
@@ -205,6 +205,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //            return 0
 //        }
         
+//        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
         return dataList.count
     }
     
@@ -221,6 +222,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //            return "error"
 //        }
         
+//        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
         return dataList[row]
     }
     
@@ -251,6 +253,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         if delete_button == false {
             
 //            selectkey = dataList[row]
+//            dataList = userDefaults.array(forKey: "FirstArray") as! [String]
             select_1 = dataList[row]
 //           print(select_1)
 //           selectButton.isEnabled = true
@@ -285,19 +288,25 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
                 // ボタンが押された時の処理を書く（クロージャ実装）
                 (action: UIAlertAction!) -> Void in
-                print("OK")
+//                print("OK")
                 print(self.memberVariable)
                 print(self.dataList[self.memberVariable])
-                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
+//                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
+                
                 self.dataList.remove(at: self.memberVariable)
+//                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
                 self.selectPicker.reloadAllComponents()
+//                self.selectPicker.delegate = self
+//                self.selectPicker.dataSource = self
+                print(self.dataList)
+                self.userDefaults.set(self.dataList, forKey: "FirstArray")
                 
             })
             // キャンセルボタン
             let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
                 // ボタンが押された時の処理を書く（クロージャ実装）
                 (action: UIAlertAction!) -> Void in
-                print("Cancel")
+//                print("Cancel")
             })
 
             // ③ UIAlertControllerにActionを追加
