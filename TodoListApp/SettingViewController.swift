@@ -19,7 +19,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
         super.viewDidLoad()
         
         navbar?.delegate = self
-        newText.delegate = viewclass
+        newText.delegate = viewclass            
 //        viewclass.Printfunc()
         // Do any additional setup after loading the view.
         

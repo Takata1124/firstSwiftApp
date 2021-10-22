@@ -9,12 +9,16 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationBarDelegate {
     
-    var dataList : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
+//    var dataList : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
+    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
 //    var categoryList : [String] = ["apple", "banana","chocolate"]
     var searchkey : String?
     var selectkey : String?
     var delete_button: Bool = false
+    var data_bool: Bool = true
     var delete_count: Int = 0
+    
+    var dataList: [String] = []
     
     let userDefaults = UserDefaults.standard
     var testText: String = "default"
@@ -25,7 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //    @IBOutlet weak var selectLabel: UILabel!
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var delete_b: UIButton!
-    @IBOutlet weak var label: UILabel!
+//    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         
@@ -47,6 +51,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
 //        selectPicker.layer.borderColor = UIColor.black.cgColor
 //        selectPicker.layer.borderWidth = 1.0
+        selectPicker.layer.cornerRadius = 30
         selectPicker.delegate = self
         selectPicker.dataSource = self
 //        selectPicker.center = self.view.center
@@ -69,8 +74,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 .foregroundColor: UIColor.black
             ]
         
-        userDefaults.register(defaults: ["DataStore": "default"])
-        label.text = readData()
+//        userDefaults.register(defaults: ["DataStore": "default"])
+//        label.text = readData()
+        
+        userDefaults.register(defaults: ["FirstArray": firstArray])
+        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
+        print(dataList)
+//        label.text = getfirstArray[0]
         
 //        self.navigationItem.title = "Todo"
 //        self.navigationController?.navigationBar.backgroundColor = UIColor.purple
@@ -80,20 +90,41 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
         super.viewWillAppear(animated)
         
-        userDefaults.register(defaults: ["DataStore": "default"])
-        label.text = readData()
+//        userDefaults.register(defaults: ["DataStore": "default"])
+//        label.text = readData()
+        
+//        userDefaults.set(self.secondArray, forKey: "FirstArray")
+        selectPicker.delegate = self
+        selectPicker.dataSource = self
+        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
+        print(dataList)
+//        print(firstArray)
+//        label.text = getfirstArray[0]
     }
     
     func readData() -> String {
         
         let str: String = userDefaults.object(forKey: "DataStore") as! String
-        print(str)
+//        print(str)
         return str
     }
     
     func saveData(str: String?) {
         
         userDefaults.set(str, forKey: "DataStore")
+    }
+    
+    func arraySave(str: String?){
+        
+        guard let unstr = str else {return}
+        print(unstr)
+        firstArray = userDefaults.array(forKey: "FirstArray") as! [String]
+        firstArray.append(unstr)
+        userDefaults.set(firstArray, forKey: "FirstArray")
+       
+//        userDefaults.set(firstArray, forKey: "FirstArray")
+//        print(firstArray)
+//        print(dataList)
     }
     
     @IBAction func deleteButtonfunc(_ sender: Any) {
@@ -139,9 +170,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         textField.resignFirstResponder()
         
         testText = textField.text!
-        print(testText)
-        print(type(of: testText))
-        saveData(str: testText)
+//        print(testText)
+//        print(type(of: testText))
+//        saveData(str: testText)
+        arraySave(str: testText)
         
 //        label.text = readData()
         
@@ -149,6 +181,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //            dataList.append(searchkey)
 //        }
 //        print(dataList)
+//
 //        selectPicker.reloadAllComponents()
         textField.text = ""
         
@@ -255,6 +288,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
                 print("OK")
                 print(self.memberVariable)
                 print(self.dataList[self.memberVariable])
+                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
                 self.dataList.remove(at: self.memberVariable)
                 self.selectPicker.reloadAllComponents()
                 

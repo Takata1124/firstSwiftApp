@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3K-z7-rvz">
-                                <rect key="frame" x="292" y="633" width="30" height="30"/>
+                                <rect key="frame" x="292" y="733" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="aLr-0P-Qf4"/>
                                     <constraint firstAttribute="height" constant="30" id="il6-g0-UsB"/>
@@ -40,7 +40,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfl-Ng-kRw">
-                                <rect key="frame" x="192" y="633" width="30" height="30"/>
+                                <rect key="frame" x="192" y="733" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="8Nj-TW-K7v"/>
                                     <constraint firstAttribute="height" constant="30" id="L6p-v5-b9V"/>
@@ -56,12 +56,12 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fis-BA-lZG">
-                                <rect key="frame" x="30" y="340" width="354" height="216"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="30" y="440" width="354" height="216"/>
+                                <color key="backgroundColor" red="0.42453376857601866" green="0.86960409163665464" blue="0.91953656462585032" alpha="0.67998965231788078" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UY9-IB-BlO">
-                                <rect key="frame" x="92" y="633" width="30" height="30"/>
+                                <rect key="frame" x="92" y="733" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="7g0-2I-ylx"/>
                                     <constraint firstAttribute="height" constant="30" id="IWA-Rm-RX1"/>
@@ -82,17 +82,11 @@
                                     <constraint firstAttribute="height" constant="150" id="XKK-FA-jOD"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A0j-w1-luF">
-                                <rect key="frame" x="124" y="752" width="167" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Fis-BA-lZG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="100" id="11G-Vu-NXi"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5up-pt-sm7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YRK-mn-7tc" secondAttribute="trailing" constant="30" id="9hg-R7-cci"/>
                             <constraint firstItem="z3K-z7-rvz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="A2Y-Sd-VZr"/>
@@ -100,21 +94,19 @@
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fwa-Mr-tFZ"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JdS-Nf-9uI"/>
                             <constraint firstItem="UY9-IB-BlO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="NDn-Ar-Ssf"/>
+                            <constraint firstItem="UY9-IB-BlO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="Swf-tb-fnv"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TRE-wC-qKQ"/>
-                            <constraint firstItem="UY9-IB-BlO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="Vpn-sU-yio"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="aVK-yN-a71"/>
-                            <constraint firstItem="Fis-BA-lZG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bi1-BV-pmb"/>
+                            <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="bOC-I3-z2L"/>
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-200" id="k9h-21-F31"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oLB-CK-y7W"/>
+                            <constraint firstItem="z3K-z7-rvz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="po7-LQ-6tf"/>
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="ul9-OT-CBz"/>
-                            <constraint firstItem="z3K-z7-rvz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="ycO-Rl-FcQ"/>
-                            <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="200" id="yum-bC-nWm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
                         <outlet property="delete_b" destination="UY9-IB-BlO" id="ExL-sp-aNi"/>
-                        <outlet property="label" destination="A0j-w1-luF" id="ohH-r2-9dt"/>
                         <outlet property="navbar_t" destination="g6i-ga-XPU" id="Cdg-GW-ahP"/>
                         <outlet property="selectPicker" destination="Fis-BA-lZG" id="zYS-Wi-Tvj"/>
                         <segue destination="uh1-el-Pvj" kind="show" identifier="goNext" id="yrv-BS-qyw"/>
