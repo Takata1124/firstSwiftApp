@@ -195,10 +195,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="8a58e4a3bc04064a53bf0f3ac1a64cff_413ae506c2690be5fe553cada81c0e50_raw" translatesAutoresizingMaskIntoConstraints="NO" id="ITz-w6-j2t">
-                                <rect key="frame" x="0.0" y="-54" width="414" height="950"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVS-iF-PFU">
                                 <rect key="frame" x="16" y="794" width="382" height="38"/>
                                 <color key="backgroundColor" red="0.78574085884353728" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -227,19 +223,44 @@
                                     <navigationItem title="Title" id="hZo-Xr-sxW"/>
                                 </items>
                             </navigationBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5085302_s" translatesAutoresizingMaskIntoConstraints="NO" id="0Vh-pP-kw6">
+                                <rect key="frame" x="-113" y="150.5" width="640" height="195"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="U7N-4V-RkB"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLp-hK-YEA">
+                                <rect key="frame" x="97" y="568" width="220" height="60"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="D9D-hX-1Me"/>
+                                    <constraint firstAttribute="height" constant="60" id="TFx-5e-rhQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="📷イメージを変更"/>
+                                <connections>
+                                    <action selector="photoButtonAction:" destination="Pug-S9-EdS" eventType="touchUpInside" id="cmL-bV-PAS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="N0p-WG-Yyt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="N0p-WG-Yyt" firstAttribute="trailing" secondItem="JVS-iF-PFU" secondAttribute="trailing" constant="16" id="DNp-W8-wI4"/>
+                            <constraint firstItem="0Vh-pP-kw6" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="JYr-2O-Bnw"/>
                             <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="Jxm-ck-5F4"/>
+                            <constraint firstItem="MLp-hK-YEA" firstAttribute="centerX" secondItem="5G2-8A-IW1" secondAttribute="centerX" id="Qu6-KK-xMn"/>
                             <constraint firstItem="N0p-WG-Yyt" firstAttribute="bottom" secondItem="JVS-iF-PFU" secondAttribute="bottom" constant="30" id="Zk7-4g-EkU"/>
+                            <constraint firstItem="MLp-hK-YEA" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" constant="150" id="cbu-Ou-WA6"/>
                             <constraint firstItem="LH3-pq-Dxm" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" id="d0H-Aw-guv"/>
                             <constraint firstItem="JVS-iF-PFU" firstAttribute="leading" secondItem="N0p-WG-Yyt" secondAttribute="leading" constant="16" id="ggZ-c4-euM"/>
+                            <constraint firstItem="0Vh-pP-kw6" firstAttribute="centerY" secondItem="5G2-8A-IW1" secondAttribute="centerY" constant="-200" id="sNb-yR-idI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="S0P-CT-HGf"/>
                     <connections>
+                        <outlet property="imagePicture" destination="0Vh-pP-kw6" id="rgD-YK-msY"/>
                         <outlet property="navbar" destination="448-5A-cw2" id="4JJ-PJ-DVO"/>
                         <outlet property="newText" destination="LH3-pq-Dxm" id="Ymu-ip-ZWD"/>
                     </connections>

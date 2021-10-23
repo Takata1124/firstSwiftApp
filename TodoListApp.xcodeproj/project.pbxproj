@@ -18,6 +18,7 @@
 		688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688895D8271C9B18002102E7 /* TableViewCell.xib */; };
 		688895DC271DA173002102E7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DB271DA173002102E7 /* SettingViewController.swift */; };
 		688895DE271EF38D002102E7 /* UIcolor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DD271EF38D002102E7 /* UIcolor.swift */; };
+		688895E02723F924002102E7 /* UIimageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DF2723F924002102E7 /* UIimageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		688895D8271C9B18002102E7 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		688895DB271DA173002102E7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		688895DD271EF38D002102E7 /* UIcolor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcolor.swift; sourceTree = "<group>"; };
+		688895DF2723F924002102E7 /* UIimageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIimageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				688895DB271DA173002102E7 /* SettingViewController.swift */,
 				688895DD271EF38D002102E7 /* UIcolor.swift */,
+				688895DF2723F924002102E7 /* UIimageExtension.swift */,
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
 				688895C2271AE3F6002102E7 /* LaunchScreen.storyboard */,
 				688895C0271AE3F6002102E7 /* Assets.xcassets */,
@@ -161,6 +164,7 @@
 				688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */,
 				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
 				688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */,
+				688895E02723F924002102E7 /* UIimageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +316,8 @@
 				DEVELOPMENT_TEAM = 2FZRK6M67D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoListApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラにアクセスします";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -340,6 +346,8 @@
 				DEVELOPMENT_TEAM = 2FZRK6M67D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoListApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "カメラにアクセスします";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -7,11 +7,13 @@
 
 import UIKit
 
-class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate {
+class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var newText: UITextField!
 //    @IBOutlet weak var categoryText: UITextField!
     @IBOutlet weak var navbar: UINavigationBar!
+    @IBOutlet weak var imagePicture: UIImageView!
+    
     
     let viewclass = ViewController()
     
@@ -41,14 +43,65 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
         return .topAttached
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func photoButtonAction(_ sender: Any) {
+        
+        let alertController = UIAlertController(title: "確認", message: "選択してください", preferredStyle: .actionSheet)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            
+            let cameraAction = UIAlertAction(title: "カメラ", style: .default, handler: {(action) in
+                
+                print("カメラは利用できます")
+                
+                let imagePickerController = UIImagePickerController()
+                imagePickerController.sourceType = .camera
+                imagePickerController.delegate = self
+                self.present(imagePickerController, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(cameraAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            
+            let photolibraryAction = UIAlertAction(title: "フォトライブラリー", style: .default, handler: {(action) in
+                
+                print("フォトライブラリーは利用できます")
+                
+                let imagePickerController = UIImagePickerController()
+                imagePickerController.sourceType = .photoLibrary
+                imagePickerController.delegate = self
+                self.present(imagePickerController, animated: true, completion: nil)
+            })
+            
+            alertController.addAction(photolibraryAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        alertController.popoverPresentationController?.sourceView = view
+        present(alertController, animated: true, completion: nil)
     }
-    */
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let i_image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        let resizeImage = i_image?.resized()
+        imagePicture.image = i_image
+        dismiss(animated: true, completion: nil)
+    }
+}
 
+extension UIImage {
+    func resized() -> UIImage? {
+        
+        let rect = CGRect(x: 0, y: 0, width: 90, height: 195)
+        
+        UIGraphicsBeginImageContext(rect.size)
+        self.draw(in: rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return image!
+    }
 }
