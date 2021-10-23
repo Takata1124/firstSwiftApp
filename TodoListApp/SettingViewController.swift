@@ -14,8 +14,11 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     @IBOutlet weak var navbar: UINavigationBar!
     @IBOutlet weak var imagePicture: UIImageView!
     
-    
     let viewclass = ViewController()
+    
+    let defaults = UserDefaults.standard
+    var saveArray: Array! = [NSData]()
+//    var image: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
             
             let cameraAction = UIAlertAction(title: "カメラ", style: .default, handler: {(action) in
                 
-                print("カメラは利用できます")
+//                print("カメラは利用できます")
                 
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.sourceType = .camera
@@ -66,7 +69,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
             
             let photolibraryAction = UIAlertAction(title: "フォトライブラリー", style: .default, handler: {(action) in
                 
-                print("フォトライブラリーは利用できます")
+//                print("フォトライブラリーは利用できます")
                 
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.sourceType = .photoLibrary
@@ -88,20 +91,34 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
         let i_image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
 //        let resizeImage = i_image?.resized()
         imagePicture.image = i_image
+//        sendSaveImage(i_image)
         dismiss(animated: true, completion: nil)
     }
+    
+//    func sendSaveImage(_ image: UIImage?) {
+//       //NSData型にキャスト
+//        guard let unimage = image else {return}
+//        let data = unimage.pngData() as NSData?
+//        if let imageData = data {
+//           saveArray.append(imageData)
+//           defaults.set(saveArray, forKey: "saveImage")
+////           defaults.synchronize()
+//        }
+//        print(saveArray)
+//    }
+    
 }
 
-extension UIImage {
-    func resized() -> UIImage? {
-        
-        let rect = CGRect(x: 0, y: 0, width: 90, height: 195)
-        
-        UIGraphicsBeginImageContext(rect.size)
-        self.draw(in: rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image!
-    }
-}
+//extension UIImage {
+//    func resized() -> UIImage? {
+//
+//        let rect = CGRect(x: 0, y: 0, width: 90, height: 195)
+//
+//        UIGraphicsBeginImageContext(rect.size)
+//        self.draw(in: rect)
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return image!
+//    }
+//}

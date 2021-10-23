@@ -21,6 +21,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
     let userDefaults = UserDefaults.standard
     var testText: String = "default"
+    
+    var saveArray: Array! = [NSData]()
+    
 
 //    @IBOutlet weak var selectButton: UIButton!
 //    @IBOutlet weak var newText: UITextField!

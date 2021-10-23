@@ -21,28 +21,41 @@
                         <rect key="frame" x="15" y="15" width="81" height="85"/>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ここにメッセージを書きます" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="111" y="15" width="254" height="85"/>
+                        <rect key="frame" x="96" y="15" width="224" height="85"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhB-w0-3y1">
+                        <rect key="frame" x="320" y="32.5" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="OH0-E1-gPq"/>
+                            <constraint firstAttribute="height" constant="50" id="Uwv-dE-Sic"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="15" id="8sS-Xk-RNd"/>
+                    <constraint firstItem="dhB-w0-3y1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="C5q-v5-YjU"/>
                     <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="15" id="FpB-GT-4lB"/>
                     <constraint firstItem="j4w-1v-oXe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="GLR-Ax-ePU"/>
                     <constraint firstItem="j4w-1v-oXe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Hi9-c2-W2q"/>
+                    <constraint firstItem="dhB-w0-3y1" firstAttribute="leading" secondItem="wRL-ri-5N4" secondAttribute="trailing" id="KXk-6n-s9Y"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="j4w-1v-oXe" secondAttribute="trailing" id="OOz-OS-UtO"/>
                     <constraint firstAttribute="trailing" secondItem="j4w-1v-oXe" secondAttribute="trailing" constant="284" id="Z4r-ES-Nm2"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Zdc-Hz-jlq"/>
-                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="j4w-1v-oXe" secondAttribute="trailing" constant="15" id="h01-LG-IwU"/>
                     <constraint firstAttribute="bottom" secondItem="j4w-1v-oXe" secondAttribute="bottom" constant="15" id="hQI-Se-Wqa"/>
+                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="60" id="oTA-gu-Vib"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="IconImage" destination="j4w-1v-oXe" id="68K-7y-sX7"/>
                 <outlet property="cellText" destination="wRL-ri-5N4" id="KpX-bm-vyz"/>
+                <outlet property="checkButton" destination="dhB-w0-3y1" id="Cpy-8U-YTZ"/>
             </connections>
             <point key="canvasLocation" x="-142.02898550724638" y="-13.727678571428571"/>
         </tableViewCell>
