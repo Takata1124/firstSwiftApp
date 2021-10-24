@@ -41,6 +41,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     @IBOutlet weak var navbar: UINavigationBar!
     @IBOutlet weak var imagePicture: UIImageView!
     
+    
     let viewclass = ViewController()
     
     let defaults = UserDefaults.standard
@@ -49,6 +50,8 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("hello")
         
         navbar?.delegate = self
         newText.delegate = viewclass            
