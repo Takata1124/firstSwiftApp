@@ -28,7 +28,7 @@
                         <buttonConfiguration key="configuration" style="plain"/>
                     </button>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ここにメッセージを書きます" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="0.0" y="15" width="320" height="85"/>
+                        <rect key="frame" x="15" y="15" width="305" height="85"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -36,11 +36,11 @@
                     </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8PJ-jT-ihp"/>
                     <constraint firstItem="dhB-w0-3y1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="C5q-v5-YjU"/>
                     <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="15" id="FpB-GT-4lB"/>
                     <constraint firstItem="dhB-w0-3y1" firstAttribute="leading" secondItem="wRL-ri-5N4" secondAttribute="trailing" id="KXk-6n-s9Y"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Zdc-Hz-jlq"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="o1H-hi-CfM"/>
                     <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="60" id="oTA-gu-Vib"/>
                 </constraints>
             </tableViewCellContentView>
@@ -49,7 +49,7 @@
                 <outlet property="cellText" destination="wRL-ri-5N4" id="KpX-bm-vyz"/>
                 <outlet property="checkButton" destination="dhB-w0-3y1" id="Cpy-8U-YTZ"/>
             </connections>
-            <point key="canvasLocation" x="-142.02898550724638" y="-13.727678571428571"/>
+            <point key="canvasLocation" x="-141" y="-18"/>
         </tableViewCell>
     </objects>
     <resources>

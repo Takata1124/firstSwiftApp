@@ -39,6 +39,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         messageTable.delegate = self
         messageTable.dataSource = self
         messageTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
+        messageTable.separatorColor = .black
         
         navbar_task?.delegate = viewclass
         navbar_task?.barTintColor = .rgb(red: 200, green: 200, blue: 200)

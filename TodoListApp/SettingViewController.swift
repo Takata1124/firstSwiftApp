@@ -40,10 +40,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
             // 文字の色
                 .foregroundColor: UIColor.black
             ]
-        
-
     }
-    
     
     @IBAction func backbutton(_ sender: Any) {
 
@@ -102,6 +99,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
 //        sendSaveImage(i_image)
         dismiss(animated: true, completion: nil)
     }
+}
     
 //    func sendSaveImage(_ image: UIImage?) {
 //       //NSData型にキャスト
@@ -114,8 +112,8 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
 //        }
 //        print(saveArray)
 //    }
-    
-}
+//
+//}
 
 //extension UIImage {
 //    func resized() -> UIImage? {
