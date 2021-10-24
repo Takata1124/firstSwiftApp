@@ -19,6 +19,11 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
 
     }
     
+    @IBAction func nextView(_ sender: Any) {
+        
+        performSegue(withIdentifier: "goNextNext", sender: nil)
+    }
+    
     var textVC: String?
     var TODO: [String?] = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
     let viewclass = ViewController()

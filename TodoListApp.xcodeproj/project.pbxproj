@@ -19,6 +19,10 @@
 		688895DC271DA173002102E7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DB271DA173002102E7 /* SettingViewController.swift */; };
 		688895DE271EF38D002102E7 /* UIcolor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DD271EF38D002102E7 /* UIcolor.swift */; };
 		688895E02723F924002102E7 /* UIimageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DF2723F924002102E7 /* UIimageExtension.swift */; };
+		688895E22724FFC8002102E7 /* TodoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895E12724FFC8002102E7 /* TodoData.swift */; };
+		688895E4272527BC002102E7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895E3272527BB002102E7 /* TableViewController.swift */; };
+		688895E72725390A002102E7 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895E527253909002102E7 /* ToDoTableViewCell.swift */; };
+		688895E82725390A002102E7 /* ToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688895E62725390A002102E7 /* ToDoTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		688895DB271DA173002102E7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		688895DD271EF38D002102E7 /* UIcolor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcolor.swift; sourceTree = "<group>"; };
 		688895DF2723F924002102E7 /* UIimageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIimageExtension.swift; sourceTree = "<group>"; };
+		688895E12724FFC8002102E7 /* TodoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoData.swift; sourceTree = "<group>"; };
+		688895E3272527BB002102E7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		688895E527253909002102E7 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
+		688895E62725390A002102E7 /* ToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,9 +78,11 @@
 			children = (
 				688895B7271AE3F5002102E7 /* AppDelegate.swift */,
 				688895B9271AE3F5002102E7 /* SceneDelegate.swift */,
+				688895E12724FFC8002102E7 /* TodoData.swift */,
 				688895BB271AE3F5002102E7 /* ViewController.swift */,
 				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				688895DB271DA173002102E7 /* SettingViewController.swift */,
+				688895E3272527BB002102E7 /* TableViewController.swift */,
 				688895DD271EF38D002102E7 /* UIcolor.swift */,
 				688895DF2723F924002102E7 /* UIimageExtension.swift */,
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
@@ -81,6 +91,8 @@
 				688895C5271AE3F6002102E7 /* Info.plist */,
 				688895D7271C9B18002102E7 /* TableViewCell.swift */,
 				688895D8271C9B18002102E7 /* TableViewCell.xib */,
+				688895E527253909002102E7 /* ToDoTableViewCell.swift */,
+				688895E62725390A002102E7 /* ToDoTableViewCell.xib */,
 			);
 			path = TodoListApp;
 			sourceTree = "<group>";
@@ -144,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				688895C4271AE3F6002102E7 /* LaunchScreen.storyboard in Resources */,
+				688895E82725390A002102E7 /* ToDoTableViewCell.xib in Resources */,
 				688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */,
 				688895C1271AE3F6002102E7 /* Assets.xcassets in Resources */,
 				688895BF271AE3F5002102E7 /* Main.storyboard in Resources */,
@@ -159,8 +172,11 @@
 			files = (
 				688895BC271AE3F5002102E7 /* ViewController.swift in Sources */,
 				688895CC271B21D3002102E7 /* TaskViewController.swift in Sources */,
+				688895E22724FFC8002102E7 /* TodoData.swift in Sources */,
+				688895E4272527BC002102E7 /* TableViewController.swift in Sources */,
 				688895DE271EF38D002102E7 /* UIcolor.swift in Sources */,
 				688895B8271AE3F5002102E7 /* AppDelegate.swift in Sources */,
+				688895E72725390A002102E7 /* ToDoTableViewCell.swift in Sources */,
 				688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */,
 				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
 				688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */,

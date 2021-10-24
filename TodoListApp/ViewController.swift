@@ -6,6 +6,37 @@
 //
 
 import UIKit
+import Foundation.NSObject
+
+class OriginalData: NSObject, NSCoding {
+
+    var primaryKey: String
+    var dataA: Bool
+    var dataB: Int
+    var dataC: Double
+    var dataD: Date? // 初期化する必要のないプロパティ
+
+    init(_ primaryKey: String, _ dataA: Bool, _ dataB: Int, _ dataC: Double) {
+        self.primaryKey = primaryKey
+        self.dataA = dataA
+        self.dataB = dataB
+        self.dataC = dataC
+    }
+
+    required init?(coder: NSCoder) {
+        primaryKey = (coder.decodeObject(forKey: "primaryKey") as? String) ?? ""
+        dataA = coder.decodeBool(forKey: "dataA")
+        dataB = coder.decodeInteger(forKey: "dataB")
+        dataC = coder.decodeDouble(forKey: "dataC")
+    }
+
+    func encode(with coder: NSCoder) {
+        coder.encode(primaryKey, forKey: "primaryKey")
+        coder.encode(dataA, forKey: "dataA")
+        coder.encode(dataB, forKey: "dataB")
+        coder.encode(dataC, forKey: "dataC")
+    }
+}
 
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationBarDelegate {
     
@@ -24,7 +55,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
     var saveArray: Array! = [NSData]()
     
-
 //    @IBOutlet weak var selectButton: UIButton!
 //    @IBOutlet weak var newText: UITextField!
     @IBOutlet weak var selectPicker: UIPickerView!
@@ -83,10 +113,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
         print(dataList)
 //        label.text = getfirstArray[0]
-        
 //        self.navigationItem.title = "Todo"
 //        self.navigationController?.navigationBar.backgroundColor = UIColor.purple
+        
+//        if let storeData = UserDefaults().data(forKey: "todoList") {
+//            do {
+//                let unarchiveData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storeData)
+//                self.todoList.append(contentsOf: unarchiveData as! [TodoData])
+//            } catch {
+//                print(error)
+//            }
+//        }
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -324,4 +363,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        print("Hello")
 //    }
 }
+
+
 

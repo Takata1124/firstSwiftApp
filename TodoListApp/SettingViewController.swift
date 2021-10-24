@@ -7,32 +7,7 @@
 
 import UIKit
 
-public protocol NSCoding {
 
-    func encode(with aCoder: NSCoder)
-    init?(coder aDecoder: NSCoder) // NS_DESIGNATED_INITIALIZER
-}
-
-var todoList: [TodoData] = []
-
-class TodoData: NSObject, NSCoding {
-    
-    var todoTitle: String?
-    var todoDone: Bool = false
-
-    
-    override init(){}
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(todoTitle, forKey: "todoTitle")
-        aCoder.encode(todoDone, forKey: "todoDone")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
-        todoDone = aDecoder.decodeBool(forKey: "todoDone")
-    }
-}
 
 class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
@@ -66,18 +41,7 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
                 .foregroundColor: UIColor.black
             ]
         
-        if let storeData = UserDefaults().data(forKey: "todoList") {
-            do {
-                let unarchiveData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storeData)
-                todoList.append(contentsOf: unarchiveData as! [TodoData])
-            } catch {
-                print(error)
-            }
-        }
-    }
-    
-    @IBAction func addButton(_ sender: Any) {
-        
+
     }
     
     
