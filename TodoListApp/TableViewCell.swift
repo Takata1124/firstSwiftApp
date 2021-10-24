@@ -21,6 +21,8 @@ class TableViewCell: UITableViewCell {
 //        checkButton.backgroundColor = .black
         checkButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+        cellText.isEditable = false
+        cellText.isSelectable = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

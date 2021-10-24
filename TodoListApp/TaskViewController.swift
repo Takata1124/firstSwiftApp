@@ -104,4 +104,11 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         cell.cellText.text = TODO[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("tapped table view")
+//        let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
+//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "chatRoomViewController")
+//        navigationController?.pushViewController(chatRoomViewController, animated: true)
+    }
 }

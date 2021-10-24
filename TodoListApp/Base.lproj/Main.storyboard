@@ -57,7 +57,7 @@
                             </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fis-BA-lZG">
                                 <rect key="frame" x="30" y="440" width="354" height="216"/>
-                                <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="0.64000000000000001" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UY9-IB-BlO">
@@ -82,12 +82,18 @@
                                     <constraint firstAttribute="height" constant="150" id="XKK-FA-jOD"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUI-mn-aZT">
-                                <rect key="frame" x="174" y="809" width="67" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeO-mh-JpH">
+                                <rect key="frame" x="292" y="808" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="H4i-vx-QnC"/>
+                                    <constraint firstAttribute="width" constant="30" id="Zdd-aO-DhI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="person.3.fill" catalog="system">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -101,6 +107,7 @@
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fwa-Mr-tFZ"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JdS-Nf-9uI"/>
                             <constraint firstItem="UY9-IB-BlO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-100" id="NDn-Ar-Ssf"/>
+                            <constraint firstItem="HeO-mh-JpH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="100" id="RP3-se-MlE"/>
                             <constraint firstItem="UY9-IB-BlO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="Swf-tb-fnv"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TRE-wC-qKQ"/>
                             <constraint firstItem="Fis-BA-lZG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="aVK-yN-a71"/>
@@ -108,6 +115,7 @@
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-200" id="k9h-21-F31"/>
                             <constraint firstItem="zfl-Ng-kRw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oLB-CK-y7W"/>
                             <constraint firstItem="z3K-z7-rvz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="300" id="po7-LQ-6tf"/>
+                            <constraint firstItem="HeO-mh-JpH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="375" id="rs8-wI-59g"/>
                             <constraint firstItem="YRK-mn-7tc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="ul9-OT-CBz"/>
                         </constraints>
                     </view>
@@ -401,6 +409,7 @@
         <image name="5085302_s" width="640" height="427"/>
         <image name="8a58e4a3bc04064a53bf0f3ac1a64cff_413ae506c2690be5fe553cada81c0e50_raw" width="1000" height="1500"/>
         <image name="Image" width="64" height="64"/>
+        <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="スタンダードなゴミ箱アイコン" width="256" height="256"/>
         <image name="折れ線と棒グラフのアイコン素材" width="256" height="256"/>
         <systemColor name="labelColor">
@@ -408,9 +417,6 @@
         </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

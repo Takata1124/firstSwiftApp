@@ -1,6 +1,7 @@
 import Foundation
 
 class TodoData: NSObject, NSCoding {
+    
     var todoTitle: String?
     var todoDone: Bool = false
 
@@ -16,4 +17,3 @@ class TodoData: NSObject, NSCoding {
         todoDone = aDecoder.decodeBool(forKey: "todoDone")
     }
 }
-

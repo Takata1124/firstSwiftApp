@@ -14,6 +14,7 @@ class ToDoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 

@@ -30,8 +30,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if let textField = alertController.textFields?.first {
                 
                 let todoData = TodoData()
-                todoData.todoTitle = textField.text!
+                if textField.text == "" {
+                    return
+                }
                 
+                todoData.todoTitle = textField.text!
                 self.todoList.insert(todoData, at: 0)
 
 //                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .right)
@@ -65,7 +68,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tabletable.delegate = self
         tabletable.dataSource = self
-        tabletable.register(UINib(nibName: "ToDoTableViewCell", bundle: nil), forCellReuseIdentifier: "todoCell")
+        tabletable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         tabletable.separatorColor = .black
         
         navbar_do?.delegate = viewclass
@@ -87,7 +90,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tabletable.isEditing = false
         tabletable.allowsSelectionDuringEditing = true
-        
+        buttonbutton.setTitle("Edit", for: .normal)
     }
     
     @IBOutlet weak var buttonbutton: UIButton!
@@ -103,7 +106,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -118,10 +120,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! ToDoTableViewCell
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
         let todoData = todoList[indexPath.row]
 
-        cell.todocellText.text = todoData.todoTitle
+        cell.cellText.text = todoData.todoTitle
         
         if todoData.todoDone {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
@@ -170,11 +173,13 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        todoList.remove(at: indexPath.row)
-//        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-//    }
-    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tabletable.isEditing {
+            return .delete
+        }
+        return .none
+    }
+
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let list = todoList[fromIndexPath.row]
         todoList.remove(at: fromIndexPath.row)
@@ -203,8 +208,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    }
 }
 
-
-//
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
 //        cell.cellText.text = TODO[indexPath.row]

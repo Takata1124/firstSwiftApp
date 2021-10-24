@@ -27,19 +27,30 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain"/>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ここにメッセージを書きます" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="15" y="15" width="305" height="85"/>
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="ここにメッセージを書きます" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
+                        <rect key="frame" x="15" y="30" width="305" height="55"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-s6-VPr">
+                        <rect key="frame" x="15" y="97" width="60" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Bbi-mk-zUK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="30" id="6oh-nG-euC"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="8Ok-Wk-oit"/>
                     <constraint firstItem="dhB-w0-3y1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="C5q-v5-YjU"/>
-                    <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="15" id="FpB-GT-4lB"/>
+                    <constraint firstItem="XaW-s6-VPr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CXe-9u-Sjj"/>
+                    <constraint firstAttribute="bottom" secondItem="XaW-s6-VPr" secondAttribute="bottom" id="JnL-4e-vZG"/>
                     <constraint firstItem="dhB-w0-3y1" firstAttribute="leading" secondItem="wRL-ri-5N4" secondAttribute="trailing" id="KXk-6n-s9Y"/>
-                    <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Zdc-Hz-jlq"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="o1H-hi-CfM"/>
                     <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="60" id="oTA-gu-Vib"/>
                 </constraints>
@@ -49,7 +60,7 @@
                 <outlet property="cellText" destination="wRL-ri-5N4" id="KpX-bm-vyz"/>
                 <outlet property="checkButton" destination="dhB-w0-3y1" id="Cpy-8U-YTZ"/>
             </connections>
-            <point key="canvasLocation" x="-141" y="-18"/>
+            <point key="canvasLocation" x="-142.02898550724638" y="-18.415178571428569"/>
         </tableViewCell>
     </objects>
     <resources>
