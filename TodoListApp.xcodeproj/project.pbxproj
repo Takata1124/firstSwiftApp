@@ -23,9 +23,16 @@
 		688895E4272527BC002102E7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895E3272527BB002102E7 /* TableViewController.swift */; };
 		688895E72725390A002102E7 /* ToDoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895E527253909002102E7 /* ToDoTableViewCell.swift */; };
 		688895E82725390A002102E7 /* ToDoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688895E62725390A002102E7 /* ToDoTableViewCell.xib */; };
+		68A45FB62726E78900FF755A /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FB52726E78900FF755A /* SignUp.storyboard */; };
+		68A45FB82726EBF700FF755A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FB72726EBF700FF755A /* SignUpViewController.swift */; };
+		68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FB9272707C900FF755A /* GoogleService-Info.plist */; };
+		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27815B50013CCBAD6DCDC6FA /* Pods-TodoListApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoListApp/Pods-TodoListApp.debug.xcconfig"; sourceTree = "<group>"; };
+		436C40CDBFC94E7C8FF086D5 /* Pods-TodoListApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp.release.xcconfig"; path = "Target Support Files/Pods-TodoListApp/Pods-TodoListApp.release.xcconfig"; sourceTree = "<group>"; };
+		4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		688895B4271AE3F5002102E7 /* TodoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688895B7271AE3F5002102E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688895B9271AE3F5002102E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +51,9 @@
 		688895E3272527BB002102E7 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		688895E527253909002102E7 /* ToDoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTableViewCell.swift; sourceTree = "<group>"; };
 		688895E62725390A002102E7 /* ToDoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoTableViewCell.xib; sourceTree = "<group>"; };
+		68A45FB52726E78900FF755A /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		68A45FB72726EBF700FF755A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		68A45FB9272707C900FF755A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,17 +61,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C3D330FFEF3A0946A29754D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		688895AB271AE3F5002102E7 = {
 			isa = PBXGroup;
 			children = (
 				688895B6271AE3F5002102E7 /* TodoListApp */,
 				688895B5271AE3F5002102E7 /* Products */,
+				86813378F09F2DB89102884D /* Pods */,
+				1C3D330FFEF3A0946A29754D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,12 +110,25 @@
 				688895C2271AE3F6002102E7 /* LaunchScreen.storyboard */,
 				688895C0271AE3F6002102E7 /* Assets.xcassets */,
 				688895C5271AE3F6002102E7 /* Info.plist */,
+				68A45FB9272707C900FF755A /* GoogleService-Info.plist */,
 				688895D7271C9B18002102E7 /* TableViewCell.swift */,
 				688895D8271C9B18002102E7 /* TableViewCell.xib */,
 				688895E527253909002102E7 /* ToDoTableViewCell.swift */,
 				688895E62725390A002102E7 /* ToDoTableViewCell.xib */,
+				68A45FB52726E78900FF755A /* SignUp.storyboard */,
+				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 			);
 			path = TodoListApp;
+			sourceTree = "<group>";
+		};
+		86813378F09F2DB89102884D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27815B50013CCBAD6DCDC6FA /* Pods-TodoListApp.debug.xcconfig */,
+				436C40CDBFC94E7C8FF086D5 /* Pods-TodoListApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,9 +138,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 688895C8271AE3F6002102E7 /* Build configuration list for PBXNativeTarget "TodoListApp" */;
 			buildPhases = (
+				F11A2C2AC3E380EF2A92E281 /* [CP] Check Pods Manifest.lock */,
 				688895B0271AE3F5002102E7 /* Sources */,
 				688895B1271AE3F5002102E7 /* Frameworks */,
 				688895B2271AE3F5002102E7 /* Resources */,
+				296C1D5E8BDAB5852C639913 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,13 +193,57 @@
 			files = (
 				688895C4271AE3F6002102E7 /* LaunchScreen.storyboard in Resources */,
 				688895E82725390A002102E7 /* ToDoTableViewCell.xib in Resources */,
+				68A45FB62726E78900FF755A /* SignUp.storyboard in Resources */,
 				688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */,
 				688895C1271AE3F6002102E7 /* Assets.xcassets in Resources */,
 				688895BF271AE3F5002102E7 /* Main.storyboard in Resources */,
+				68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		296C1D5E8BDAB5852C639913 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TodoListApp/Pods-TodoListApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TodoListApp/Pods-TodoListApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TodoListApp/Pods-TodoListApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F11A2C2AC3E380EF2A92E281 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TodoListApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		688895B0271AE3F5002102E7 /* Sources */ = {
@@ -176,6 +256,7 @@
 				688895E4272527BC002102E7 /* TableViewController.swift in Sources */,
 				688895DE271EF38D002102E7 /* UIcolor.swift in Sources */,
 				688895B8271AE3F5002102E7 /* AppDelegate.swift in Sources */,
+				68A45FB82726EBF700FF755A /* SignUpViewController.swift in Sources */,
 				688895E72725390A002102E7 /* ToDoTableViewCell.swift in Sources */,
 				688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */,
 				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
@@ -324,6 +405,7 @@
 		};
 		688895C9271AE3F6002102E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27815B50013CCBAD6DCDC6FA /* Pods-TodoListApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -336,7 +418,8 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = SignUp;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -354,6 +437,7 @@
 		};
 		688895CA271AE3F6002102E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 436C40CDBFC94E7C8FF086D5 /* Pods-TodoListApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -366,7 +450,8 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = SignUp;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

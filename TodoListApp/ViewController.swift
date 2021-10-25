@@ -66,35 +66,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-//        selectButton.layer.cornerRadius = 100
-//        selectButton.layer.borderColor = UIColor.black.cgColor
-//        selectButton.layer.borderWidth = 1.0
-//        selectButton.isEnabled = false
-//        selectButton.isHidden = true
-        
-//        newText.layer.borderColor = UIColor.lightGray.cgColor
-//        newText.layer.borderWidth = 1.0
-//        newText.delegate = self
-//        newText.isUserInteractionEnabled = false
-//        newText.isHidden = true
-//        newText.layer.cornerRadius = 20
-        
-//        selectPicker.layer.borderColor = UIColor.black.cgColor
-//        selectPicker.layer.borderWidth = 1.0
         selectPicker.layer.cornerRadius = 50
         selectPicker.delegate = self
         selectPicker.dataSource = self
-//        selectPicker.center = self.view.center
-        
-//        selectPicker.selectRow(<#T##row: Int##Int#>, inComponent: <#T##Int#>, animated: <#T##Bool#>)
-//        selectPicker.selectRow(0, inComponent: 0, animated: false)
-//        selectPicker.selectRow(1, inComponent: 1, animated: false)
-        
-//        selectLabel.text = "カテゴリー"
-//        selectLabel.layer.borderColor = UIColor.lightGray.cgColor
-//        selectLabel.layer.borderWidth = 1.0
         
         navbar_t.items![0].title = "Category"
         
@@ -105,28 +80,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             // 文字の色
                 .foregroundColor: UIColor.black
             ]
-        
-//        userDefaults.register(defaults: ["DataStore": "default"])
-//        label.text = readData()
-        
+
         userDefaults.register(defaults: ["FirstArray": firstArray])
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
         print(dataList)
-//        label.text = getfirstArray[0]
-//        self.navigationItem.title = "Todo"
-//        self.navigationController?.navigationBar.backgroundColor = UIColor.purple
-        
-//        if let storeData = UserDefaults().data(forKey: "todoList") {
-//            do {
-//                let unarchiveData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(storeData)
-//                self.todoList.append(contentsOf: unarchiveData as! [TodoData])
-//            } catch {
-//                print(error)
-//            }
-//        }
+
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -139,7 +99,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         selectPicker.dataSource = self
         
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-//        print(dataList)
+        print(dataList)
+        
+//        print("hello")
+//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+//        self.present(signUpViewController, animated: true, completion: nil)
+        
 //        print(firstArray)
 //        label.text = getfirstArray[0]
     }
@@ -185,13 +151,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         }
     }
     
-    @IBAction func selectfunc(_ sender: Any) {
-        
-        performSegue(withIdentifier: "goNext", sender: nil)
-    }
+//    @IBAction func selectfunc(_ sender: Any) {
+//
+//        performSegue(withIdentifier: "goNext", sender: nil)
+//    }
     
     @IBAction func settingfunc(_ sender: Any) {
         
+//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
+//        self.present(signUpViewController, animated: true, completion: nil)
         performSegue(withIdentifier: "goSetting", sender: nil)
     }
     
