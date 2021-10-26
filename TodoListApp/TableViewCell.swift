@@ -9,9 +9,22 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
+    var user: User? {
+        didSet{
+            if let user = user {
+                cellText.text = user.username
+                dateLabel.text = dateFormatterForDateLabel(date: user.createdAt.dateValue())
+                latestLabel.text = user.email
+            }
+            
+        }
+    }
+    
     @IBOutlet weak var IconImage: UIImageView!
     @IBOutlet weak var cellText: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var latestLabel: UILabel!
     
     private var checked = false
     
@@ -30,6 +43,16 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    private func dateFormatterForDateLabel(date: Date) -> String {
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .full
+        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "ja_JP")
+        return formatter.string(from: date)
+    }
+    
     
     @objc private func didTapButton(){
         switch checked {

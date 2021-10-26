@@ -26,6 +26,7 @@
 		68A45FB62726E78900FF755A /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FB52726E78900FF755A /* SignUp.storyboard */; };
 		68A45FB82726EBF700FF755A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FB72726EBF700FF755A /* SignUpViewController.swift */; };
 		68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FB9272707C900FF755A /* GoogleService-Info.plist */; };
+		68A45FBD272864CB00FF755A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FBC272864CB00FF755A /* User.swift */; };
 		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		68A45FB52726E78900FF755A /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		68A45FB72726EBF700FF755A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		68A45FB9272707C900FF755A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		68A45FBC272864CB00FF755A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		688895B6271AE3F5002102E7 /* TodoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				68A45FBB272864A200FF755A /* Models */,
 				688895B7271AE3F5002102E7 /* AppDelegate.swift */,
 				688895B9271AE3F5002102E7 /* SceneDelegate.swift */,
 				688895E12724FFC8002102E7 /* TodoData.swift */,
@@ -104,21 +107,29 @@
 				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				688895DB271DA173002102E7 /* SettingViewController.swift */,
 				688895E3272527BB002102E7 /* TableViewController.swift */,
+				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 				688895DD271EF38D002102E7 /* UIcolor.swift */,
 				688895DF2723F924002102E7 /* UIimageExtension.swift */,
+				688895D7271C9B18002102E7 /* TableViewCell.swift */,
+				688895E527253909002102E7 /* ToDoTableViewCell.swift */,
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
+				68A45FB52726E78900FF755A /* SignUp.storyboard */,
 				688895C2271AE3F6002102E7 /* LaunchScreen.storyboard */,
+				688895D8271C9B18002102E7 /* TableViewCell.xib */,
+				688895E62725390A002102E7 /* ToDoTableViewCell.xib */,
 				688895C0271AE3F6002102E7 /* Assets.xcassets */,
 				688895C5271AE3F6002102E7 /* Info.plist */,
 				68A45FB9272707C900FF755A /* GoogleService-Info.plist */,
-				688895D7271C9B18002102E7 /* TableViewCell.swift */,
-				688895D8271C9B18002102E7 /* TableViewCell.xib */,
-				688895E527253909002102E7 /* ToDoTableViewCell.swift */,
-				688895E62725390A002102E7 /* ToDoTableViewCell.xib */,
-				68A45FB52726E78900FF755A /* SignUp.storyboard */,
-				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 			);
 			path = TodoListApp;
+			sourceTree = "<group>";
+		};
+		68A45FBB272864A200FF755A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				68A45FBC272864CB00FF755A /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		86813378F09F2DB89102884D /* Pods */ = {
@@ -127,7 +138,6 @@
 				27815B50013CCBAD6DCDC6FA /* Pods-TodoListApp.debug.xcconfig */,
 				436C40CDBFC94E7C8FF086D5 /* Pods-TodoListApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -250,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68A45FBD272864CB00FF755A /* User.swift in Sources */,
 				688895BC271AE3F5002102E7 /* ViewController.swift in Sources */,
 				688895CC271B21D3002102E7 /* TaskViewController.swift in Sources */,
 				688895E22724FFC8002102E7 /* TodoData.swift in Sources */,
@@ -418,7 +429,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignUp;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -450,7 +461,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "フォトライブラリーにアクセスします";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = SignUp;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

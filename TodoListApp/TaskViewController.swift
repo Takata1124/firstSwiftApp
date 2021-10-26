@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarDelegate {
     
@@ -26,6 +29,8 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     
     var textVC: String?
     var TODO: [String?] = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
+    private var users = [User]()
+    private var reverseArray = [User]()
     let viewclass = ViewController()
 
     override func viewDidLoad() {
@@ -57,6 +62,50 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if Auth.auth().currentUser?.uid == nil {
+            viewdidloadSign()
+        }
+        fetchUserInfoFromFirestore()
+        print(users)
+    }
+    
+    func viewdidloadSign() {
+        
+        print("呼ばれた")
+        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+        signUpViewController.modalPresentationStyle = .fullScreen
+        self.present(signUpViewController, animated: true, completion: nil)
+    }
+    
+    private func fetchUserInfoFromFirestore() {
+        
+        Firestore.firestore().collection("users").getDocuments { (snapshots, err) in
+            if let err = err {
+                print("user情報の取得に失敗しました\(err)")
+                return
+            }
+            
+            print("user情報の取得に成功しました")
+            snapshots?.documents.forEach({ (snapshot) in
+                let dic = snapshot.data()
+                let user = User.init(dic: dic)
+                
+                self.users.append(user)
+                self.messageTable.reloadData()
+                
+                self.users.forEach({ (user) in
+                    print(user.username)
+                })
+            })
+            print(type(of: self.users))
+            print(self.users.count)
+        }
     }
     
 //    func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -96,12 +145,27 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TODO.count
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
-        cell.cellText.text = TODO[indexPath.row]
+        print(users)
+        print(users[0].username)
+        
+        var usercount: Int = users.count
+        
+        for i in 0..<usercount {
+            usercount = usercount - i - 1
+            print(usercount)
+            reverseArray.append(users[usercount])
+            usercount = users.count
+        }
+        
+//        reverseArray.append(users[1])
+        print(reverseArray[0].username)
+//        cell.user = users[indexPath.row]
+        cell.user = reverseArray[indexPath.row]
         return cell
     }
     

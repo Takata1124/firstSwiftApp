@@ -83,31 +83,35 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
         userDefaults.register(defaults: ["FirstArray": firstArray])
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
+        
         print(dataList)
 
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        viewdidloadNext()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
-        
+
         super.viewWillAppear(animated)
-        
+
 //        userDefaults.register(defaults: ["DataStore": "default"])
 //        label.text = readData()
-        
+
 //        userDefaults.set(self.secondArray, forKey: "FirstArray")
         selectPicker.delegate = self
         selectPicker.dataSource = self
-        
+
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]
         print(dataList)
+
+    }
+    
+    func viewdidloadNext() {
         
-//        print("hello")
-//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-//        self.present(signUpViewController, animated: true, completion: nil)
-        
-//        print(firstArray)
-//        label.text = getfirstArray[0]
+        performSegue(withIdentifier: "goNext", sender: nil)
     }
     
     func readData() -> String {
@@ -158,10 +162,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     
     @IBAction func settingfunc(_ sender: Any) {
         
-//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
-//        self.present(signUpViewController, animated: true, completion: nil)
-        performSegue(withIdentifier: "goSetting", sender: nil)
+        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
+        self.present(signUpViewController, animated: true, completion: nil)
+//        performSegue(withIdentifier: "goSetting", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
