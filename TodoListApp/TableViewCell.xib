@@ -27,7 +27,7 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain"/>
                     </button>
-                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="ここにメッセージを書きます" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="ここにメッセージを書きます" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
                         <rect key="frame" x="80" y="30" width="240" height="55"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>

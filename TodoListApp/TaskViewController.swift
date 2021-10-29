@@ -15,6 +15,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     @IBOutlet weak var messageTable: UITableView!
     @IBOutlet weak var messageText: UITextView!
     @IBOutlet weak var navbar_task: UINavigationBar!
+    @IBOutlet weak var navTitle: UINavigationItem!
     
     @IBAction func inputTextButton(_ sender: Any) {
         
@@ -29,17 +30,23 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     
     var textVC: String?
     var TODO: [String?] = ["牛乳を買う", "掃除をする", "アプリ開発の勉強をする"]
-    private var users = [User]()
-    private var reverseArray = [User]()
+    private var user: User? {
+        didSet {
+            navTitle.title = user?.username
+        }
+    }
+    
+    private var chatrooms = [ChatRoom]()
     let viewclass = ViewController()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    private func setupViews() {
         
+        print("hello3")
         messageText.layer.borderColor = UIColor.black.cgColor
         messageText.layer.borderWidth = 1.0
         messageText.layer.cornerRadius = 20
         messageText.delegate = self
+        
         
         messageTable.delegate = self
         messageTable.dataSource = self
@@ -62,56 +69,136 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        fetchLoginUserInfo()
+        fetchChatroomsInFromFirestore()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
+
+        ConformUserSign()
         
-        if Auth.auth().currentUser?.uid == nil {
-            viewdidloadSign()
+//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+//        signUpViewController.modalPresentationStyle = .fullScreen
+//        self.present(signUpViewController, animated: true, completion: nil)
+
+    }
+    
+    private func fetchChatroomsInFromFirestore() {
+        
+        print("hello1")
+        
+        Firestore.firestore().collection("chatRooms")
+            .addSnapshotListener { (snapshots, err) in
+                
+                if let err = err {
+                    print("ChatRoom情報の取得に失敗しました")
+                    return
+                }
+                
+                print("chatRoom情報の取得に成功しました")
+                
+                snapshots?.documentChanges.forEach ({ (documentChange) in
+                    
+                    switch documentChange.type {
+                    case .added:
+                        
+                        self.handleAddedDocumentChange(documentChange: documentChange)
+                        
+                    case .modified:
+                        print("nothing")
+                    case .removed:
+                        print("nothing")
+                    }
+                    
+                })
+            }
+    }
+    
+    private func handleAddedDocumentChange(documentChange: DocumentChange) {
+        
+        let dic = documentChange.document.data()
+        let chatroom = ChatRoom(dic: dic)
+        chatroom.documentId = documentChange.document.documentID
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        chatroom.members.forEach { (memberUid) in
+            
+            if memberUid != uid {
+                Firestore.firestore().collection("users").document(memberUid).getDocument { (snapshot, err) in
+                    
+                    if let err = err {
+                        print("ユーザー情報の取得に失敗しました")
+                        return
+                    }
+                    
+                    print("ユーザー情報の取得に成功しました")
+                    guard let dic = snapshot!.data() else { return }
+                    let user = User(dic: dic)
+                    user.uid = snapshot?.documentID
+                    
+                    chatroom.partnerUser = user
+                    self.chatrooms.append(chatroom)
+                    
+                    self.messageTable.reloadData()
+                    print(self.chatrooms.count)
+                    print(self.chatrooms)
+                }
+            }
+
         }
-        fetchUserInfoFromFirestore()
-        print(users)
     }
     
-    func viewdidloadSign() {
+    private func fetchLoginUserInfo() {
         
-        print("呼ばれた")
-        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-        signUpViewController.modalPresentationStyle = .fullScreen
-        self.present(signUpViewController, animated: true, completion: nil)
-    }
-    
-    private func fetchUserInfoFromFirestore() {
+        print("hello2")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        Firestore.firestore().collection("users").getDocuments { (snapshots, err) in
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
-                print("user情報の取得に失敗しました\(err)")
+                print("user情報の取得に失敗しました")
                 return
             }
             
-            print("user情報の取得に成功しました")
-            snapshots?.documents.forEach({ (snapshot) in
-                let dic = snapshot.data()
-                let user = User.init(dic: dic)
-                
-                self.users.append(user)
-                self.messageTable.reloadData()
-                
-                self.users.forEach({ (user) in
-                    print(user.username)
-                })
-            })
-            print(type(of: self.users))
-            print(self.users.count)
+            guard let snapshot = snapshot else { return }
+            guard let dic = snapshot.data() else { return }
+            
+            print("text:", dic)
+            let user = User(dic: dic)
+            self.user = user
+        }
+        
+    }
+    
+    @IBAction func tapButton(_ sender: Any) {
+        
+        let storyboard = UIStoryboard.init(name: "UserList", bundle: nil)
+        let userListViewController = storyboard.instantiateViewController(withIdentifier: "UserListViewController")
+//        userListViewController.modalPresentationStyle = .fullScreen
+        self.present(userListViewController, animated: true, completion: nil)
+        
+    }
+    //    @objc private func tappedNavRightBarButton() {
+//        print("taptap")
+//    }
+    
+    func ConformUserSign() {
+        
+        if Auth.auth().currentUser?.uid == nil {
+            let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+            let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            signUpViewController.modalPresentationStyle = .fullScreen
+            self.present(signUpViewController, animated: true, completion: nil)
         }
     }
     
-//    func position(for bar: UIBarPositioning) -> UIBarPosition {
-//        return .topAttached
-//    }
-//
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             TODO.append(textView.text)
@@ -145,34 +232,39 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return chatrooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
-        print(users)
-        print(users[0].username)
+//        print(users)
+//        print(users[0].username)
+//
+//        var usercount: Int = users.count
+//
+//        for i in 0..<usercount {
+//            usercount = usercount - i - 1
+//            print(usercount)
+//            reverseArray.append(users[usercount])
+//            usercount = users.count
+//        }
+//
+////        reverseArray.append(users[1])
+//        print(reverseArray[0].username)
+////        cell.user = users[indexPath.row]
+//        cell.user = reverseArray[indexPath.row]
         
-        var usercount: Int = users.count
-        
-        for i in 0..<usercount {
-            usercount = usercount - i - 1
-            print(usercount)
-            reverseArray.append(users[usercount])
-            usercount = users.count
-        }
-        
-//        reverseArray.append(users[1])
-        print(reverseArray[0].username)
-//        cell.user = users[indexPath.row]
-        cell.user = reverseArray[indexPath.row]
+        cell.chatroom = chatrooms[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("tapped table view")
-//        let storyboard = UIStoryboard.init(name: "ChatRoom", bundle: nil)
-//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "chatRoomViewController")
-//        navigationController?.pushViewController(chatRoomViewController, animated: true)
+        
+        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+        chatRoomViewController.user = user
+        chatRoomViewController.chatroom = chatrooms[indexPath.row]
+        self.present(chatRoomViewController, animated: true, completion: nil)
     }
 }

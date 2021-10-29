@@ -6,17 +6,31 @@
 //
 
 import UIKit
+import Nuke
 
 class TableViewCell: UITableViewCell {
     
-    var user: User? {
-        didSet{
-            if let user = user {
-                cellText.text = user.username
-                dateLabel.text = dateFormatterForDateLabel(date: user.createdAt.dateValue())
-                latestLabel.text = user.email
-            }
+    var message: Message? {
+        didSet {
             
+            if let message = message {
+                cellText.text = message.message
+                dateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+            }
+        }
+    }
+    
+    var chatroom: ChatRoom? {
+        didSet {
+            if let chatroom = chatroom {
+                cellText.text = chatroom.partnerUser?.username
+                
+                guard let url = URL(string: chatroom.partnerUser?.profileImageUrl ?? "") else { return }
+                Nuke.loadImage(with: url, into: IconImage)
+                
+                dateLabel.text = dateFormatterForDateLabel(date: chatroom.createdAt.dateValue())
+            }
+//            cellText.text = chatroom
         }
     }
     
@@ -27,7 +41,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var latestLabel: UILabel!
     
     private var checked = false
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,6 +50,9 @@ class TableViewCell: UITableViewCell {
         checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         cellText.isEditable = false
         cellText.isSelectable = false
+        cellText.backgroundColor = .clear
+        
+        backgroundColor = .clear
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,7 +64,7 @@ class TableViewCell: UITableViewCell {
     private func dateFormatterForDateLabel(date: Date) -> String {
         
         let formatter = DateFormatter()
-        formatter.dateStyle = .full
+        formatter.dateStyle = .none
         formatter.timeStyle = .short
         formatter.locale = Locale(identifier: "ja_JP")
         return formatter.string(from: date)

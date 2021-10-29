@@ -80,6 +80,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             // 文字の色
                 .foregroundColor: UIColor.black
             ]
+        
+//        delete_b.imageView?.contentMode = .scaleAspectFill
+//        delete_b.contentHorizontalAlignment = .fill
+//        delete_b.contentVerticalAlignment = .fill
 
         userDefaults.register(defaults: ["FirstArray": firstArray])
         dataList = userDefaults.array(forKey: "FirstArray") as! [String]

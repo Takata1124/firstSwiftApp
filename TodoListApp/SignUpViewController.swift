@@ -118,7 +118,7 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("text", textField.text)
+//        print("text", textField.text)
         let emailIsEmpty = emailTextField.text?.isEmpty ?? false
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? false
         let usernameIsEmpty = usernameTextField.text?.isEmpty ?? false
