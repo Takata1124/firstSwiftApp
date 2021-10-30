@@ -17,17 +17,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KDF-Rw-vqy">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23s-3T-d6B">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="eou-K6-GDf"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="23s-3T-d6B" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="AkV-OU-2Om"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KDF-Rw-vqy" secondAttribute="trailing" id="PIj-RI-ssY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="KDF-Rw-vqy" secondAttribute="bottom" id="PsA-ig-XXG"/>
                             <constraint firstItem="KDF-Rw-vqy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SPS-iy-vMS"/>
-                            <constraint firstItem="KDF-Rw-vqy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="cRf-in-a08"/>
+                            <constraint firstItem="23s-3T-d6B" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ZTn-G1-dWx"/>
+                            <constraint firstItem="23s-3T-d6B" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="eaH-qU-nDv"/>
+                            <constraint firstItem="KDF-Rw-vqy" firstAttribute="top" secondItem="23s-3T-d6B" secondAttribute="bottom" id="uCY-90-Zyd"/>
                         </constraints>
                     </view>
                     <connections>
@@ -36,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="81" y="72"/>
+            <point key="canvasLocation" x="79.710144927536234" y="71.651785714285708"/>
         </scene>
     </scenes>
     <resources>

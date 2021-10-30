@@ -37,11 +37,12 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     }
     
     private var chatrooms = [ChatRoom]()
+    private var chatRoomListener: ListenerRegistration?
+    
     let viewclass = ViewController()
     
     private func setupViews() {
         
-        print("hello3")
         messageText.layer.borderColor = UIColor.black.cgColor
         messageText.layer.borderWidth = 1.0
         messageText.layer.cornerRadius = 20
@@ -75,27 +76,23 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         super.viewDidLoad()
         
         setupViews()
-        fetchLoginUserInfo()
+        ConformUserSign()
         fetchChatroomsInFromFirestore()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
 
-        ConformUserSign()
+        fetchLoginUserInfo()
         
-//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
-//        signUpViewController.modalPresentationStyle = .fullScreen
-//        self.present(signUpViewController, animated: true, completion: nil)
-
     }
     
     private func fetchChatroomsInFromFirestore() {
         
-        print("hello1")
+        chatRoomListener?.remove()
+        chatrooms.removeAll()
+        messageTable.reloadData()
         
-        Firestore.firestore().collection("chatRooms")
+        chatRoomListener = Firestore.firestore().collection("chatRooms")
             .addSnapshotListener { (snapshots, err) in
                 
                 if let err = err {
@@ -158,7 +155,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     
     private func fetchLoginUserInfo() {
         
-        print("hello2")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
@@ -185,9 +181,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
         self.present(userListViewController, animated: true, completion: nil)
         
     }
-    //    @objc private func tappedNavRightBarButton() {
-//        print("taptap")
-//    }
     
     func ConformUserSign() {
         
@@ -265,6 +258,7 @@ extension TaskViewController: UITableViewDelegate, UITableViewDataSource {
         let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
         chatRoomViewController.user = user
         chatRoomViewController.chatroom = chatrooms[indexPath.row]
+        chatRoomViewController.modalPresentationStyle = .fullScreen
         self.present(chatRoomViewController, animated: true, completion: nil)
     }
 }

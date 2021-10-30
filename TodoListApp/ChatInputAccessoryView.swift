@@ -8,18 +8,27 @@
 import UIKit
 
 protocol ChatInputAccessoryViewDelegate: class {
+    
     func tappedSendButton(text: String)
+    func tappedBackButton()
 }
 
 class ChatInputAccessoryView: UIView {
 
     @IBOutlet weak var chatText: UITextView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    
     
     @IBAction func tappedButton(_ sender: Any) {
         guard let text = chatText.text else { return }
         delegate?.tappedSendButton(text: text)
     }
+    
+    @IBAction func tappedBackButton(_ sender: Any) {
+        delegate?.tappedBackButton()
+    }
+    
     
     weak var delegate: ChatInputAccessoryViewDelegate?
     

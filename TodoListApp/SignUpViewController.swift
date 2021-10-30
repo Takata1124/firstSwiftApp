@@ -18,10 +18,14 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
-    @IBOutlet weak var alreadyHaveAccountButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpViews()
+    }
+    
+    private func setUpViews() {
         
         profileImageButton.layer.cornerRadius = 75
         profileImageButton.layer.borderWidth = 1
@@ -37,7 +41,16 @@ class SignUpViewController: UIViewController {
         registerButton.isEnabled  = false
         registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
     }
-    
+        
+    @IBAction func tappedalready(_ sender: Any) {
+        
+        print("tapped")
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginviewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//        loginviewController.modalPresentationStyle = .fullScreen
+        self.present(loginviewController, animated: true, completion: nil)
+        
+    }
     @objc private func tappedProfileImageButton() {
         print("tapped")
         let imagePickerController = UIImagePickerController()
@@ -112,6 +125,10 @@ class SignUpViewController: UIViewController {
             
             
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 

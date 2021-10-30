@@ -91,6 +91,9 @@
                                 <rect key="frame" x="102" y="728" width="210" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="既にアカウントをお持ちの方"/>
+                                <connections>
+                                    <action selector="tappedalready:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="X9O-5Q-K6z"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rsk-er-1Hn">
                                 <rect key="frame" x="132" y="73" width="150" height="150"/>
@@ -117,7 +120,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="alreadyHaveAccountButton" destination="s3B-aW-S9r" id="rUx-Wn-lis"/>
                         <outlet property="emailTextField" destination="wZP-95-KV6" id="xoy-sX-Ck4"/>
                         <outlet property="passwordTextField" destination="3qP-VQ-gNC" id="oGj-Gw-gFU"/>
                         <outlet property="profileImageButton" destination="rsk-er-1Hn" id="rdz-nJ-qK2"/>

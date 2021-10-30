@@ -6,43 +6,40 @@
 //
 
 import UIKit
-import Foundation.NSObject
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
-class OriginalData: NSObject, NSCoding {
 
-    var primaryKey: String
-    var dataA: Bool
-    var dataB: Int
-    var dataC: Double
-    var dataD: Date? // 初期化する必要のないプロパティ
 
-    init(_ primaryKey: String, _ dataA: Bool, _ dataB: Int, _ dataC: Double) {
-        self.primaryKey = primaryKey
-        self.dataA = dataA
-        self.dataB = dataB
-        self.dataC = dataC
-    }
-
-    required init?(coder: NSCoder) {
-        primaryKey = (coder.decodeObject(forKey: "primaryKey") as? String) ?? ""
-        dataA = coder.decodeBool(forKey: "dataA")
-        dataB = coder.decodeInteger(forKey: "dataB")
-        dataC = coder.decodeDouble(forKey: "dataC")
-    }
-
-    func encode(with coder: NSCoder) {
-        coder.encode(primaryKey, forKey: "primaryKey")
-        coder.encode(dataA, forKey: "dataA")
-        coder.encode(dataB, forKey: "dataB")
-        coder.encode(dataC, forKey: "dataC")
+private func addCategory(text: String) {
+//    print("tapbutton")
+    
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+//    guard let partnerUid = self.selectedUser?.uid else { return }
+//    let members = [uid, partnerUid]
+    
+    let docData = [
+        "uid": uid,
+        "categorytitle": text,
+        "createdAt": Timestamp()
+    ] as [String: Any]
+    
+    Firestore.firestore().collection("category").addDocument(data: docData) { (err) in
+        if let err = err {
+            print("カテゴリーの保存に失敗しました(\(err)")
+            return
+        }
+        
+        print("カテゴリーの保存が成功しました")
+//        self.dismiss(animated: true, completion: nil)
     }
 }
 
-class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UINavigationBarDelegate {
-    
-//    var dataList : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
-    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
-//    var categoryList : [String] = ["apple", "banana","chocolate"]
+class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDelegate {
+
+//    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
+
     var searchkey : String?
     var selectkey : String?
     var delete_button: Bool = false
@@ -50,26 +47,40 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var delete_count: Int = 0
     var dataList: [String] = []
     
-    let userDefaults = UserDefaults.standard
-    var testText: String = "default"
+//    let userDefaults = UserDefaults.standard
+//    var testText: String = "default"
+
+//    var saveArray: Array! = [NSData]()
     
-    var saveArray: Array! = [NSData]()
-    
-//    @IBOutlet weak var selectButton: UIButton!
-//    @IBOutlet weak var newText: UITextField!
-    @IBOutlet weak var selectPicker: UIPickerView!
-//    @IBOutlet weak var selectLabel: UILabel!
+//    @IBOutlet weak var selectPicker: UIPickerView!
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var delete_b: UIButton!
-//    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var categoryTable: UITableView!
+    
+    var category: Category?
+    private var categories = [Category]()
+    
+    private var categoryListener: ListenerRegistration?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        selectPicker.layer.cornerRadius = 50
-        selectPicker.delegate = self
-        selectPicker.dataSource = self
+        setUpViews()
+//        fetchCategoryInfoFromFirestore()
+        fetchCategory()
+
+    }
+    
+    private func setUpViews() {
+        
+//        selectPicker.layer.cornerRadius = 50
+//        selectPicker.delegate = self
+//        selectPicker.dataSource = self
+        
+        categoryTable.delegate = self
+        categoryTable.dataSource = self
+        categoryTable.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "categoryCell")
         
         navbar_t.items![0].title = "Category"
         
@@ -80,67 +91,81 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             // 文字の色
                 .foregroundColor: UIColor.black
             ]
-        
-//        delete_b.imageView?.contentMode = .scaleAspectFill
-//        delete_b.contentHorizontalAlignment = .fill
-//        delete_b.contentVerticalAlignment = .fill
-
-        userDefaults.register(defaults: ["FirstArray": firstArray])
-        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-        
-        print(dataList)
-
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        viewdidloadNext()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//        viewdidloadNext()
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
 
-//        userDefaults.register(defaults: ["DataStore": "default"])
-//        label.text = readData()
-
-//        userDefaults.set(self.secondArray, forKey: "FirstArray")
-        selectPicker.delegate = self
-        selectPicker.dataSource = self
-
-        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-        print(dataList)
-
+    }
+    
+    func fetchCategoryInfoFromFirestore() {
+        
+        Firestore.firestore().collection("category").getDocuments { (snapshots, err) in
+            if let err = err {
+                print("カテゴリー情報の取得に失敗しました\(err)")
+                return
+            }
+            
+            //            print(snapshots)
+            print("カテゴリー情報の取得に成功しました")
+            snapshots?.documents.forEach({ (snapshot) in
+                let dic = snapshot.data()
+                let catego = Category.init(dic: dic)
+                //                user.uid = snapshot.documentID
+                
+                //                guard let uid = Auth.auth().currentUser?.uid else { return }
+                
+                //                //loginUserでなければ
+                //                if uid == snapshot.documentID {
+                //                    return
+                //                }
+                
+                self.categories.append(catego)
+                self.categoryTable.reloadData()
+            })
+        }
+    }
+    
+    func fetchCategory() {
+        
+//        guard let categoryDocId = category?.categoryId else { return }
+        
+        
+        Firestore.firestore().collection("category").addSnapshotListener { (snapshots, err) in
+            
+            if let err = err {
+                print("メッセージの取得に失敗しました")
+                return
+            }
+            
+            snapshots?.documentChanges.forEach({ (documentChange) in
+                switch documentChange.type {
+                case .added:
+                    let dic = documentChange.document.data()
+                    let catego = Category(dic: dic)
+                    self.categories.append(catego)
+                    self.categoryTable.reloadData()
+                    
+                    print(self.categories)
+                    
+                case .modified:
+                    print("nothing")
+                case .removed:
+                    print("nothing")
+                }
+            })
+        }
     }
     
     func viewdidloadNext() {
         
         performSegue(withIdentifier: "goNext", sender: nil)
-    }
-    
-    func readData() -> String {
-        
-        let str: String = userDefaults.object(forKey: "DataStore") as! String
-//        print(str)
-        return str
-    }
-    
-    func saveData(str: String?) {
-        
-        userDefaults.set(str, forKey: "DataStore")
-    }
-    
-    func arraySave(str: String?){
-        
-        guard let unstr = str else {return}
-        print(unstr)
-        firstArray = userDefaults.array(forKey: "FirstArray") as! [String]
-        firstArray.append(unstr)
-        userDefaults.set(firstArray, forKey: "FirstArray")
-       
-//        userDefaults.set(firstArray, forKey: "FirstArray")
-//        print(firstArray)
-//        print(dataList)
     }
     
     @IBAction func deleteButtonfunc(_ sender: Any) {
@@ -158,188 +183,201 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
             delete_count = 0
         }
     }
-    
-//    @IBAction func selectfunc(_ sender: Any) {
-//
-//        performSegue(withIdentifier: "goNext", sender: nil)
-//    }
-    
+
     @IBAction func settingfunc(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
         let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
         self.present(signUpViewController, animated: true, completion: nil)
-//        performSegue(withIdentifier: "goSetting", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if (segue.identifier == "goNext") {
-            let taskVC = segue.destination as! TaskViewController
-            taskVC.textVC = select_1
-        }
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        textField.resignFirstResponder()
-        
-        testText = textField.text!
-//        print(testText)
-//        print(type(of: testText))
-//        saveData(str: testText)
-        arraySave(str: testText)
-        
-//        label.text = readData()
-        
-//        if var searchkey = textField.text {
-//            dataList.append(searchkey)
-//        }
-//        print(dataList)
-//
-//        selectPicker.reloadAllComponents()
-        textField.text = ""
-        
-        return true
-    }
-    
-// UIPickerViewの列の数
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    // UIPickerViewの行数、リストの数
-    func pickerView(_ pickerView: UIPickerView,
-                    numberOfRowsInComponent component: Int) -> Int {
-//        switch component {
-//        case 0:
-//            return categoryList.count
-//        case 1:
-//            return dataList.count
-//        default:
-//            return 0
-//        }
-        
-//        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-        return dataList.count
-    }
-    
-    // UIPickerViewの最初の表示d
-    func pickerView(_ pickerView: UIPickerView,
-                    titleForRow row: Int,
-                    forComponent component: Int) -> String? {
-//        switch component {
-//        case 0:
-//            return categoryList[row]
-//        case 1:
-//            return dataList[row]
-//        default:
-//            return "error"
-//        }
-        
-//        dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-        return dataList[row]
-    }
-    
-//    var select_0: String?
-    var select_1: String?
-    
-    // UIPickerViewのRowが選択された時の挙動
-    func pickerView(_ pickerView: UIPickerView,
-                    didSelectRow row: Int,
-                    inComponent component: Int) {
-//        switch component {
-//        case 0:
-//            selectkey = categoryList[row]
-//            select_0 = categoryList[row]
-//            selectButton.isEnabled = true
-//        case 1:
-//            selectkey = dataList[row]
-//            select_1 = dataList[row]
-//            selectButton.isEnabled = true
-//        default:
-//            break
-//        }
-//
-//        guard let select_00 = select_0 else {return}
-//        guard let select_11 = select_1 else {return}
-//        selectLabel.text = /*"カテゴリー/タスク： \n*/"\(select_00)/\(select_11)"
-        
-        if delete_button == false {
-            
-//            selectkey = dataList[row]
-//            dataList = userDefaults.array(forKey: "FirstArray") as! [String]
-            select_1 = dataList[row]
-//           print(select_1)
-//           selectButton.isEnabled = true
-           
-            guard let select_11 = select_1 else {return}
-//            selectLabel.text = select_11 /*"カテゴリー/タスク： \n"\(select_1)"*/
-            navbar_t.items![0].title = dataList[row]
-            performSegue(withIdentifier: "goNext", sender: nil)
+    @IBAction func addButton(_ sender: Any) {
+        let alertController = UIAlertController(title: "categoryを追加", message: "追加するcategory名を入力してください", preferredStyle: .alert)
+
+        alertController.addTextField { textField in
+            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            textField.addConstraint(heightConstraint)
         }
         
-        if delete_button == true {
-            
-            select_1 = dataList[row]
-            test_alert(select_1)
-            
-            self.memberVariable = row
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
+            if let textField = alertController.textFields?.first {
+                if textField.text == "" {
+                    return
+                }
+                
+                guard let text = textField.text else { return }
+                
+                addCategory(text: text)
+                
+                do {
+                    print("完了")
+                } catch {
+                    print("error")
+                }
+            }
         }
-    }
-    
-    var memberVariable: Int = 0
-    
-    func test_alert(_ sender: String?) {
         
-//        print(select_1)
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         
-        let alert: UIAlertController = UIAlertController(title: select_1, message: "削除してもいいですか？", preferredStyle:  UIAlertController.Style.alert)
-
-                // ② Actionの設定
-                // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
-                // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
-                // OKボタン
-            let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
-                // ボタンが押された時の処理を書く（クロージャ実装）
-                (action: UIAlertAction!) -> Void in
-//                print("OK")
-                print(self.memberVariable)
-                print(self.dataList[self.memberVariable])
-//                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
-                
-                self.dataList.remove(at: self.memberVariable)
-//                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
-                self.selectPicker.reloadAllComponents()
-//                self.selectPicker.delegate = self
-//                self.selectPicker.dataSource = self
-                print(self.dataList)
-                self.userDefaults.set(self.dataList, forKey: "FirstArray")
-                
-            })
-            // キャンセルボタン
-            let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
-                // ボタンが押された時の処理を書く（クロージャ実装）
-                (action: UIAlertAction!) -> Void in
-//                print("Cancel")
-            })
-
-            // ③ UIAlertControllerにActionを追加
-            alert.addAction(cancelAction)
-            alert.addAction(defaultAction)
-
-            // ④ Alertを表示
-            present(alert, animated: true, completion: nil)
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
-    
-//    func Printfunc() {
-//        print("Hello")
-//    }
 }
 
+extension ViewController:  UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
+        cell.categoryLabel.font = UIFont.systemFont(ofSize: 16)
+        cell.category = categories[indexPath.row]
+        return cell
+    }
+}
 
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if (segue.identifier == "goNext") {
+//            let taskVC = segue.destination as! TaskViewController
+//            taskVC.textVC = select_1
+//        }
+//    }
+
+//    func readData() -> String {
+//
+//        let str: String = userDefaults.object(forKey: "DataStore") as! String
+//        return str
+//    }
+//
+//    func saveData(str: String?) {
+//
+//        userDefaults.set(str, forKey: "DataStore")
+//    }
+//
+//    func arraySave(str: String?){
+//
+//        guard let unstr = str else {return}
+//        print(unstr)
+//        firstArray = userDefaults.array(forKey: "FirstArray") as! [String]
+//        firstArray.append(unstr)
+//        userDefaults.set(firstArray, forKey: "FirstArray")
+//
+//
+//    }
+
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//
+//        textField.resignFirstResponder()
+//
+//        testText = textField.text!
+//
+//        arraySave(str: testText)
+//        textField.text = ""
+//
+//        return true
+//    }
+    
+//// UIPickerViewの列の数
+//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+//        return 1
+//    }
+//
+//    // UIPickerViewの行数、リストの数
+//    func pickerView(_ pickerView: UIPickerView,
+//                    numberOfRowsInComponent component: Int) -> Int {
+//
+//        return dataList.count
+//    }
+//
+//    // UIPickerViewの最初の表示d
+//    func pickerView(_ pickerView: UIPickerView,
+//                    titleForRow row: Int,
+//                    forComponent component: Int) -> String? {
+//
+//        return dataList[row]
+//    }
+//
+////    var select_0: String?
+//    var select_1: String?
+//
+//    // UIPickerViewのRowが選択された時の挙動
+//    func pickerView(_ pickerView: UIPickerView,
+//                    didSelectRow row: Int,
+//                    inComponent component: Int) {
+//
+//
+//        if delete_button == false {
+//
+//            select_1 = dataList[row]
+//
+//
+//            guard let select_11 = select_1 else {return}
+//
+//            navbar_t.items![0].title = dataList[row]
+//            performSegue(withIdentifier: "goNext", sender: nil)
+//        }
+//
+//        if delete_button == true {
+//
+//            select_1 = dataList[row]
+//            test_alert(select_1)
+//
+//            self.memberVariable = row
+//        }
+//    }
+//
+//    var memberVariable: Int = 0
+//
+//    func test_alert(_ sender: String?) {
+//
+//        let alert: UIAlertController = UIAlertController(title: select_1, message: "削除してもいいですか？", preferredStyle:  UIAlertController.Style.alert)
+//
+//                // ② Actionの設定
+//                // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+//                // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+//                // OKボタン
+//            let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
+//                // ボタンが押された時の処理を書く（クロージャ実装）
+//                (action: UIAlertAction!) -> Void in
+////                print("OK")
+//                print(self.memberVariable)
+//                print(self.dataList[self.memberVariable])
+////                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
+//
+//                self.dataList.remove(at: self.memberVariable)
+////                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
+//                self.selectPicker.reloadAllComponents()
+////                self.selectPicker.delegate = self
+////                self.selectPicker.dataSource = self
+//                print(self.dataList)
+//                self.userDefaults.set(self.dataList, forKey: "FirstArray")
+//
+//            })
+//            // キャンセルボタン
+//            let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
+//                // ボタンが押された時の処理を書く（クロージャ実装）
+//                (action: UIAlertAction!) -> Void in
+////                print("Cancel")
+//            })
+//
+//            // ③ UIAlertControllerにActionを追加
+//            alert.addAction(cancelAction)
+//            alert.addAction(defaultAction)
+//
+//            // ④ Alertを表示
+//            present(alert, animated: true, completion: nil)
+//    }
 

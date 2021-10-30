@@ -27,7 +27,6 @@ class ChatRoomStoryViewController: UIViewController {
     }()
     
     @IBOutlet weak var chatRoomTable: UITableView!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,7 @@ class ChatRoomStoryViewController: UIViewController {
         chatRoomTable.delegate = self
         chatRoomTable.dataSource = self
         chatRoomTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: customCell)
-        chatRoomTable.backgroundColor = .lightGray
+        chatRoomTable.backgroundColor = .white
         
         fetchMessages()
     }
@@ -79,6 +78,11 @@ class ChatRoomStoryViewController: UIViewController {
 }
 
 extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
+    
+    func tappedBackButton() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     func tappedSendButton(text: String) {
 

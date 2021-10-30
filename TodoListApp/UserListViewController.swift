@@ -19,6 +19,7 @@ class UserListViewController: UIViewController {
 
     @IBOutlet weak var userListTable: UITableView!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,20 @@ class UserListViewController: UIViewController {
         startButton.addTarget(self, action: #selector(tappedstartButton), for: .touchUpInside)
         
         fetchUserInfoFromFirestore()
-        
-//        userListTable.register(UITableViewCell.self, forCellReuseIdentifier: cellid)
     }
     
+    @IBAction func tappedLogout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+            let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            signUpViewController.modalPresentationStyle = .fullScreen
+            self.present(signUpViewController, animated: true, completion: nil)
+        } catch {
+            print("ログアウトに失敗しました")
+        }
+    }
+
     @IBAction func tappedCloseButton(_ sender: Any) {
         
         dismiss(animated: true, completion: nil)
@@ -71,7 +82,7 @@ class UserListViewController: UIViewController {
                 return
             }
             
-            print(snapshots)
+//            print(snapshots)
             print("user情報の取得に成功しました")
             snapshots?.documents.forEach({ (snapshot) in
                 let dic = snapshot.data()

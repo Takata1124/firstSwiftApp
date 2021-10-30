@@ -20,6 +20,17 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="OYf-cq-2mD">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="fXG-gD-QfX">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="tYN-yg-8rL">
+                                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                                <connections>
+                                                    <action selector="tappedLogout:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Vc3-f6-GsD"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="iQe-Dj-ESU">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="8Nz-Fp-TGZ">
                                                 <rect key="frame" x="319" y="5" width="75" height="34.5"/>
@@ -86,6 +97,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="logoutButton" destination="tYN-yg-8rL" id="Olm-He-I3t"/>
                         <outlet property="startButton" destination="8Nz-Fp-TGZ" id="hVn-Wx-lma"/>
                         <outlet property="userListTable" destination="QSF-1a-IoR" id="sWq-dV-nrv"/>
                     </connections>
