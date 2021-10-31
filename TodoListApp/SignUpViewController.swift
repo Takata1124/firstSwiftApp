@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import PKHUD
 
 class SignUpViewController: UIViewController {
     
@@ -18,7 +19,10 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
-
+    
+    
+    var eyeconClick: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,17 +44,31 @@ class SignUpViewController: UIViewController {
         
         registerButton.isEnabled  = false
         registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
-    }
         
+        emailTextField.becomeFirstResponder()
+        passwordTextField.isSecureTextEntry = true
+    }
+    
+    @IBAction func eyeconAction(_ sender: Any) {
+        if (eyeconClick == true) {
+            passwordTextField.isSecureTextEntry = false
+            eyeconClick = false
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            eyeconClick = true
+        }
+    }
+    
     @IBAction func tappedalready(_ sender: Any) {
         
         print("tapped")
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginviewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//        loginviewController.modalPresentationStyle = .fullScreen
+        loginviewController.modalPresentationStyle = .fullScreen
         self.present(loginviewController, animated: true, completion: nil)
         
     }
+    
     @objc private func tappedProfileImageButton() {
         print("tapped")
         let imagePickerController = UIImagePickerController()
@@ -62,8 +80,10 @@ class SignUpViewController: UIViewController {
     
     @objc private func tappedRegisterButoon() {
         
-        guard let image = profileImageButton.imageView?.image else { return}
-        guard let uploadImage = image.jpegData(compressionQuality: 0.3) else { return }
+        let image = profileImageButton.imageView?.image ?? UIImage(named: "5085302_s")
+        guard let uploadImage = image?.jpegData(compressionQuality: 0.3) else { return }
+        
+        HUD.show(.progress)
         
         let fileName = NSUUID().uuidString
         let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
@@ -71,6 +91,7 @@ class SignUpViewController: UIViewController {
         storageRef.putData(uploadImage, metadata: nil) {(metadata, err) in
             if let err = err {
                 print("Firestorageへの情報の保存に失敗しました\(err)")
+                HUD.hide()
                 return
             }
             
@@ -78,6 +99,7 @@ class SignUpViewController: UIViewController {
             storageRef.downloadURL { (url, err) in
                 if let err = err {
                     print("FireStorageからのダウンロードに失敗しました\(err)")
+                    HUD.hide()
                     return
                 }
                 
@@ -122,8 +144,6 @@ class SignUpViewController: UIViewController {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
                 self.present(viewController, animated: true, completion: nil)
             }
-            
-            
         }
     }
     
@@ -135,7 +155,7 @@ class SignUpViewController: UIViewController {
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-//        print("text", textField.text)
+        //        print("text", textField.text)
         let emailIsEmpty = emailTextField.text?.isEmpty ?? false
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? false
         let usernameIsEmpty = usernameTextField.text?.isEmpty ?? false

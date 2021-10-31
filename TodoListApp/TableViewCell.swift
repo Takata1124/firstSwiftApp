@@ -11,6 +11,7 @@ import Nuke
 class TableViewCell: UITableViewCell {
     
     var message: Message? {
+        
         didSet {
             
             if let message = message {
@@ -21,6 +22,7 @@ class TableViewCell: UITableViewCell {
     }
     
     var chatroom: ChatRoom? {
+        
         didSet {
             if let chatroom = chatroom {
                 cellText.text = chatroom.partnerUser?.username
@@ -40,14 +42,14 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var latestLabel: UILabel!
     
-    private var checked = false
+//    private var checked = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 //        checkButton.backgroundColor = .black
-        checkButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+//        checkButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+//        checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         cellText.isEditable = false
         cellText.isSelectable = false
         cellText.backgroundColor = .clear
@@ -70,18 +72,16 @@ class TableViewCell: UITableViewCell {
         return formatter.string(from: date)
     }
     
-    
-    @objc private func didTapButton(){
-        switch checked {
-        case false:
-            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
-            checked = true
-            print("true")
-        case true:
-            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
-            checked = false
-            print("false")
-        }
-    }
-    
+//    @objc private func didTapButton(){
+//        switch checked {
+//        case false:
+//            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+//            checked = true
+//            print("true")
+//        case true:
+//            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+//            checked = false
+//            print("false")
+//        }
+//    }
 }

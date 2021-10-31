@@ -10,9 +10,10 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
-class ChatRoomStoryViewController: UIViewController {
+class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     var user: User?
+    var category: Category?
     var chatroom: ChatRoom?
     
     private var customCell = "customCell"
@@ -27,15 +28,12 @@ class ChatRoomStoryViewController: UIViewController {
     }()
     
     @IBOutlet weak var chatRoomTable: UITableView!
-
+    @IBOutlet weak var navbar_t: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        chatRoomTable.delegate = self
-        chatRoomTable.dataSource = self
-        chatRoomTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: customCell)
-        chatRoomTable.backgroundColor = .white
         
+        setUpViews()
         fetchMessages()
     }
     
@@ -49,11 +47,24 @@ class ChatRoomStoryViewController: UIViewController {
         return true
     }
     
+    private func setUpViews() {
+        
+        chatRoomTable.delegate = self
+        chatRoomTable.dataSource = self
+        chatRoomTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: customCell)
+        chatRoomTable.backgroundColor = .white
+        
+        navbar_t.items![0].title = ""
+        navbar_t?.delegate = self
+        navbar_t.barTintColor = .rgb(red: 200, green: 200, blue: 200)
+        navbar_t.items![0].title = category?.categorytitle
+    }
+    
     private func fetchMessages() {
         
-        guard let chatroomDocId = chatroom?.documentId else { return  }
+        guard let categoDocId = category?.categoryId else { return  }
         
-        Firestore.firestore().collection("chatRooms").document(chatroomDocId).collection("messages").addSnapshotListener { (snapshots, err) in
+        Firestore.firestore().collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("メッセージの取得に失敗しました")
                 return
@@ -66,7 +77,7 @@ class ChatRoomStoryViewController: UIViewController {
                     let message = Message(dic: dic)
                     self.messages.append(message)
                     self.chatRoomTable.reloadData()
-
+                    
                 case .modified:
                     print("nothing")
                 case .removed:
@@ -75,18 +86,22 @@ class ChatRoomStoryViewController: UIViewController {
             })
         }
     }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
 }
 
 extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
     
     func tappedBackButton() {
+        
         dismiss(animated: true, completion: nil)
     }
     
-    
     func tappedSendButton(text: String) {
-
-        guard let chatroomDocId = chatroom?.documentId else { return  }
+        
+        guard let categoDocId = category?.categoryId else { return  }
         guard let name = user?.username else { return }
         guard let uid = Auth.auth().currentUser?.uid else  { return }
         chatInputAccessoryViwe.removetext()
@@ -98,20 +113,19 @@ extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
             "message": text
         ] as [String : Any]
         
-        Firestore.firestore().collection("chatRooms").document(chatroomDocId).collection("messages").document()
+        Firestore.firestore().collection("category").document(categoDocId).collection("messages").document()
             .setData(docData) { (err) in
                 if let err = err {
                     print("メッセージの保存に失敗しました")
                     return
                 }
-                
                 print("メッセージの保存に成功しました")
             }
     }
 }
 
 extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSource {
-        
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         chatRoomTable.estimatedRowHeight = 20
         return UITableView.automaticDimension
@@ -126,5 +140,4 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         cell.message = messages[indexPath.row]
         return cell
     }
-
 }

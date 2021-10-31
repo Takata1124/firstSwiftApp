@@ -149,7 +149,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
                     print(self.chatrooms)
                 }
             }
-
         }
     }
     

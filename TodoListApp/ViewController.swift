@@ -12,30 +12,6 @@ import FirebaseAuth
 
 
 
-private func addCategory(text: String) {
-//    print("tapbutton")
-    
-    guard let uid = Auth.auth().currentUser?.uid else { return }
-//    guard let partnerUid = self.selectedUser?.uid else { return }
-//    let members = [uid, partnerUid]
-    
-    let docData = [
-        "uid": uid,
-        "categorytitle": text,
-        "createdAt": Timestamp()
-    ] as [String: Any]
-    
-    Firestore.firestore().collection("category").addDocument(data: docData) { (err) in
-        if let err = err {
-            print("カテゴリーの保存に失敗しました(\(err)")
-            return
-        }
-        
-        print("カテゴリーの保存が成功しました")
-//        self.dismiss(animated: true, completion: nil)
-    }
-}
-
 class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDelegate {
 
 //    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
@@ -57,7 +33,9 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     @IBOutlet weak var delete_b: UIButton!
     @IBOutlet weak var categoryTable: UITableView!
     
+    var user: User?
     var category: Category?
+    
     private var categories = [Category]()
     
     private var categoryListener: ListenerRegistration?
@@ -66,10 +44,11 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         
         super.viewDidLoad()
         
+        
         setUpViews()
 //        fetchCategoryInfoFromFirestore()
-        fetchCategory()
-
+        fetchUserCategory()
+        fetchUserInfoFromFirestore()
     }
     
     private func setUpViews() {
@@ -82,63 +61,58 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         categoryTable.dataSource = self
         categoryTable.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "categoryCell")
         
-        navbar_t.items![0].title = "Category"
-        
+        navbar_t.items![0].title = ""
         navbar_t?.delegate = self
         navbar_t.barTintColor = .rgb(red: 200, green: 200, blue: 200)
-        navbar_t.isTranslucent = true
-        navbar_t.titleTextAttributes = [
-            // 文字の色
-                .foregroundColor: UIColor.black
-            ]
+//        navbar_t.isTranslucent = true
+//        navbar_t.titleTextAttributes = [
+//            // 文字の色
+//                .foregroundColor: UIColor.black
+//            ]
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//
+    override func viewDidAppear(_ animated: Bool) {
+
 //        viewdidloadNext()
-//    }
+        ConfirmUserSign()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
+        
 
     }
     
-    func fetchCategoryInfoFromFirestore() {
+    private func addCategory(text: String) {
+    //    print("tapbutton")
         
-        Firestore.firestore().collection("category").getDocuments { (snapshots, err) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+    //    guard let partnerUid = self.selectedUser?.uid else { return }
+    //    let members = [uid, partnerUid]
+        
+        let docData = [
+            "uid": uid,
+            "categorytitle": text,
+            "createdAt": Timestamp()
+        ] as [String: Any]
+        
+        Firestore.firestore().collection("users").document(uid).collection("category").addDocument(data: docData) { (err) in
             if let err = err {
-                print("カテゴリー情報の取得に失敗しました\(err)")
+                print("カテゴリーの保存に失敗しました(\(err)")
                 return
             }
             
-            //            print(snapshots)
-            print("カテゴリー情報の取得に成功しました")
-            snapshots?.documents.forEach({ (snapshot) in
-                let dic = snapshot.data()
-                let catego = Category.init(dic: dic)
-                //                user.uid = snapshot.documentID
-                
-                //                guard let uid = Auth.auth().currentUser?.uid else { return }
-                
-                //                //loginUserでなければ
-                //                if uid == snapshot.documentID {
-                //                    return
-                //                }
-                
-                self.categories.append(catego)
-                self.categoryTable.reloadData()
-            })
+            print("カテゴリーの保存が成功しました")
+    //        self.dismiss(animated: true, completion: nil)
         }
     }
     
-    func fetchCategory() {
+    private func fetchUserCategory() {
         
-//        guard let categoryDocId = category?.categoryId else { return }
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
         
-        
-        Firestore.firestore().collection("category").addSnapshotListener { (snapshots, err) in
-            
+        Firestore.firestore().collection("users").document(uid).collection("category").addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("メッセージの取得に失敗しました")
                 return
@@ -149,10 +123,13 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
                 case .added:
                     let dic = documentChange.document.data()
                     let catego = Category(dic: dic)
+                    catego.categoryId = documentChange.document.documentID
+//                    self.category?.categoryId = documentChange.document.documentID
+                    
                     self.categories.append(catego)
                     self.categoryTable.reloadData()
                     
-                    print(self.categories)
+//                    print(self.categories)
                     
                 case .modified:
                     print("nothing")
@@ -163,10 +140,75 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         }
     }
     
-    func viewdidloadNext() {
+//    private func handleDolistAddedDocumentChange(documentChange: DocumentChange) {
+//
+//        let dic = documentChange.document.data()
+////        let chatroom = ChatRoom(dic: dic)
+//        category?.categoryId = documentChange.document.documentID
+//
+////        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        chatroom.members.forEach { (memberUid) in
+//
+//            if memberUid != uid {
+//                Firestore.firestore().collection("users").document(memberUid).getDocument { (snapshot, err) in
+//
+//                    if let err = err {
+//                        print("ユーザー情報の取得に失敗しました")
+//                        return
+//                    }
+//
+//                    print("ユーザー情報の取得に成功しました")
+//                    guard let dic = snapshot!.data() else { return }
+//                    let user = User(dic: dic)
+//                    user.uid = snapshot?.documentID
+//
+//                    chatroom.partnerUser = user
+////                    self.chatrooms.append(chatroom)
+////
+////                    self.messageTable.reloadData()
+////                    print(self.chatrooms.count)
+////                    print(self.chatrooms)
+//                }
+//            }
+//        }
+//    }
+    
+    private func fetchUserInfoFromFirestore() {
         
-        performSegue(withIdentifier: "goNext", sender: nil)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err {
+                print("user情報の取得に失敗しました")
+                return
+            }
+            
+            guard let snapshot = snapshot else { return }
+            guard let dic = snapshot.data() else { return }
+            
+//            print("text:", dic)
+            let user = User(dic: dic)
+            self.user = user
+//            print(user.username)
+//            print(type(of: user.username))
+            self.navbar_t.items![0].title = user.username
+        }
     }
+    
+    func ConfirmUserSign() {
+        
+        if Auth.auth().currentUser?.uid == nil {
+            let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+            let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            signUpViewController.modalPresentationStyle = .fullScreen
+            self.present(signUpViewController, animated: true, completion: nil)
+        }
+    }
+    
+//    func viewdidloadNext() {
+//
+//        performSegue(withIdentifier: "goNext", sender: nil)
+//    }
     
     @IBAction func deleteButtonfunc(_ sender: Any) {
         
@@ -183,12 +225,24 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
             delete_count = 0
         }
     }
+    
+    @IBAction func tappedLogout(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+            let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+            let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
+            signUpViewController.modalPresentationStyle = .fullScreen
+            self.present(signUpViewController, animated: true, completion: nil)
+        } catch {
+            print("ログアウトに失敗しました")
+        }
+    }
 
     @IBAction func settingfunc(_ sender: Any) {
         
-        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
-        self.present(signUpViewController, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
+//        self.present(signUpViewController, animated: true, completion: nil)
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -211,7 +265,7 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
                 
                 guard let text = textField.text else { return }
                 
-                addCategory(text: text)
+                self.addCategory(text: text)
                 
                 do {
                     print("完了")
@@ -246,7 +300,80 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
         cell.category = categories[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("tapped table view")
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+        chatRoomViewController.user = user
+        chatRoomViewController.category = categories[indexPath.row]
+        
+        chatRoomViewController.modalPresentationStyle = .fullScreen
+        self.present(chatRoomViewController, animated: true, completion: nil)
+    }
 }
+
+//    func fetchCategoryInfoFromFirestore() {
+//
+//        Firestore.firestore().collection("category").getDocuments { (snapshots, err) in
+//            if let err = err {
+//                print("カテゴリー情報の取得に失敗しました\(err)")
+//                return
+//            }
+//
+//            //            print(snapshots)
+//            print("カテゴリー情報の取得に成功しました")
+//            snapshots?.documents.forEach({ (snapshot) in
+//                let dic = snapshot.data()
+//                let catego = Category.init(dic: dic)
+//                //                user.uid = snapshot.documentID
+//
+//                //                guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//                //                //loginUserでなければ
+//                //                if uid == snapshot.documentID {
+//                //                    return
+//                //                }
+//
+//                self.categories.append(catego)
+//                self.categoryTable.reloadData()
+//            })
+//        }
+//    }
+    
+//    func fetchCategory() {
+//
+////        guard let categoryDocId = category?.categoryId else { return }
+//
+//
+//        Firestore.firestore().collection("category").addSnapshotListener { (snapshots, err) in
+//
+//            if let err = err {
+//                print("メッセージの取得に失敗しました")
+//                return
+//            }
+//
+//            snapshots?.documentChanges.forEach({ (documentChange) in
+//                switch documentChange.type {
+//                case .added:
+//                    let dic = documentChange.document.data()
+//                    let catego = Category(dic: dic)
+//                    self.categories.append(catego)
+//                    self.categoryTable.reloadData()
+//
+//                    print(self.categories)
+//
+//                case .modified:
+//                    print("nothing")
+//                case .removed:
+//                    print("nothing")
+//                }
+//            })
+//        }
+//    }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //

@@ -41,6 +41,7 @@
                     </view>
                     <connections>
                         <outlet property="chatRoomTable" destination="KDF-Rw-vqy" id="GzP-6r-sLz"/>
+                        <outlet property="navbar_t" destination="23s-3T-d6B" id="pTc-uT-WeB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

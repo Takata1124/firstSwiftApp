@@ -26,8 +26,6 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("hello")
-        
         navbar?.delegate = self
         newText.delegate = viewclass            
 //        viewclass.Printfunc()

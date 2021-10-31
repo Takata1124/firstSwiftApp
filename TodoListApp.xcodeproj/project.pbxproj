@@ -38,6 +38,7 @@
 		68A45FD6272D278F00FF755A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FD4272D278F00FF755A /* CategoryTableViewCell.swift */; };
 		68A45FD7272D278F00FF755A /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FD5272D278F00FF755A /* CategoryTableViewCell.xib */; };
 		68A45FD9272D2EB200FF755A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FD8272D2EB200FF755A /* Category.swift */; };
+		68A45FDB272F154500FF755A /* DoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FDA272F154500FF755A /* DoList.swift */; };
 		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		68A45FD4272D278F00FF755A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		68A45FD5272D278F00FF755A /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
 		68A45FD8272D2EB200FF755A /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		68A45FDA272F154500FF755A /* DoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,10 +135,10 @@
 				68A45FC0272910C000FF755A /* UserListViewController.swift */,
 				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 				68A45FD2272CED3800FF755A /* LoginViewController.swift */,
-				688895D7271C9B18002102E7 /* TableViewCell.swift */,
 				68A45FC6272B54A700FF755A /* ChatRoomStoryViewController.swift */,
 				68A45FCB272B64A000FF755A /* ChatInputAccessoryView.swift */,
 				68A45FD4272D278F00FF755A /* CategoryTableViewCell.swift */,
+				688895D7271C9B18002102E7 /* TableViewCell.swift */,
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
 				68A45FB52726E78900FF755A /* SignUp.storyboard */,
 				68A45FD0272CEBCD00FF755A /* Login.storyboard */,
@@ -160,6 +162,7 @@
 				68A45FC22729F4CA00FF755A /* ChatRoom.swift */,
 				68A45FCE272CB01600FF755A /* Message.swift */,
 				68A45FD8272D2EB200FF755A /* Category.swift */,
+				68A45FDA272F154500FF755A /* DoList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				68A45FD6272D278F00FF755A /* CategoryTableViewCell.swift in Sources */,
 				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
 				688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */,
+				68A45FDB272F154500FF755A /* DoList.swift in Sources */,
 				688895E02723F924002102E7 /* UIimageExtension.swift in Sources */,
 				68A45FCC272B64A000FF755A /* ChatInputAccessoryView.swift in Sources */,
 			);

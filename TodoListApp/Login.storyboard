@@ -72,15 +72,25 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QB-MR-d5L">
                                 <rect key="frame" x="88" y="658" width="238.5" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="まだアカウントをお持ちでない方"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SX-Te-Hj8">
                                 <rect key="frame" x="136.5" y="124" width="141" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHM-8x-CEs">
+                                <rect key="frame" x="357" y="487.5" width="57" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="eye.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="eyeconAction:" destination="Vgj-5m-9Wb" eventType="touchUpInside" id="bg6-Wc-p0d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oq7-YO-fNa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -89,11 +99,14 @@
                             <constraint firstItem="p3q-JY-rTj" firstAttribute="centerX" secondItem="9JG-zy-eXN" secondAttribute="centerX" id="BXP-OV-dxP"/>
                             <constraint firstItem="jhf-Zh-MMT" firstAttribute="centerY" secondItem="9JG-zy-eXN" secondAttribute="centerY" id="Krt-kJ-KYp"/>
                             <constraint firstItem="jhf-Zh-MMT" firstAttribute="centerX" secondItem="9JG-zy-eXN" secondAttribute="centerX" id="Mfx-Ei-JER"/>
+                            <constraint firstItem="Oq7-YO-fNa" firstAttribute="trailing" secondItem="SHM-8x-CEs" secondAttribute="trailing" id="NFF-qb-Thh"/>
                             <constraint firstItem="jhf-Zh-MMT" firstAttribute="centerX" secondItem="9JG-zy-eXN" secondAttribute="centerX" id="S2o-t9-L45"/>
                             <constraint firstItem="7SX-Te-Hj8" firstAttribute="centerX" secondItem="9JG-zy-eXN" secondAttribute="centerX" id="ShL-HT-vQ9"/>
                             <constraint firstItem="p3q-JY-rTj" firstAttribute="top" secondItem="jhf-Zh-MMT" secondAttribute="bottom" constant="30" id="Uee-FU-LeX"/>
                             <constraint firstItem="7QB-MR-d5L" firstAttribute="top" secondItem="p3q-JY-rTj" secondAttribute="bottom" constant="50" id="XKN-DN-NTc"/>
                             <constraint firstItem="7SX-Te-Hj8" firstAttribute="top" secondItem="Oq7-YO-fNa" secondAttribute="top" constant="80" id="YRb-yB-Vx8"/>
+                            <constraint firstItem="SHM-8x-CEs" firstAttribute="centerY" secondItem="jhf-Zh-MMT" secondAttribute="centerY" constant="55" id="eNV-6T-sXe"/>
+                            <constraint firstItem="SHM-8x-CEs" firstAttribute="leading" secondItem="jhf-Zh-MMT" secondAttribute="trailing" id="grI-ZE-k82"/>
                         </constraints>
                     </view>
                     <connections>
@@ -101,6 +114,7 @@
                         <outlet property="emailTextField" destination="kzH-ra-feA" id="MZs-tR-zHA"/>
                         <outlet property="loginButton" destination="p3q-JY-rTj" id="ZxN-Er-cEV"/>
                         <outlet property="passwordTextField" destination="ZVo-pH-TBM" id="PHO-rN-SGC"/>
+                        <outlet property="registerButton" destination="p3q-JY-rTj" id="nbX-23-daw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kPS-gU-cuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -109,6 +123,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye.fill" catalog="system" width="128" height="78"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

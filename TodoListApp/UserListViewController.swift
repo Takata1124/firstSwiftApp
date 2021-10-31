@@ -82,7 +82,6 @@ class UserListViewController: UIViewController {
                 return
             }
             
-//            print(snapshots)
             print("user情報の取得に成功しました")
             snapshots?.documents.forEach({ (snapshot) in
                 let dic = snapshot.data()
@@ -150,5 +149,4 @@ class UserListTableCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
