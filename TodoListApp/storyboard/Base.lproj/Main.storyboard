@@ -137,8 +137,6 @@
                         <outlet property="categoryTable" destination="Oy6-p9-wRj" id="VXG-aP-TX8"/>
                         <outlet property="delete_b" destination="UY9-IB-BlO" id="ExL-sp-aNi"/>
                         <outlet property="navbar_t" destination="g6i-ga-XPU" id="Cdg-GW-ahP"/>
-                        <segue destination="uh1-el-Pvj" kind="show" identifier="goNext" id="yrv-BS-qyw"/>
-                        <segue destination="Pug-S9-EdS" kind="presentation" identifier="goSetting" id="Zks-3j-JqR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
