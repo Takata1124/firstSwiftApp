@@ -169,7 +169,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
             let user = User(dic: dic)
             self.user = user
         }
-        
     }
     
     @IBAction func tapButton(_ sender: Any) {

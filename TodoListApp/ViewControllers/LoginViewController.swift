@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var donthaveAccountButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginLabel: UILabel!
     
     var eyeconClick: Bool = true
     
@@ -40,7 +41,6 @@ class LoginViewController: UIViewController {
     @objc private func tappedDontHaveAccountButton() {
         
         dismiss(animated: true, completion: nil)
-
     }
     
     private func setUpView() {
@@ -55,6 +55,9 @@ class LoginViewController: UIViewController {
         
         registerButton.isEnabled  = false
         registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
+        
+//        loginLabel.tintColor = UIColor.red
+        loginLabel.isHidden = true
     }
     
     @objc private func tappedLoginButton() {
@@ -67,6 +70,10 @@ class LoginViewController: UIViewController {
             if let err = err {
                 HUD.hide()
                 print("ログインに失敗しました")
+                self.loginLabel.isHidden = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    self.loginLabel.isHidden = true
+                }
                 return
             }
             
@@ -99,5 +106,11 @@ extension LoginViewController: UITextFieldDelegate {
             registerButton.isEnabled = true
             registerButton.backgroundColor = .rgb(red: 0, green: 185, blue: 0)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // キーボードを閉じる
+        textField.resignFirstResponder()
+        return true
     }
 }

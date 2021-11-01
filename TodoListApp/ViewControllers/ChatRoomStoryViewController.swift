@@ -96,6 +96,7 @@ extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
     
     func tappedBackButton() {
         
+        chatInputAccessoryViwe.isHidden = true
         dismiss(animated: true, completion: nil)
     }
     
@@ -139,5 +140,17 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
         cell.message = messages[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("tapped")
+        tableView.deselectRow(at: indexPath, animated: true)
+        let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
+        let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
+//        chatRoomViewController.user = user
+//        chatRoomViewController.category = categories[indexPath.row]
+        
+        dolistViewController.modalPresentationStyle = .fullScreen
+        self.present(dolistViewController, animated: true, completion: nil)
     }
 }

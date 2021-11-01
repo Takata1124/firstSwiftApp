@@ -10,8 +10,6 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
-
-
 class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDelegate {
 
 //    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
