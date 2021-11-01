@@ -16,7 +16,6 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     var category: Category?
     var chatroom: ChatRoom?
     
-    private var customCell = "customCell"
     private var messages = [Message]()
     
     private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
@@ -37,6 +36,12 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         fetchMessages()
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewDidLoad()
+//
+//        chatInputAccessoryViwe.isHidden = false
+//    }
+    
     override var inputAccessoryView: UIView? {
         get {
             return chatInputAccessoryViwe
@@ -51,7 +56,7 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         
         chatRoomTable.delegate = self
         chatRoomTable.dataSource = self
-        chatRoomTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: customCell)
+        chatRoomTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         chatRoomTable.backgroundColor = .white
         
         navbar_t.items![0].title = ""
@@ -62,9 +67,10 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     private func fetchMessages() {
         
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
         guard let categoDocId = category?.categoryId else { return  }
         
-        Firestore.firestore().collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
+        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("メッセージの取得に失敗しました")
                 return
@@ -73,8 +79,10 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
             snapshots?.documentChanges.forEach({ (documentChange) in
                 switch documentChange.type {
                 case .added:
+                    
                     let dic = documentChange.document.data()
                     let message = Message(dic: dic)
+                    message.messageId = documentChange.document.documentID
                     self.messages.append(message)
                     self.chatRoomTable.reloadData()
                     
@@ -114,14 +122,13 @@ extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
             "message": text
         ] as [String : Any]
         
-        Firestore.firestore().collection("category").document(categoDocId).collection("messages").document()
-            .setData(docData) { (err) in
-                if let err = err {
-                    print("メッセージの保存に失敗しました")
-                    return
-                }
-                print("メッセージの保存に成功しました")
+        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document().setData(docData) { (err) in
+            if let err = err {
+                print("メッセージの保存に失敗しました")
+                return
             }
+            print("メッセージの保存に成功しました")
+        }
     }
 }
 
@@ -147,9 +154,9 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
         let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
-//        chatRoomViewController.user = user
-//        chatRoomViewController.category = categories[indexPath.row]
-        
+        dolistViewController.user = user
+        dolistViewController.category = category
+        dolistViewController.message = messages[indexPath.row]
         dolistViewController.modalPresentationStyle = .fullScreen
         self.present(dolistViewController, animated: true, completion: nil)
     }

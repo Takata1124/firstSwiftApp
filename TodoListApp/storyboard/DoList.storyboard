@@ -53,6 +53,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dolistTable" destination="2O4-Ja-TMs" id="nSR-Wo-2hd"/>
                         <outlet property="navbar_t" destination="Bja-Fa-YPL" id="woI-TR-cdH"/>
                     </connections>
                 </viewController>

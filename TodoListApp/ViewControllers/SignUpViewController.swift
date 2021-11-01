@@ -45,7 +45,7 @@ class SignUpViewController: UIViewController {
         registerButton.isEnabled  = false
         registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
         
-        emailTextField.becomeFirstResponder()
+        //        emailTextField.becomeFirstResponder()
         passwordTextField.isSecureTextEntry = true
     }
     
@@ -167,6 +167,12 @@ extension SignUpViewController: UITextFieldDelegate {
             registerButton.isEnabled = true
             registerButton.backgroundColor = .rgb(red: 0, green: 185, blue: 0)
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // キーボードを閉じる
+        textField.resignFirstResponder()
+        return true
     }
 }
 

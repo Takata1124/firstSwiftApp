@@ -36,6 +36,17 @@ class TableViewCell: UITableViewCell {
         }
     }
     
+    var dolist: DoList? {
+        
+        didSet {
+            
+            if let dolist = dolist {
+                cellText.text = dolist.dolisttitle
+                dateLabel.text = dateFormatterForDateLabel(date: dolist.createdAt.dateValue())
+            }
+        }
+    }
+    
     @IBOutlet weak var IconImage: UIImageView!
     @IBOutlet weak var cellText: UITextView!
     @IBOutlet weak var checkButton: UIButton!

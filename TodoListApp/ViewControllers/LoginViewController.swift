@@ -47,7 +47,7 @@ class LoginViewController: UIViewController {
         
         donthaveAccountButton.addTarget(self, action: #selector(tappedDontHaveAccountButton), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
-        emailTextField.becomeFirstResponder()
+        //        emailTextField.becomeFirstResponder()
         passwordTextField.isSecureTextEntry = true
         
         emailTextField.delegate = self
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
         registerButton.isEnabled  = false
         registerButton.backgroundColor = .rgb(red: 100, green: 100, blue: 100)
         
-//        loginLabel.tintColor = UIColor.red
+        //        loginLabel.tintColor = UIColor.red
         loginLabel.isHidden = true
     }
     
@@ -97,7 +97,7 @@ extension LoginViewController: UITextFieldDelegate {
         //        print("text", textField.text)
         let emailIsEmpty = emailTextField.text?.isEmpty ?? false
         let passwordIsEmpty = passwordTextField.text?.isEmpty ?? false
-//        let usernameIsEmpty = usernameTextField.text?.isEmpty ?? false
+        //        let usernameIsEmpty = usernameTextField.text?.isEmpty ?? false
         
         if emailIsEmpty || passwordIsEmpty {
             registerButton.isEnabled  = false

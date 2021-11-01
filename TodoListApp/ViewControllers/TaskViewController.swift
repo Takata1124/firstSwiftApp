@@ -83,7 +83,6 @@ class TaskViewController: UIViewController, UITextViewDelegate, UINavigationBarD
     override func viewDidAppear(_ animated: Bool) {
 
         fetchLoginUserInfo()
-        
     }
     
     private func fetchChatroomsInFromFirestore() {
