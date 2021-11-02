@@ -1,6 +1,6 @@
 //
 //  ChatRoomStoryViewController.swift
-//  TodoListApp
+//  messagesApp
 //
 //  Created by t032fj on 2021/10/29.
 //
@@ -28,6 +28,8 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     @IBOutlet weak var chatRoomTable: UITableView!
     @IBOutlet weak var navbar_t: UINavigationBar!
+    @IBOutlet weak var changebutton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +65,8 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         navbar_t?.delegate = self
         navbar_t.barTintColor = .rgb(red: 200, green: 200, blue: 200)
         navbar_t.items![0].title = category?.categorytitle
+        
+        changebutton.setTitle("Edit", for: .normal)
     }
     
     private func fetchMessages() {
@@ -87,8 +91,10 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
                     self.chatRoomTable.reloadData()
                     
                 case .modified:
+                    
                     print("nothing")
                 case .removed:
+                    
                     print("nothing")
                 }
             })
@@ -97,6 +103,18 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
+    }
+    
+    @IBAction func changemode(_ sender: Any) {
+        
+        if (chatRoomTable.isEditing == true) {
+            chatRoomTable.isEditing = false
+            changebutton.setTitle("Edit", for: .normal)
+            
+        } else {
+            chatRoomTable.isEditing = true
+            changebutton.setTitle("Editing", for: .normal)
+        }
     }
 }
 
@@ -159,5 +177,60 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         dolistViewController.message = messages[indexPath.row]
         dolistViewController.modalPresentationStyle = .fullScreen
         self.present(dolistViewController, animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+//
+            guard let messId = messages[indexPath.row].messageId else { return }
+            print(messId)
+            
+            guard let categoDocId = category?.categoryId else { return  }
+            guard let uid = Auth.auth().currentUser?.uid else  { return }
+            
+            Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messId).delete()
+            
+            messages.remove(at: indexPath.row)
+            chatRoomTable.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if chatRoomTable.isEditing {
+            return .delete
+        }
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        
+        let list = messages[fromIndexPath.row]
+        messages.remove(at: fromIndexPath.row)
+        messages.insert(list, at: to.row)
+        
+        print(fromIndexPath)
+        print(to.row)
+        
+        print(messages[fromIndexPath[1]].message)
+        print(messages[to.row].message)
+        
+        guard let categoDocId = category?.categoryId else { return  }
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        
+        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err)  in
+            
+            documents?.documents.forEach { document in
+                let dataDescription = document.data().map(String.init(describing:))
+                print(dataDescription)
+
+            }
+            
+        }
+    }
+
+    //並び替えを可能にする
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 }

@@ -23,7 +23,19 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23s-3T-d6B">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="eou-K6-GDf"/>
+                                    <navigationItem title="Title" id="eou-K6-GDf">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="Bh0-4K-szM">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="PPi-HJ-3YZ">
+                                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="changemode:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TaA-0a-hh7"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -40,6 +52,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="changebutton" destination="PPi-HJ-3YZ" id="Ibz-IX-UG8"/>
                         <outlet property="chatRoomTable" destination="KDF-Rw-vqy" id="GzP-6r-sLz"/>
                         <outlet property="navbar_t" destination="23s-3T-d6B" id="pTc-uT-WeB"/>
                     </connections>
