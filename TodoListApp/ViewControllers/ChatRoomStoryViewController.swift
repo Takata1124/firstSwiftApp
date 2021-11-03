@@ -18,6 +18,7 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     private var messages = [Message]()
     
+    
     private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
         
         let view = ChatInputAccessoryView()
@@ -205,29 +206,151 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         
+        guard let categoDocId = category?.categoryId else { return  }
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        
+        var datas = [String]()
+        
+        let databaseMessage = Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages")
+        
+        var Intcount: Int = messages.count - 1
+        for i in 0...Intcount {
+            print(i)
+            guard let messId = messages[i].messageId else { return }
+            print(messId)
+            
+            
+//            databaseMessage.document(messId).delete()
+            
+            datas.append(messId)
+//            chatRoomTable.reloadData()
+        }
+        
+        print(datas)
+        
         let list = messages[fromIndexPath.row]
         messages.remove(at: fromIndexPath.row)
         messages.insert(list, at: to.row)
         
-        print(fromIndexPath)
-        print(to.row)
+//        print(fromIndexPath)
+        print("toindex", to.row)
         
-        print(messages[fromIndexPath[1]].message)
-        print(messages[to.row].message)
+        var toIndexPath: Int = to.row
+//
+//        print(messages[fromIndexPath[1]].message)
+//        print(messages[to.row].message)
         
-        guard let categoDocId = category?.categoryId else { return  }
-        guard let uid = Auth.auth().currentUser?.uid else  { return }
+//        print(messages)
+//        print(messages[0])
+//        print(messages[0].message)
         
-        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err)  in
+        var messcount: Int = messages.count - 1
+        
+        for i in 0...messcount {
             
-            documents?.documents.forEach { document in
-                let dataDescription = document.data().map(String.init(describing:))
-                print(dataDescription)
-
+            let docData = [
+                "name": messages[i].name,
+                "createdAt": messages[i].createdAt,
+                "uid": messages[i].uid,
+                "message": messages[i].message
+            ] as [String : Any]
+            
+            databaseMessage.document().setData(docData) { (err) in
+                if let err = err {
+                    print("メッセージの保存に失敗しました")
+                    return
+                }
+                print("メッセージの保存に成功しました")
             }
-            
         }
+        
+
+        
+        var IDcount: Int = datas.count - 1
+//        var count = -1
+        
+//        repeat {
+//            count += 1
+//            let docId = datas[count]
+//            databaseMessage.document(docId).delete()
+//
+//          // 繰り返し実行されるコード
+//        } while count < IDcount
+        
+        for i in 0...IDcount {
+            
+//            if i < toIndexPath {
+//                print(i)
+//                let docId = datas[i]
+//                print(docId)
+//
+//                databaseMessage.document(docId).delete()
+//                messages.removeFirst()
+//            } else if i == toIndexPath {
+//
+//                continue
+//            } else {
+//
+//                print(i)
+//                let docId = datas[i - 1]
+//                print(docId)
+//
+//                databaseMessage.document(docId).delete()
+//                messages.remove(at: 1)
+//
+//    //            datas.append(messId)
+//    //            chatRoomTable.reloadData()
+//            }
+            
+            print(i)
+            let docId = datas[i]
+            print(docId)
+        
+            databaseMessage.document(docId).delete()
+            messages.removeFirst()
+        }
+        
+        print(datas)
+        
     }
+//        var numbersString: [String] = []
+//        var numbersInt: [Int] = []
+
+//        numbersString = messages.map({ (value: Message) -> String in
+//                        return value.tostring
+//                    })
+                    // [1, 2, 3]
+        
+//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addDocument(data: messages[0])
+        
+        
+//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err)  in
+//
+//            documents?.documents.forEach { document in
+//                let dataDescription = document.data()
+//                print(dataDescription)
+////                let dataDescription = document.data().map(String.init(describing:))
+////                print(dataDescription)
+////                print(dataDescription[0])
+//
+////                let docData = [
+////                    "name": ,
+////                    "createdAt": Timestamp(),
+////                    "uid": uid,
+////                    "message": text
+////                ] as [String : Any]
+//
+////                docData = dataDescription[0]
+////                self.messages.append(message)
+//
+//
+//
+//                self.datas.append(dataDescription)
+//                print(self.datas)
+//            }
+//
+//        }
+//    }
 
     //並び替えを可能にする
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
