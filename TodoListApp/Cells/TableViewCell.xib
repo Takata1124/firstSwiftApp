@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="ここにメッセージを書きます" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="15" y="15" width="350" height="70"/>
+                        <rect key="frame" x="15" y="15" width="290" height="70"/>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -33,12 +33,23 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcO-Wt-THd">
+                        <rect key="frame" x="323" y="36.5" width="42" height="42"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="TcO-Wt-THd" secondAttribute="height" multiplier="1:1" id="MWd-ea-DT6"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="checkmark" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="30" id="6oh-nG-euC"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="8Ok-Wk-oit"/>
+                    <constraint firstAttribute="trailing" secondItem="TcO-Wt-THd" secondAttribute="trailing" constant="15" id="9Rj-Pg-7DT"/>
                     <constraint firstItem="XaW-s6-VPr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CXe-9u-Sjj"/>
-                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="15" id="oTA-gu-Vib"/>
+                    <constraint firstItem="TcO-Wt-THd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n94-N8-h2r"/>
+                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="75" id="oTA-gu-Vib"/>
                     <constraint firstAttribute="bottom" secondItem="XaW-s6-VPr" secondAttribute="bottom" constant="5" id="thO-Py-Kfo"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="yxa-th-fiX"/>
                 </constraints>
@@ -46,12 +57,14 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="cellText" destination="wRL-ri-5N4" id="KpX-bm-vyz"/>
+                <outlet property="checkButton" destination="TcO-Wt-THd" id="BU5-i0-lnQ"/>
                 <outlet property="dateLabel" destination="XaW-s6-VPr" id="VTi-0t-EQ6"/>
             </connections>
-            <point key="canvasLocation" x="-664" y="-199"/>
+            <point key="canvasLocation" x="-657.97101449275362" y="-203.23660714285714"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

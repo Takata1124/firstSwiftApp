@@ -17,6 +17,7 @@ class TableViewCell: UITableViewCell {
             if let message = message {
                 cellText.text = message.message
                 dateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
+                
             }
         }
     }
@@ -43,6 +44,22 @@ class TableViewCell: UITableViewCell {
             if let dolist = dolist {
                 cellText.text = dolist.dolisttitle
                 dateLabel.text = dateFormatterForDateLabel(date: dolist.createdAt.dateValue())
+                
+                let checkClick = dolist.click
+                
+                if checkClick == true {
+                
+//                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                    print("check")
+//                    viewcell.accessoryType = .none
+                } else {
+                    
+//                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+                    print("circle")
+//                    viewcell.accessoryType = .checkmark
+                }
             }
         }
     }
@@ -52,10 +69,14 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var latestLabel: UILabel!
+//    @IBOutlet weak var viewview: UIView!
+    
+    var checked: Bool?
     
 //    private var checked = false
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         // Initialization code
 //        checkButton.backgroundColor = .black
@@ -65,9 +86,23 @@ class TableViewCell: UITableViewCell {
         cellText.isSelectable = false
         cellText.backgroundColor = .clear
         
+//        checkButton.layer.cornerRadius = 22
+//        checkButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        
         backgroundColor = .clear
+        
+//        checked = false
     }
 
+//    @objc func tappedButton() {
+//
+//        print("tapbutton")
+//
+//        if checkClick == false {
+//
+//        }
+//    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -84,6 +119,7 @@ class TableViewCell: UITableViewCell {
     }
     
 //    @objc private func didTapButton(){
+//
 //        switch checked {
 //        case false:
 //            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -93,6 +129,11 @@ class TableViewCell: UITableViewCell {
 //            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
 //            checked = false
 //            print("false")
+//
+//        case .none:
+//            print("nothing")
+//        case .some(_):
+//            print("nothing")
 //        }
 //    }
 }

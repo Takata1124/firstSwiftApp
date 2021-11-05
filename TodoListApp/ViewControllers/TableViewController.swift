@@ -155,17 +155,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//
-//        //削除の場合、配列からデータを削除する。
-//        if( editingStyle == UITableViewCell.EditingStyle.delete) {
-//            todoList.remove(at: indexPath.row)
-//        }
-//
-//        //テーブルの再読み込み
-//        tabletable.reloadData()
-//    }
-//
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             todoList.remove(at: indexPath.row)
@@ -191,6 +180,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return true
     }
     
+}
+
 //    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
 //        return true
 //    }
@@ -206,14 +197,24 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
 //        return false
 //    }
-}
-
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
 //        cell.cellText.text = TODO[indexPath.row]
 //        return cell
 ////    }
 //}
+
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//
+//        //削除の場合、配列からデータを削除する。
+//        if( editingStyle == UITableViewCell.EditingStyle.delete) {
+//            todoList.remove(at: indexPath.row)
+//        }
+//
+//        //テーブルの再読み込み
+//        tabletable.reloadData()
+//    }
+//
 
 //extension TableViewController: UITableViewDelegate, UITableViewDataSource {
 //

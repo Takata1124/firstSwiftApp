@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6818103C2733FC8900D39F11 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6818103B2733FC8900D39F11 /* TableViewCell.xib */; };
 		688895B8271AE3F5002102E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895B7271AE3F5002102E7 /* AppDelegate.swift */; };
 		688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895B9271AE3F5002102E7 /* SceneDelegate.swift */; };
 		688895BC271AE3F5002102E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895BB271AE3F5002102E7 /* ViewController.swift */; };
@@ -15,7 +16,6 @@
 		688895C4271AE3F6002102E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 688895C2271AE3F6002102E7 /* LaunchScreen.storyboard */; };
 		688895CC271B21D3002102E7 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895CB271B21D3002102E7 /* TaskViewController.swift */; };
 		688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895D7271C9B18002102E7 /* TableViewCell.swift */; };
-		688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 688895D8271C9B18002102E7 /* TableViewCell.xib */; };
 		688895DC271DA173002102E7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DB271DA173002102E7 /* SettingViewController.swift */; };
 		688895DE271EF38D002102E7 /* UIcolor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DD271EF38D002102E7 /* UIcolor.swift */; };
 		688895E02723F924002102E7 /* UIimageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688895DF2723F924002102E7 /* UIimageExtension.swift */; };
@@ -48,6 +48,7 @@
 		27815B50013CCBAD6DCDC6FA /* Pods-TodoListApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp.debug.xcconfig"; path = "Target Support Files/Pods-TodoListApp/Pods-TodoListApp.debug.xcconfig"; sourceTree = "<group>"; };
 		436C40CDBFC94E7C8FF086D5 /* Pods-TodoListApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoListApp.release.xcconfig"; path = "Target Support Files/Pods-TodoListApp/Pods-TodoListApp.release.xcconfig"; sourceTree = "<group>"; };
 		4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoListApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6818103B2733FC8900D39F11 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		688895B4271AE3F5002102E7 /* TodoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		688895B7271AE3F5002102E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		688895B9271AE3F5002102E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +59,6 @@
 		688895C5271AE3F6002102E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		688895CB271B21D3002102E7 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		688895D7271C9B18002102E7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		688895D8271C9B18002102E7 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		688895DB271DA173002102E7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		688895DD271EF38D002102E7 /* UIcolor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcolor.swift; sourceTree = "<group>"; };
 		688895DF2723F924002102E7 /* UIimageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIimageExtension.swift; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 				68A45FD4272D278F00FF755A /* CategoryTableViewCell.swift */,
 				688895D7271C9B18002102E7 /* TableViewCell.swift */,
 				68A45FCB272B64A000FF755A /* ChatInputAccessoryView.swift */,
+				6818103B2733FC8900D39F11 /* TableViewCell.xib */,
 				68A45FD5272D278F00FF755A /* CategoryTableViewCell.xib */,
-				688895D8271C9B18002102E7 /* TableViewCell.xib */,
 				68A45FC8272B624600FF755A /* ChatInputAccessoryView.xib */,
 			);
 			path = Cells;
@@ -278,8 +278,8 @@
 				68A45FD7272D278F00FF755A /* CategoryTableViewCell.xib in Resources */,
 				688895C4271AE3F6002102E7 /* LaunchScreen.storyboard in Resources */,
 				68A45FB62726E78900FF755A /* SignUp.storyboard in Resources */,
-				688895DA271C9B18002102E7 /* TableViewCell.xib in Resources */,
 				688895C1271AE3F6002102E7 /* Assets.xcassets in Resources */,
+				6818103C2733FC8900D39F11 /* TableViewCell.xib in Resources */,
 				68A45FBF27290EB300FF755A /* UserList.storyboard in Resources */,
 				688895BF271AE3F5002102E7 /* Main.storyboard in Resources */,
 				68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */,

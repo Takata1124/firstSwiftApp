@@ -26,8 +26,3 @@ class Message {
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
     }
 }
-
-//class MessageToString {
-//    
-//    
-//}

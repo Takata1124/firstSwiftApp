@@ -102,6 +102,38 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         }
     }
     
+//    private func fetchBoolMessages() {
+//
+//        guard let uid = Auth.auth().currentUser?.uid else  { return }
+//        guard let categoDocId = category?.categoryId else { return  }
+//
+//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
+//            if let err = err {
+//                print("メッセージの取得に失敗しました")
+//                return
+//            }
+//
+//            snapshots?.documentChanges.forEach({ (documentChange) in
+//                switch documentChange.type {
+//                case .added:
+//
+//                    let dic = documentChange.document.data()
+//                    let message = Message(dic: dic)
+//                    message.messageId = documentChange.document.documentID
+//                    self.messages.append(message)
+//                    self.chatRoomTable.reloadData()
+//
+//                case .modified:
+//
+//                    print("nothing")
+//                case .removed:
+//
+//                    print("nothing")
+//                }
+//            })
+//        }
+//    }
+    
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }
@@ -132,13 +164,15 @@ extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
         guard let categoDocId = category?.categoryId else { return  }
         guard let name = user?.username else { return }
         guard let uid = Auth.auth().currentUser?.uid else  { return }
+        
         chatInputAccessoryViwe.removetext()
         
         let docData = [
             "name": name,
             "createdAt": Timestamp(),
             "uid": uid,
-            "message": text
+            "message": text,
+            "click": false
         ] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document().setData(docData) { (err) in
@@ -169,7 +203,8 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("tapped")
+        
+//        print("tapped")
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
         let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
@@ -178,7 +213,26 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         dolistViewController.message = messages[indexPath.row]
         dolistViewController.modalPresentationStyle = .fullScreen
         self.present(dolistViewController, animated: true, completion: nil)
+        
+//        let cell = tableView.cellForRow(at: indexPath)
+//        let selectedIndexPaths = tableView.indexPathsForSelectedRows
+//        if selectedIndexPaths != nil && (selectedIndexPaths?.contains(indexPath))! {
+//            if let paths = selectedIndexPaths {
+//                for path in paths {
+//                    if indexPath.section == path.section {
+//                        let checkedCell = tableView.cellForRow(at: path)
+//                        checkedCell?.accessoryType = .none
+//                    }
+//                }
+//            }
+//        }
+//        cell?.accessoryType = .checkmark
     }
+    
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//       let cell = tableView.cellForRow(at: indexPath)
+//       cell!.accessoryType = .none
+//   }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -193,7 +247,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
             
             messages.remove(at: indexPath.row)
             chatRoomTable.deleteRows(at: [indexPath], with: .fade)
-            
         }
     }
     
@@ -219,7 +272,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
             guard let messId = messages[i].messageId else { return }
             print(messId)
             
-            
 //            databaseMessage.document(messId).delete()
             
             datas.append(messId)
@@ -227,7 +279,7 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         print(datas)
-        
+                        
         let list = messages[fromIndexPath.row]
         messages.remove(at: fromIndexPath.row)
         messages.insert(list, at: to.row)
@@ -263,8 +315,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
                 print("メッセージの保存に成功しました")
             }
         }
-        
-
         
         var IDcount: Int = datas.count - 1
 //        var count = -1
@@ -313,6 +363,14 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         print(datas)
         
     }
+
+
+    //並び替えを可能にする
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+}
+
 //        var numbersString: [String] = []
 //        var numbersInt: [Int] = []
 
@@ -331,7 +389,7 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 //                print(dataDescription)
 ////                let dataDescription = document.data().map(String.init(describing:))
 ////                print(dataDescription)
-////                print(dataDescription[0])
+//                print(dataDescription[0])
 //
 ////                let docData = [
 ////                    "name": ,
@@ -351,9 +409,3 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 //
 //        }
 //    }
-
-    //並び替えを可能にする
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-}

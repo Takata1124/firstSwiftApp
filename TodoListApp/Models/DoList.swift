@@ -15,6 +15,7 @@ class DoList {
     let uid: String
     let dolisttitle: String
     let createdAt: Timestamp
+    var click: Bool?
     
     var dolistId: String?
     
@@ -24,5 +25,6 @@ class DoList {
         self.uid = dic["uid"] as? String ?? ""
         self.dolisttitle = dic["dolisttitle"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
+        self.click = dic["click"] as? Bool ?? false
     }
 }
