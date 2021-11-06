@@ -24,6 +24,8 @@ class CategoryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        categoryLabel.tintColor = .red
+//        categoryLabel.textColor = .red
         
         autoresizingMask = .flexibleWidth
     }

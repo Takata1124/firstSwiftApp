@@ -316,11 +316,11 @@ extension DoListViewController: ChatInputAccessoryViewDelegate {
 class MenuListController: UITableViewController {
     
     var dolistviewController: DoListViewController?
-    var items = ["Logout", "Category", "Task", "Do", "Setting"]
+    var items = ["Logout", "Category", "Task", "Detail", "Setting"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "categoryCell")
         tableView.backgroundColor = .rgb(red: 200, green: 200, blue: 200)
     }
     
@@ -329,9 +329,20 @@ class MenuListController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
+        cell.categoryLabel.text = items[indexPath.row]
         cell.backgroundColor = .rgb(red: 200, green: 200, blue: 200)
+        cell.categoryLabel.tintColor = UIColor.red
+        
+        if indexPath.row == 3 {
+            
+            cell.categoryLabel.textColor = .white
+            print(indexPath)
+            print("white")
+        } else {
+        
+        }
+        
         return cell
     }
     
@@ -366,6 +377,9 @@ class MenuListController: UITableViewController {
             print("実行")
             self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
         }
+        
+        
+        
     }
 }
 
