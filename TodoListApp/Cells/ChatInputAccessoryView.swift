@@ -29,7 +29,6 @@ class ChatInputAccessoryView: UIView {
         delegate?.tappedBackButton()
     }
     
-    
     weak var delegate: ChatInputAccessoryViewDelegate?
     
     override init(frame: CGRect) {
@@ -71,9 +70,9 @@ class ChatInputAccessoryView: UIView {
     }
     
     required init?(coder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension ChatInputAccessoryView: UITextViewDelegate {
@@ -85,5 +84,4 @@ extension ChatInputAccessoryView: UITextViewDelegate {
             sendButton.isEnabled = true
         }
     }
-    
 }

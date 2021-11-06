@@ -15,7 +15,7 @@ import FirebaseFirestore
 
 class DoListViewController: UIViewController, UINavigationBarDelegate {
     
-
+    
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var dolistTable: UITableView!
     
@@ -25,7 +25,7 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
     var dolist: DoList?
     
     var dolists = [DoList]()
-
+    
     var menu: SideMenuNavigationController?
     
     private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
@@ -97,13 +97,13 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
                     
                 case .modified:
                     
-//                    Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList")
-//                    let dic = documentChange.document.data()
-//                    let dolis = DoList(dic: dic)
-//                    dolis.dolistId = documentChange.document.documentID
-//                    self.dolists.append(dolis)
+                    //                    Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList")
+                    //                    let dic = documentChange.document.data()
+                    //                    let dolis = DoList(dic: dic)
+                    //                    dolis.dolistId = documentChange.document.documentID
+                    //                    self.dolists.append(dolis)
                     
-//                    self.dolistTable.reloadData()
+                    //                    self.dolistTable.reloadData()
                     
                     print("modify")
                 case .removed:
@@ -130,76 +130,75 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
 var indexList: [Int] = []
 //var clicked: Bool = false
 
-
-
 extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         dolistTable.estimatedRowHeight = 20
         return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dolists.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
         cell.dolist = dolists[indexPath.row]
+        cell.delegate = self
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         
         let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
         
-//        var docId: String?
+        //        var docId: String?
         var chattext: String?
         chattext = dolists[indexPath.row].dolisttitle
         var clicked = dolists[indexPath.row].click!
         
         var listId: String?
         listId = dolists[indexPath.row].dolistId
-//        docId = dolists[indexPath.row].dolistId
+        //        docId = dolists[indexPath.row].dolistId
         print(clicked ?? "")
         
         guard let uid = Auth.auth().currentUser?.uid else  { return }
         guard let categoDocId = category?.categoryId else { return  }
         guard let messageDcId = message?.messageId else { return }
-//        guard let name = user?.username else { return }
+        //        guard let name = user?.username else { return }
         
-//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList").getDocuments { (documents, err) in
-//            if let err = err {
-//                print("err")
-//                return
-//            }
-//            documents?.documents.forEach { document in
-//
-//                let dic = document.document.data()
-//                let dolis = DoList(dic: dic)
-//                dolis.dolistId = document.document.documentID
-//                self.dolists.append(dolis)
-//                self.dolistTable.reloadData()
-//
-//        }
+        //        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList").getDocuments { (documents, err) in
+        //            if let err = err {
+        //                print("err")
+        //                return
+        //            }
+        //            documents?.documents.forEach { document in
+        //
+        //                let dic = document.document.data()
+        //                let dolis = DoList(dic: dic)
+        //                dolis.dolistId = document.document.documentID
+        //                self.dolists.append(dolis)
+        //                self.dolistTable.reloadData()
+        //
+        //        }
         
-//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err)  in
-//
-//            documents?.documents.forEach { document in
-//                let dataDescription = document.data()
-//                print(dataDescription)
-//                let dataDescription = document.data().map(String.init(describing:))
-//                print(dataDescription)
-//                print(dataDescription[0])
+        //        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err)  in
+        //
+        //            documents?.documents.forEach { document in
+        //                let dataDescription = document.data()
+        //                print(dataDescription)
+        //                let dataDescription = document.data().map(String.init(describing:))
+        //                print(dataDescription)
+        //                print(dataDescription[0])
         
         print(indexPath)
         
         if clicked == false {
             
             let docData = [
-//                "name": name,
+                //                "name": name,
                 "createdAt": Timestamp(),
                 "uid": uid,
                 "dolisttitle": chattext,
@@ -211,12 +210,12 @@ extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
             let dolis = DoList(dic: docData)
             dolists[indexPath.row] = dolis
             dolists[indexPath.row].dolistId = listId
-//            cell.dolist = dolis
+            //            cell.dolist = dolis
             
             print("clickTrue")
             clicked = true
             Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList").document(listId!).updateData([
-      
+                
                 "click": true
                 
             ])
@@ -225,7 +224,7 @@ extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             
             let docData = [
-//                "name": name,
+                //                "name": name,
                 "createdAt": Timestamp(),
                 "uid": uid,
                 "dolisttitle": chattext,
@@ -241,41 +240,58 @@ extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
             print("clickFalse")
             clicked = false
             Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(messageDcId).collection("doList").document(listId!).updateData([
-      
+                
                 "click": false
             ])
             dolistTable.reloadData()
         }
         
-//        cell.dolist = dolists[indexPath.row]
+        //        cell.dolist = dolists[indexPath.row]
         
-//        print("tapped")
+        //        print("tapped")
         
         
-//        print(type(of: indexPath))
+        //        print(type(of: indexPath))
         
-//        if indexList.contains(indexPath.row) {
-//
-//            let indexPli = indexList.count - 1
-//            for i in 0...indexPli {
-//
-//                if indexList[i] == indexPath.row {
-//
-//                    indexList.remove(at: i)
-//                    cell?.accessoryType = .none
-//                    break
-//
-//                } else {
-//
-//                    continue
-//                }
-//            }
-//        } else {
-//
-//            indexList.append(indexPath.row)
-//            cell?.accessoryType = .checkmark
-//        }
+        //        if indexList.contains(indexPath.row) {
+        //
+        //            let indexPli = indexList.count - 1
+        //            for i in 0...indexPli {
+        //
+        //                if indexList[i] == indexPath.row {
+        //
+        //                    indexList.remove(at: i)
+        //                    cell?.accessoryType = .none
+        //                    break
+        //
+        //                } else {
+        //
+        //                    continue
+        //                }
+        //            }
+        //        } else {
+        //
+        //            indexList.append(indexPath.row)
+        //            cell?.accessoryType = .checkmark
+        //        }
     }
+}
+
+extension DoListViewController: TableViewCellDelegate {
+    
+    func tappedButton() {
+        
+        //        chatInputAccessoryViwe.isHidden = true
+        //        dismiss(animated: true, completion: nil)
+        print("dismiss")
+        chatInputAccessoryViwe.isHidden = true
+        
+        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
+        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
+        calenderViewController.modalPresentationStyle = .fullScreen
+        self.present(calenderViewController, animated: true, completion: nil)
+    }
+    
 }
 
 extension DoListViewController: ChatInputAccessoryViewDelegate {
@@ -329,6 +345,7 @@ class MenuListController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
         cell.categoryLabel.text = items[indexPath.row]
         cell.backgroundColor = .rgb(red: 200, green: 200, blue: 200)
@@ -340,7 +357,7 @@ class MenuListController: UITableViewController {
             print(indexPath)
             print("white")
         } else {
-        
+            
         }
         
         return cell
@@ -406,7 +423,7 @@ class MenuListController: UITableViewController {
 //                }
 //            }
 //        }
-        
+
 //        tableView.deselectRow(at: indexPath, animated: true)
 //        let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
 //        let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController

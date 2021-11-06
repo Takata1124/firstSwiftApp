@@ -52,8 +52,7 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     private func setUpViews() {
         
 //        selectPicker.layer.cornerRadius = 50
-//        selectPicker.delegate = self
-//        selectPicker.dataSource = self
+
         
         categoryTable.delegate = self
         categoryTable.dataSource = self
@@ -415,25 +414,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
 //        return true
 //    }
     
-//// UIPickerViewの列の数
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    // UIPickerViewの行数、リストの数
-//    func pickerView(_ pickerView: UIPickerView,
-//                    numberOfRowsInComponent component: Int) -> Int {
-//
-//        return dataList.count
-//    }
-//
-//    // UIPickerViewの最初の表示d
-//    func pickerView(_ pickerView: UIPickerView,
-//                    titleForRow row: Int,
-//                    forComponent component: Int) -> String? {
-//
-//        return dataList[row]
-//    }
+
 //
 ////    var select_0: String?
 //    var select_1: String?

@@ -8,6 +8,12 @@
 import UIKit
 import Nuke
 
+protocol TableViewCellDelegate: class {
+    
+//    func tappedSendButton(text: String)
+    func tappedButton()
+}
+
 class TableViewCell: UITableViewCell {
     
     var message: Message? {
@@ -52,12 +58,23 @@ class TableViewCell: UITableViewCell {
 //                    let viewcell = TableViewCell()
                     checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
                     print("check")
+                    
+                    backgroundColor = .lightGray
+                    
+//                    let atr =  NSMutableAttributedString(string: cellText.text!)
+//                    atr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, atr.length))
+//                    self.cellText.attributedText = atr
+                    
 //                    viewcell.accessoryType = .none
                 } else {
                     
 //                    let viewcell = TableViewCell()
                     checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
                     print("circle")
+//                    cellText.text = dolist.dolisttitle
+                    
+                    backgroundColor = .clear
+                    
 //                    viewcell.accessoryType = .checkmark
                 }
             }
@@ -69,6 +86,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var latestLabel: UILabel!
+    @IBOutlet weak var alertButton: UIButton!
+    
 //    @IBOutlet weak var viewview: UIView!
     
     var checked: Bool?
@@ -87,20 +106,28 @@ class TableViewCell: UITableViewCell {
         cellText.backgroundColor = .clear
         
 //        checkButton.layer.cornerRadius = 22
-//        checkButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+//        alertButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)
         
         backgroundColor = .clear
         
 //        checked = false
+    }
+    
+    weak var delegate: TableViewCellDelegate?
+    
+    @IBAction func tappedButton(_ sender: Any) {
+        delegate?.tappedButton()
+//        print("tapped")
     }
 
 //    @objc func tappedButton() {
 //
 //        print("tapbutton")
 //
-//        if checkClick == false {
-//
-//        }
+//        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
+//        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
+//        calenderViewController.modalPresentationStyle = .fullScreen
+//        self.present(calenderViewController, animated: true, completion: nil)
 //    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

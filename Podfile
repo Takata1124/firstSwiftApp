@@ -6,5 +6,14 @@ target 'TodoListApp' do
   use_frameworks!
 
   # Pods for TodoListApp
-
+  pod 'FSCalendar'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Database'
+  pod 'Nuke'
+  pod 'SideMenu'
+  pod 'PKHUD'
+  
 end

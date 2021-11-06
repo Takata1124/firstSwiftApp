@@ -18,14 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="ここにメッセージを書きます" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="15" y="15" width="290" height="70"/>
+                        <rect key="frame" x="70" y="15" width="240" height="70"/>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-s6-VPr">
-                        <rect key="frame" x="15" y="92" width="60" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaW-s6-VPr">
+                        <rect key="frame" x="320" y="92" width="60" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="Bbi-mk-zUK"/>
                         </constraints>
@@ -33,37 +33,54 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcO-Wt-THd">
-                        <rect key="frame" x="341" y="45.5" width="24" height="24"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcO-Wt-THd">
+                        <rect key="frame" x="336.5" y="36" width="43.5" height="43.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="TcO-Wt-THd" secondAttribute="height" multiplier="1:1" id="MWd-ea-DT6"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="bell.fill" catalog="system"/>
+                        <connections>
+                            <action selector="tappedButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LZM-J6-tGP"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rL-cD-uPC">
+                        <rect key="frame" x="22" y="45.5" width="24" height="24"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="5rL-cD-uPC" secondAttribute="height" multiplier="1:1" id="SOA-sL-qUj"/>
                         </constraints>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain"/>
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="5rL-cD-uPC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="2To-xv-j5z"/>
+                    <constraint firstItem="5rL-cD-uPC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5Dz-mV-DFp"/>
                     <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="30" id="6oh-nG-euC"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="8Ok-Wk-oit"/>
-                    <constraint firstAttribute="trailing" secondItem="TcO-Wt-THd" secondAttribute="trailing" constant="15" id="9Rj-Pg-7DT"/>
-                    <constraint firstItem="XaW-s6-VPr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="CXe-9u-Sjj"/>
+                    <constraint firstAttribute="trailing" secondItem="TcO-Wt-THd" secondAttribute="trailing" id="9Rj-Pg-7DT"/>
+                    <constraint firstItem="5rL-cD-uPC" firstAttribute="width" secondItem="5rL-cD-uPC" secondAttribute="height" multiplier="1:1" id="XOJ-W1-4G6"/>
+                    <constraint firstAttribute="trailing" secondItem="XaW-s6-VPr" secondAttribute="trailing" id="lmN-Um-P1v"/>
                     <constraint firstItem="TcO-Wt-THd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n94-N8-h2r"/>
-                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="75" id="oTA-gu-Vib"/>
+                    <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="70" id="oTA-gu-Vib"/>
                     <constraint firstAttribute="bottom" secondItem="XaW-s6-VPr" secondAttribute="bottom" constant="5" id="thO-Py-Kfo"/>
-                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="yxa-th-fiX"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="yxa-th-fiX"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="alertButton" destination="TcO-Wt-THd" id="0bh-wL-X3D"/>
                 <outlet property="cellText" destination="wRL-ri-5N4" id="KpX-bm-vyz"/>
-                <outlet property="checkButton" destination="TcO-Wt-THd" id="BU5-i0-lnQ"/>
+                <outlet property="checkButton" destination="5rL-cD-uPC" id="Yj3-17-10G"/>
                 <outlet property="dateLabel" destination="XaW-s6-VPr" id="VTi-0t-EQ6"/>
             </connections>
             <point key="canvasLocation" x="-657.97101449275362" y="-203.23660714285714"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bell.fill" catalog="system" width="128" height="124"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

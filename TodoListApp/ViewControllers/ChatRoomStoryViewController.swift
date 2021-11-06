@@ -18,7 +18,6 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     private var messages = [Message]()
     
-    
     private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
         
         let view = ChatInputAccessoryView()
