@@ -57,6 +57,7 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         categoryTable.delegate = self
         categoryTable.dataSource = self
         categoryTable.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "categoryCell")
+        categoryTable.separatorColor = .black
         
         navbar_t.items![0].title = ""
         navbar_t?.delegate = self
@@ -78,7 +79,6 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 
         super.viewWillAppear(animated)
         
-
     }
     
     private func addCategory(text: String) {
@@ -250,11 +250,16 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         let alertController = UIAlertController(title: "categoryを追加", message: "追加するcategory名を入力してください", preferredStyle: .alert)
 
         alertController.addTextField { textField in
+            
             let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            
             textField.addConstraint(heightConstraint)
+            textField.placeholder = "入力"
+            textField.font = UIFont.systemFont(ofSize: 17)
         }
         
         let okAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
+            
             if let textField = alertController.textFields?.first {
                 if textField.text == "" {
                     return
@@ -295,6 +300,7 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
         cell.categoryLabel.font = UIFont.systemFont(ofSize: 16)
         cell.category = categories[indexPath.row]
+        cell.separatorInset = .zero
         return cell
     }
     

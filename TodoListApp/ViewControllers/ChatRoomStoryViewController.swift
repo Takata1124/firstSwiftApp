@@ -29,7 +29,7 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     @IBOutlet weak var chatRoomTable: UITableView!
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var changebutton: UIButton!
-    
+    @IBOutlet weak var returnButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +44,15 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
 //        chatInputAccessoryViwe.isHidden = false
 //    }
     
-    override var inputAccessoryView: UIView? {
-        get {
-            return chatInputAccessoryViwe
-        }
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
+//    override var inputAccessoryView: UIView? {
+//        get {
+//            return chatInputAccessoryViwe
+//        }
+//    }
+//
+//    override var canBecomeFirstResponder: Bool {
+//        return true
+//    }
     
     private func setUpViews() {
         
@@ -67,6 +67,8 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         navbar_t.items![0].title = category?.categorytitle
         
         changebutton.setTitle("Edit", for: .normal)
+        
+        returnButton.layer.cornerRadius = 25
     }
     
     private func fetchMessages() {
@@ -148,6 +150,12 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
             changebutton.setTitle("Editing", for: .normal)
         }
     }
+    
+    @IBAction func returnButtonAction(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
@@ -227,11 +235,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 //        }
 //        cell?.accessoryType = .checkmark
     }
-    
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//       let cell = tableView.cellForRow(at: indexPath)
-//       cell!.accessoryType = .none
-//   }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -362,13 +365,16 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         print(datas)
         
     }
-
-
     //並び替えを可能にする
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 }
+
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//       let cell = tableView.cellForRow(at: indexPath)
+//       cell!.accessoryType = .none
+//   }
 
 //        var numbersString: [String] = []
 //        var numbersInt: [Int] = []

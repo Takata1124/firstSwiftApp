@@ -40,7 +40,7 @@
                             <constraint firstAttribute="width" secondItem="TcO-Wt-THd" secondAttribute="height" multiplier="1:1" id="MWd-ea-DT6"/>
                         </constraints>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="bell.fill" catalog="system"/>
+                        <buttonConfiguration key="configuration" style="plain" image="bell" catalog="system"/>
                         <connections>
                             <action selector="tappedButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LZM-J6-tGP"/>
                         </connections>
@@ -80,7 +80,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bell.fill" catalog="system" width="128" height="124"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

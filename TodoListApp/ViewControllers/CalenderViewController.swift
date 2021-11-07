@@ -20,8 +20,10 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     
     
     //    var dataList : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
-    let dataList = [["00","01","02","03"],
-                    ["00","05","10","15",]]
+    let dataList = [["00","01","02","03","04","05","06","07","08","09",
+                     "10","11","12","13","14","15","16","17","18","19",
+                     "20","21","22","23"],
+                    ["00","05","10","15","20","25","30","35","40","45","50","55"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +98,11 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         pickerLabel.text = "\(year)/\(month)/\(day)  \(data1!):\(data2!)"
         saveButton.isEnabled = true
     }
+    
+    
+    @IBAction func saveButtonAction(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        print("tappeded")
+    }
 }
-
-
-

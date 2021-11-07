@@ -18,6 +18,9 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
     
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var dolistTable: UITableView!
+    @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var returnButton: UIButton!
+    
     
     var user: User?
     var category: Category?
@@ -43,22 +46,23 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
         fetchdoList()
     }
     
-    override var inputAccessoryView: UIView? {
-        get {
-            return chatInputAccessoryViwe
-        }
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
+//    override var inputAccessoryView: UIView? {
+//        get {
+//            return chatInputAccessoryViwe
+//        }
+//    }
+//
+//    override var canBecomeFirstResponder: Bool {
+//        return true
+//    }
     
     private func setUpView() {
         
         navbar_t.items![0].title = ""
         navbar_t?.delegate = self
         navbar_t.barTintColor = .rgb(red: 200, green: 200, blue: 200)
-        navbar_t.items![0].title = message?.message
+        
+        navbar_t.items![0].title = "\(category?.categorytitle ?? "") > \(message?.message ?? "")"
         
         menu = SideMenuNavigationController(rootViewController: MenuListController())
         menu?.leftSide = true
@@ -70,6 +74,9 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
         dolistTable.delegate = self
         dolistTable.dataSource = self
         dolistTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
+        
+        plusButton.layer.cornerRadius = 25
+        returnButton.layer.cornerRadius = 25
     }
     
     private func fetchdoList() {
@@ -125,6 +132,17 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
         self.dismiss(animated: true, completion: nil)
         print("tappeded")
     }
+    
+    @IBAction func tappedPlusButton(_ sender: Any) {
+        print("tappeded")
+    }
+    
+    @IBAction func returnAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        print("tappeded")
+    }
+    
+    
 }
 
 var indexList: [Int] = []
@@ -394,8 +412,6 @@ class MenuListController: UITableViewController {
             print("実行")
             self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
         }
-        
-        
         
     }
 }
