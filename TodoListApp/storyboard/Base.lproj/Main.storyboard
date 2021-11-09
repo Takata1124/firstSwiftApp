@@ -33,6 +33,14 @@
                                                 </connections>
                                             </button>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="qLM-I2-7lC">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="kYA-08-zXb">
+                                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                            </button>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -67,17 +75,6 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-nU-lfk">
                                         <rect key="frame" x="100" y="0.0" width="30" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3K-z7-rvz">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="折れ線と棒グラフのアイコン素材">
-                                                    <color key="titleColor" systemColor="labelColor"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyQ-ln-o2D">
                                         <rect key="frame" x="200" y="0.0" width="30" height="30"/>
@@ -98,17 +95,6 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ie-cQ-p4w">
                                         <rect key="frame" x="300" y="0.0" width="30" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleAspectFit" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HeO-mh-JpH">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" image="person.3.fill" catalog="system">
-                                                    <color key="titleColor" systemColor="labelColor"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -424,8 +410,6 @@
         <image name="5085302_s" width="640" height="427"/>
         <image name="Image" width="64" height="64"/>
         <image name="folder.badge.plus" catalog="system" width="128" height="91"/>
-        <image name="person.3.fill" catalog="system" width="128" height="61"/>
-        <image name="折れ線と棒グラフのアイコン素材" width="256" height="256"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

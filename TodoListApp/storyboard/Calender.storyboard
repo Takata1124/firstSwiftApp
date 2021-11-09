@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCP-jy-t6K">
-                                <rect key="frame" x="177" y="742" width="60" height="60"/>
+                                <rect key="frame" x="177" y="757" width="60" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eCP-jy-t6K" secondAttribute="height" multiplier="1:1" id="FXw-RZ-N2U"/>
@@ -75,7 +75,7 @@
                             <constraint firstItem="PAR-BL-OjV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="ftm-Ca-kCi"/>
                             <constraint firstItem="65c-Ik-ntu" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="jIb-SJ-LLx"/>
                             <constraint firstItem="LQp-aR-Qnb" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="k42-81-h0c"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eCP-jy-t6K" secondAttribute="bottom" constant="60" id="yVk-Ja-MVg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="eCP-jy-t6K" secondAttribute="bottom" constant="45" id="yVk-Ja-MVg"/>
                         </constraints>
                     </view>
                     <connections>

@@ -15,27 +15,35 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     var user: User?
     var category: Category?
     var chatroom: ChatRoom?
+    var indexpath: IndexPath?
+    
+    var backFlag: Bool = false
     
     private var messages = [Message]()
     
-    private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
-        
-        let view = ChatInputAccessoryView()
-        view.frame = .init(x: 0, y: 0, width: view.frame.width, height: 100)
-        view.delegate = self
-        return view
-    }()
+//    private lazy var chatInputAccessoryViwe: ChatInputAccessoryView = {
+//
+//        let view = ChatInputAccessoryView()
+//        view.frame = .init(x: 0, y: 0, width: view.frame.width, height: 100)
+//        view.delegate = self
+//        return view
+//    }()
     
     @IBOutlet weak var chatRoomTable: UITableView!
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var changebutton: UIButton!
     @IBOutlet weak var returnButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        messagesCount = []
         setUpViews()
+//        getFirebaseDoc()
         fetchMessages()
+        
+//        print("indexpath", indexpath)
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -69,71 +77,92 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         changebutton.setTitle("Edit", for: .normal)
         
         returnButton.layer.cornerRadius = 25
+        addButton.layer.cornerRadius = 25
+        
+        
+        
+//        let vc =  ViewController()
+//        vc.again = true
+        
+        
+        
+//        backFlag = false
     }
     
-    private func fetchMessages() {
-        
+    var inds = [Int]()
+    var messes = [String]()
+    
+    private func getFirebaseDoc() {
+
         guard let uid = Auth.auth().currentUser?.uid else  { return }
         guard let categoDocId = category?.categoryId else { return  }
-        
-        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
+
+        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (documents, err) in
+            if let err = err {
+                print("err")
+            }
+
+            documents?.documents.forEach({ (document) in
+
+                let dic = document.data()
+                let message = Message(dic: dic)
+                let mess = message.message
+                message.messageId = document.documentID
+
+                self.messes.append(mess)
+//                self.chatRoomTable.reloadData()
+                print(self.messes)
+            })
+        }
+    }
+    
+    var messagesCount = [Int]()
+//
+//    func firebaseCount() {
+//
+//        let ref = Database.database().reference()
+//        ref.observeSingleEvent(of: <#T##DataEventType#>) { <#DataSnapshot#> in
+//            <#code#>
+//        }
+//    }
+    
+    private func fetchMessages() {
+
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        guard let categoDocId = category?.categoryId else { return  }
+
+        let database = Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages")
+
+        database.addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("メッセージの取得に失敗しました")
                 return
             }
-            
+
             snapshots?.documentChanges.forEach({ (documentChange) in
                 switch documentChange.type {
                 case .added:
-                    
+
                     let dic = documentChange.document.data()
                     let message = Message(dic: dic)
                     message.messageId = documentChange.document.documentID
+                    self.messagesCount.append(message.key)
                     self.messages.append(message)
+                    
                     self.chatRoomTable.reloadData()
-                    
+                    print("add")
+
                 case .modified:
-                    
-                    print("nothing")
+
+                    print("modify")
                 case .removed:
-                    
+
                     print("nothing")
                 }
             })
         }
     }
     
-//    private func fetchBoolMessages() {
-//
-//        guard let uid = Auth.auth().currentUser?.uid else  { return }
-//        guard let categoDocId = category?.categoryId else { return  }
-//
-//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
-//            if let err = err {
-//                print("メッセージの取得に失敗しました")
-//                return
-//            }
-//
-//            snapshots?.documentChanges.forEach({ (documentChange) in
-//                switch documentChange.type {
-//                case .added:
-//
-//                    let dic = documentChange.document.data()
-//                    let message = Message(dic: dic)
-//                    message.messageId = documentChange.document.documentID
-//                    self.messages.append(message)
-//                    self.chatRoomTable.reloadData()
-//
-//                case .modified:
-//
-//                    print("nothing")
-//                case .removed:
-//
-//                    print("nothing")
-//                }
-//            })
-//        }
-//    }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
@@ -143,10 +172,12 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         
         if (chatRoomTable.isEditing == true) {
             chatRoomTable.isEditing = false
+            addButton.isEnabled = true
             changebutton.setTitle("Edit", for: .normal)
             
         } else {
             chatRoomTable.isEditing = true
+            addButton.isEnabled = false
             changebutton.setTitle("Editing", for: .normal)
         }
     }
@@ -156,30 +187,72 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-}
+    @IBAction func addButton(_ sender: Any) {
+        let alertController = UIAlertController(title: "Taskを追加", message: "追加するTask名を入力してください", preferredStyle: .alert)
 
-extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
-    
-    func tappedBackButton() {
+        alertController.addTextField { textField in
+            
+            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            
+            textField.addConstraint(heightConstraint)
+            textField.placeholder = "入力"
+            textField.font = UIFont.systemFont(ofSize: 17)
+        }
         
-        chatInputAccessoryViwe.isHidden = true
-        dismiss(animated: true, completion: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
+            
+            if let textField = alertController.textFields?.first {
+                if textField.text == "" {
+                    return
+                }
+                
+                guard let text = textField.text else { return }
+                
+                self.tappedSendButton(text: text)
+                
+                do {
+                    print("完了")
+                } catch {
+                    print("error")
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func tappedSendButton(text: String) {
+        
+//        backFlag = true
+//        print(backFlag)
         
         guard let categoDocId = category?.categoryId else { return  }
         guard let name = user?.username else { return }
         guard let uid = Auth.auth().currentUser?.uid else  { return }
         
-        chatInputAccessoryViwe.removetext()
+//        chatInputAccessoryViwe.removetext()
+        var messcount: Int = 0
+        
+        if messages.count == 0 {
+            
+            messcount = 0
+        } else {
+            
+            messcount = messagesCount.max()! + 1
+        }
         
         let docData = [
             "name": name,
             "createdAt": Timestamp(),
             "uid": uid,
             "message": text,
-            "click": false
+            "click": false,
+            "key": messcount
         ] as [String : Any]
         
         Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document().setData(docData) { (err) in
@@ -189,6 +262,46 @@ extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
             }
             print("メッセージの保存に成功しました")
         }
+        
+//        let storyboardmain = UIStoryboard.init(name: "Main", bundle: nil)
+//        let viewController = storyboardmain.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        
+        
+//        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+//        chatRoomViewController.user = user
+//        chatRoomViewController.category = categories[indexpath]
+        
+//        chatRoomViewController.user = viewController.user
+        
+        guard let indexpath = indexpath else {
+            return
+        }
+        
+//        let vc = self.presentingViewController as! ViewController
+//        vc.again = true
+//        print(type(of: indexpath.row))
+//        vc.index = indexpath.row
+        
+//        self.dismiss(animated: true, completion: nil)
+        
+       
+//        viewController.tableView(viewController.categoryTable!, didSelectRowAt: indexpath as! IndexPath)
+
+//        self.category = viewController.categories[indexpath]
+        
+//        self.modalPresentationStyle = .fullScreen
+//        viewController.present(self, animated: true, completion: nil)
+        
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
+//        let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
+//        dolistViewController.user = user
+//        dolistViewController.category = category
+//        dolistViewController.message = messages[0]
+//        dolistViewController.modalPresentationStyle = .fullScreen
+//        self.present(dolistViewController, animated: true, completion: nil)
+//        dolistViewController.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -204,8 +317,40 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
-        cell.message = messages[indexPath.row]
+
+//        var messList = [Int: Any]()
+//        let messagecount = messages.count - 1
+//
+////        print(messagecount)
+//
+//        for i in 0...messagecount {
+//
+//            let messkey = messages[i].key
+//            let messMessage = messages[i].message
+//            let messId = messages[i].messageId
+//            let messMesId = "\(messId!)/\(messMessage)"
+//
+//            messList.updateValue(messMesId, forKey: messkey)
+//        }
+//
+////        print(messList)
+//        let sortedDic = messList.sorted{ $0.key < $1.key }
+//
+//        if messList.count != 0 {
+//
+////            print("kkk")
+//            let str: String = (sortedDic[indexPath.row].value as? String)!
+//            let arr:[String] = str.components(separatedBy: "/")
+//
+//            cell.cellText.text = arr[1]
+//
+//            cell.cellText.text = messages[indexPath.row].message
+//        }
+        
+        cell.cellText.text = messages[indexPath.row].message
+    
         return cell
     }
     
@@ -237,10 +382,11 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
 //
             guard let messId = messages[indexPath.row].messageId else { return }
-            print(messId)
+//            print(messId)
             
             guard let categoDocId = category?.categoryId else { return  }
             guard let uid = Auth.auth().currentUser?.uid else  { return }
@@ -253,123 +399,245 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        
         if chatRoomTable.isEditing {
             return .delete
         }
         return .none
     }
+    
+    func firebaseUpdate() {
+        
+//        guard let categoDocId = category?.categoryId else { return  }
+//        guard let uid = Auth.auth().currentUser?.uid else  { return }
+//        let database = Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").getDocuments { (snapshots, err)  in
+//            if let err = err {
+//                print("erf")
+//                return
+//            }
+//
+//            snapshots?.documents.forEach({ (document) in
+//                var mess1 = self.messList[0]
+//                document.updateData([
+//                                "key": mess1
+//                            ])
+//            })
+//        }
+    }
+    
+    
 
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         
-        guard let categoDocId = category?.categoryId else { return  }
-        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        var messList = [String]()
+        var messIdList = [String]()
         
-        var datas = [String]()
-        
-        let databaseMessage = Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages")
-        
-        var Intcount: Int = messages.count - 1
-        for i in 0...Intcount {
-            print(i)
-            guard let messId = messages[i].messageId else { return }
-            print(messId)
-            
-//            databaseMessage.document(messId).delete()
-            
-            datas.append(messId)
-//            chatRoomTable.reloadData()
-        }
-        
-        print(datas)
-                        
         let list = messages[fromIndexPath.row]
         messages.remove(at: fromIndexPath.row)
         messages.insert(list, at: to.row)
         
-//        print(fromIndexPath)
-        print("toindex", to.row)
-        
-        var toIndexPath: Int = to.row
-//
-//        print(messages[fromIndexPath[1]].message)
-//        print(messages[to.row].message)
-        
 //        print(messages)
-//        print(messages[0])
-//        print(messages[0].message)
         
-        var messcount: Int = messages.count - 1
         
-        for i in 0...messcount {
-            
-            let docData = [
-                "name": messages[i].name,
-                "createdAt": messages[i].createdAt,
-                "uid": messages[i].uid,
-                "message": messages[i].message
-            ] as [String : Any]
-            
-            databaseMessage.document().setData(docData) { (err) in
-                if let err = err {
-                    print("メッセージの保存に失敗しました")
-                    return
-                }
-                print("メッセージの保存に成功しました")
-            }
+        let messagecount = messages.count - 1
+
+        print(messagecount)
+
+        for i in 0...messagecount {
+
+//            let messkey = messages[i].key
+            let messMessage = messages[i].message
+            guard let messId = messages[i].messageId else { return }
+//            let messId = messages[i].messageId
+//            let messMesId = "\(messId!)/\(messMessage)"
+
+//            messList.updateValue(messMesId, forKey: messkey)
+            messList.append(messMessage)
+            messIdList.append(messId)
         }
         
-        var IDcount: Int = datas.count - 1
-//        var count = -1
+        print(messList)
+        print(messIdList)
+//
+//        print(messList)
+//        let sortedDic = messList.sorted{ $0.key < $1.key }
+//
+//        let beforekey = sortedDic[fromIndexPath.row].key
+//
+//        let str: String = (sortedDic[fromIndexPath.row].value as? String)!
+//        let arr:[String] = str.components(separatedBy: "/")
+//        let beforedoId: String = arr[0]
+//
+//        let afterkey = sortedDic[to.row].key
+//
+//        let afterstr: String = (sortedDic[to.row].value as? String)!
+//        let afterarr:[String] = afterstr.components(separatedBy: "/")
+//        let afterdoId: String = afterarr[0]
         
-//        repeat {
-//            count += 1
-//            let docId = datas[count]
-//            databaseMessage.document(docId).delete()
-//
-//          // 繰り返し実行されるコード
-//        } while count < IDcount
         
-        for i in 0...IDcount {
-            
-//            if i < toIndexPath {
-//                print(i)
-//                let docId = datas[i]
-//                print(docId)
-//
-//                databaseMessage.document(docId).delete()
-//                messages.removeFirst()
-//            } else if i == toIndexPath {
-//
-//                continue
-//            } else {
-//
-//                print(i)
-//                let docId = datas[i - 1]
-//                print(docId)
-//
-//                databaseMessage.document(docId).delete()
-//                messages.remove(at: 1)
-//
-//    //            datas.append(messId)
-//    //            chatRoomTable.reloadData()
-//            }
-            
-            print(i)
-            let docId = datas[i]
-            print(docId)
+//        let beforeId: String = sortedDic[fromIndexPath.row].value.components(separatedBy: "/")[0]
+//        guard let beforedcId = messages[fromIndexPath.row].messageId else { return }
+//        print(beforemessage)
+//        print(beforekey)
+////        print(beforedcId)
+//        let aftermessage = messages[to.row].message
+//        let afterKey = messages[to.row].key
+//        guard let afterID = messages[to.row].messageId else { return }
+//        print(aftermessage)
+//        print(afterKey)
+//        print(afterID)
         
-            databaseMessage.document(docId).delete()
-            messages.removeFirst()
-        }
         
-        print(datas)
+       
+
+        
+//        database.document(beforedoId).updateData([
+//
+//            "key": afterkey
+//        ])
+//
+//        database.document(afterdoId).updateData([
+//
+//            "key": beforekey
+//        ])
+//        self.loadView()
+//
+//        messages = []
+//        setUpViews()
+//        fetchMessages()
+//
+//        chatRoomTable.isEditing = true
+//        addButton.isEnabled = false
+        
+//        viewDidLoad()
+        
+//        self.dismiss(animated: false, completion: nil)
+        
+//        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+////        chatRoomViewController.user = user
+////        chatRoomViewController.category = categories[indexPath.row]
+//
+//        chatRoomViewController.modalPresentationStyle = .fullScreen
+//        self.present(chatRoomViewController, animated: true, completion: nil)
+        
+//        database.document(beforedcId).updateData([
+//
+//            "message": aftermessage
+//        ])
+//
+//        database.document(afterID).updateData([
+//
+//            "message": beforemessage
+//        ])
+        
+//        chatRoomTable.reloadData()
         
     }
+    
     //並び替えを可能にする
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        
         return true
     }
 }
+
+//        var messcount: Int = messages.count - 1
+//
+//        for i in 0...messcount {
+//
+//            let docData = [
+//                "name": messages[i].name,
+//                "createdAt": messages[i].createdAt,
+//                "uid": messages[i].uid,
+//                "message": messages[i].message
+//
+//            ] as [String : Any]
+//
+//            database.document().setData(docData) { (err) in
+//                if let err = err {
+//                    print("メッセージの保存に失敗しました")
+//                    return
+//                }
+//                print("メッセージの保存に成功しました")
+//            }
+//        }
+//
+//        for i in 0...IDcount {
+//
+//            print(i)
+//            let docId = datas[i]
+//            print(docId)
+//
+////            database.document(docId ?? "").delete()
+////            messages.removeFirst()
+//        }
+
+//    private func fetchBoolMessages() {
+//
+//        guard let uid = Auth.auth().currentUser?.uid else  { return }
+//        guard let categoDocId = category?.categoryId else { return  }
+//
+//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").addSnapshotListener { (snapshots, err) in
+//            if let err = err {
+//                print("メッセージの取得に失敗しました")
+//                return
+//            }
+//
+//            snapshots?.documentChanges.forEach({ (documentChange) in
+//                switch documentChange.type {
+//                case .added:
+//
+//                    let dic = documentChange.document.data()
+//                    let message = Message(dic: dic)
+//                    message.messageId = documentChange.document.documentID
+//                    self.messages.append(message)
+//                    self.chatRoomTable.reloadData()
+//
+//                case .modified:
+//
+//                    print("nothing")
+//                case .removed:
+//
+//                    print("nothing")
+//                }
+//            })
+//        }
+//    }
+
+//extension ChatRoomStoryViewController: ChatInputAccessoryViewDelegate {
+//
+//    func tappedBackButton() {
+//
+//        chatInputAccessoryViwe.isHidden = true
+//        dismiss(animated: true, completion: nil)
+//    }
+//
+//    func tappedSendButton(text: String) {
+//
+//        guard let categoDocId = category?.categoryId else { return  }
+//        guard let name = user?.username else { return }
+//        guard let uid = Auth.auth().currentUser?.uid else  { return }
+//
+//        chatInputAccessoryViwe.removetext()
+//
+//        let docData = [
+//            "name": name,
+//            "createdAt": Timestamp(),
+//            "uid": uid,
+//            "message": text,
+//            "click": false
+//        ] as [String : Any]
+//
+//        Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document().setData(docData) { (err) in
+//            if let err = err {
+//                print("メッセージの保存に失敗しました")
+//                return
+//            }
+//            print("メッセージの保存に成功しました")
+//        }
+//    }
+//}
 
 //    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 //       let cell = tableView.cellForRow(at: indexPath)

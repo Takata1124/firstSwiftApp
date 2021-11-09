@@ -34,7 +34,11 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     var user: User?
     var category: Category?
     
-    private var categories = [Category]()
+    var categories = [Category]()
+    
+    var chatVC: ChatRoomStoryViewController?
+    var again: Bool?
+    var index: Int?
     
     private var categoryListener: ListenerRegistration?
     
@@ -67,17 +71,52 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 //            // 文字の色
 //                .foregroundColor: UIColor.black
 //            ]
+        
+        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+        chatVC = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
     }
     
     override func viewDidAppear(_ animated: Bool) {
 
 //        viewdidloadNext()
         ConfirmUserSign()
+        
+//        print(again)
+       
+        
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
+        
+//        print(chatVC?.backFlag)
+        
+//        let flag = chatVC?.backFlag
+//        guard let flag = flag else { return }
+//
+//        print(flag)
+        
+        if again == false {
+            
+            return
+            
+        } else {
+            
+            let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+            let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+            chatRoomViewController.user = user
+//            let row = index
+//            chatRoomViewController.category = categories[index ?? "0"]
+    //        chatRoomViewController.indexpath = indexPath.row
+            chatRoomViewController.modalPresentationStyle = .fullScreen
+            self.present(chatRoomViewController, animated: true, completion: nil)
+//            again = false
+            
+        }
+        
+       
         
     }
     
@@ -202,11 +241,6 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         }
     }
     
-//    func viewdidloadNext() {
-//
-//        performSegue(withIdentifier: "goNext", sender: nil)
-//    }
-    
     @IBAction func deleteButtonfunc(_ sender: Any) {
         
         if delete_count == 0 {
@@ -230,6 +264,7 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
             let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as! SignUpViewController
             signUpViewController.modalPresentationStyle = .fullScreen
             self.present(signUpViewController, animated: true, completion: nil)
+            
         } catch {
             print("ログアウトに失敗しました")
         }
@@ -284,6 +319,13 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func printing() {
+        print("ppp")
+        
+        
+        
+    }
 }
 
 extension ViewController:  UITableViewDelegate, UITableViewDataSource {
@@ -307,17 +349,25 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print("tapped table view")
         
+        print("indexpppath", indexPath)
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
         let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
         chatRoomViewController.user = user
         chatRoomViewController.category = categories[indexPath.row]
-        
+        chatRoomViewController.indexpath = indexPath
         chatRoomViewController.modalPresentationStyle = .fullScreen
         self.present(chatRoomViewController, animated: true, completion: nil)
     }
 }
+
+
+//    func viewdidloadNext() {
+//
+//        performSegue(withIdentifier: "goNext", sender: nil)
+//    }
 
 //    func fetchCategoryInfoFromFirestore() {
 //
