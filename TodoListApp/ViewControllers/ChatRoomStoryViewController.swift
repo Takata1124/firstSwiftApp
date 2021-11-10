@@ -40,10 +40,45 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         
         messagesCount = []
         setUpViews()
-//        getFirebaseDoc()
+       
         fetchMessages()
+//        getFirebaseDoc()
         
 //        print("indexpath", indexpath)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("dissappear")
+        
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        guard let categoDocId = category?.categoryId else { return  }
+        
+        let messagecount = uniqueValues.count - 1
+//
+//        print(messagecount)
+
+        for i in 0...messagecount {
+            
+            let id = uniqueValues[i]
+            let mess = messList[i]
+            
+            Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(id).updateData([
+
+                "message": mess
+            ])
+
+//            let messkey = messages[i].key
+//            let messMessage = messages[i].message
+////            guard let messId = messages[i].messageId else { return }
+////            let messId = messages[i].messageId
+////            let messMesId = "\(messId!)/\(messMessage)"
+//
+////            messList.updateValue(messMesId, forKey: messkey)
+//            messList.append(messMessage)
+//            messIdList.append(messId)
+        }
+        
+
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +126,10 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     
     var inds = [Int]()
     var messes = [String]()
+    var messList = [String]()
+    var messIdList = [String]()
+    var uniqueValues = [String]()
+    //    var messid: Any
     
     private func getFirebaseDoc() {
 
@@ -103,15 +142,47 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
             }
 
             documents?.documents.forEach({ (document) in
-
+                
                 let dic = document.data()
                 let message = Message(dic: dic)
-                let mess = message.message
+//                let mess = message.message
                 message.messageId = document.documentID
-
-                self.messes.append(mess)
-//                self.chatRoomTable.reloadData()
-                print(self.messes)
+                
+                self.messIdList.append(message.messageId ?? "")
+                
+                let orderedSet = NSOrderedSet(array: self.messIdList)
+                let uniqueValue = orderedSet.array as! [String]
+                
+                self.uniqueValues = uniqueValue
+                
+//                print(self.uniqueValues)
+                 
+//                let messagecount = self.messages.count - 1
+//
+//                print(messagecount)
+//
+//                for i in 0...messagecount {
+//
+//                    self.messList = []
+//
+//        //            let messkey = messages[i].key
+////                    let messMessage = self.messages[i].message
+//                    guard let messId = self.messages[i].messageId else { return }
+//        //            let messId = messages[i].messageId
+//        //            let messMesId = "\(messId!)/\(messMessage)"
+//
+//        //            messList.updateValue(messMesId, forKey: messkey)
+////                    self.messList.append(messMessage)
+//                    self.messIdList.append(messId)
+//                }
+                
+////                print(messList)
+////                print(messIdList)
+//        //
+//
+////                self.messes.append(mess)
+////////                self.chatRoomTable.reloadData()
+//////                print(self.messes)
             })
         }
     }
@@ -148,6 +219,10 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
                     message.messageId = documentChange.document.documentID
                     self.messagesCount.append(message.key)
                     self.messages.append(message)
+                    
+//                    self.messList = []
+//                    self.messIdList.removeAll()
+                    self.getFirebaseDoc()
                     
                     self.chatRoomTable.reloadData()
                     print("add")
@@ -429,8 +504,8 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         
-        var messList = [String]()
-        var messIdList = [String]()
+//        var messList = [String]()
+//        var messIdList = [String]()
         
         let list = messages[fromIndexPath.row]
         messages.remove(at: fromIndexPath.row)
@@ -438,27 +513,27 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         
 //        print(messages)
         
-        
         let messagecount = messages.count - 1
-
-        print(messagecount)
+//
+//        print(messagecount)
 
         for i in 0...messagecount {
 
 //            let messkey = messages[i].key
             let messMessage = messages[i].message
-            guard let messId = messages[i].messageId else { return }
+//            guard let messId = messages[i].messageId else { return }
 //            let messId = messages[i].messageId
 //            let messMesId = "\(messId!)/\(messMessage)"
 
 //            messList.updateValue(messMesId, forKey: messkey)
             messList.append(messMessage)
-            messIdList.append(messId)
+//            messIdList.append(messId)
         }
         
         print(messList)
-        print(messIdList)
-//
+//        print(messIdList)
+        print(uniqueValues)
+////
 //        print(messList)
 //        let sortedDic = messList.sorted{ $0.key < $1.key }
 //
@@ -491,10 +566,7 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
        
 
         
-//        database.document(beforedoId).updateData([
-//
-//            "key": afterkey
-//        ])
+
 //
 //        database.document(afterdoId).updateData([
 //

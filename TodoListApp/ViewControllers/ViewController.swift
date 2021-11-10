@@ -98,23 +98,23 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 //
 //        print(flag)
         
-        if again == false {
-            
-            return
-            
-        } else {
-            
-            let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-            let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
-            chatRoomViewController.user = user
-//            let row = index
-//            chatRoomViewController.category = categories[index ?? "0"]
-    //        chatRoomViewController.indexpath = indexPath.row
-            chatRoomViewController.modalPresentationStyle = .fullScreen
-            self.present(chatRoomViewController, animated: true, completion: nil)
-//            again = false
-            
-        }
+//        if again == false {
+//            
+//            return
+//            
+//        } else {
+//            
+//            let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+//            let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+//            chatRoomViewController.user = user
+////            let row = index
+////            chatRoomViewController.category = categories[index ?? "0"]
+//    //        chatRoomViewController.indexpath = indexPath.row
+//            chatRoomViewController.modalPresentationStyle = .fullScreen
+//            self.present(chatRoomViewController, animated: true, completion: nil)
+////            again = false
+//            
+//        }
         
        
         
