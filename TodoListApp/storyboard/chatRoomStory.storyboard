@@ -38,6 +38,18 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="eou-K6-GDf">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="Kwi-Q3-YUe">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="dyG-to-c1p">
+                                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="list.star" catalog="system"/>
+                                                <connections>
+                                                    <action selector="didTapMenu:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="SWO-KX-fva"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="Bh0-4K-szM">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="PPi-HJ-3YZ">
                                                 <rect key="frame" x="302" y="5" width="92" height="34.5"/>
@@ -66,21 +78,37 @@
                                     <action selector="addButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="E0e-zS-PnR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Otf-io-FWw">
+                                <rect key="frame" x="334" y="807" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Otf-io-FWw" secondAttribute="height" multiplier="1:1" id="dji-UX-Zkp"/>
+                                    <constraint firstAttribute="width" constant="50" id="e6l-mT-bv7"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.down" catalog="system"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Otf-io-FWw" firstAttribute="width" secondItem="Otf-io-FWw" secondAttribute="height" multiplier="1:1" id="4B4-e7-MKB"/>
                             <constraint firstItem="23s-3T-d6B" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="AkV-OU-2Om"/>
                             <constraint firstItem="q0O-TO-tzs" firstAttribute="top" secondItem="KDF-Rw-vqy" secondAttribute="bottom" constant="20" id="EYX-9N-q9R"/>
                             <constraint firstItem="q0O-TO-tzs" firstAttribute="width" secondItem="q0O-TO-tzs" secondAttribute="height" multiplier="1:1" id="FxC-bM-HQw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KDF-Rw-vqy" secondAttribute="trailing" id="PIj-RI-ssY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="KDF-Rw-vqy" secondAttribute="bottom" constant="75" id="PsA-ig-XXG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Otf-io-FWw" secondAttribute="trailing" constant="30" id="Qtm-Io-AQJ"/>
                             <constraint firstItem="KDF-Rw-vqy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SPS-iy-vMS"/>
                             <constraint firstItem="q0O-TO-tzs" firstAttribute="width" secondItem="q0O-TO-tzs" secondAttribute="height" multiplier="1:1" id="SvN-6F-WUr"/>
+                            <constraint firstItem="Otf-io-FWw" firstAttribute="width" secondItem="Otf-io-FWw" secondAttribute="height" multiplier="1:1" id="TDu-f1-i2L"/>
+                            <constraint firstItem="Otf-io-FWw" firstAttribute="width" secondItem="Otf-io-FWw" secondAttribute="height" multiplier="1:1" id="WNH-fe-S0s"/>
                             <constraint firstItem="xj8-Qr-Ov0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="XtU-2r-7zS"/>
                             <constraint firstItem="23s-3T-d6B" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ZTn-G1-dWx"/>
                             <constraint firstItem="23s-3T-d6B" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="eaH-qU-nDv"/>
                             <constraint firstItem="xj8-Qr-Ov0" firstAttribute="top" secondItem="KDF-Rw-vqy" secondAttribute="bottom" constant="20" id="keG-d0-V4P"/>
+                            <constraint firstItem="Otf-io-FWw" firstAttribute="top" secondItem="KDF-Rw-vqy" secondAttribute="bottom" constant="20" id="pKG-X5-3sd"/>
                             <constraint firstItem="KDF-Rw-vqy" firstAttribute="top" secondItem="23s-3T-d6B" secondAttribute="bottom" id="uCY-90-Zyd"/>
                             <constraint firstItem="q0O-TO-tzs" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="x5F-fV-cEa"/>
                             <constraint firstItem="xj8-Qr-Ov0" firstAttribute="width" secondItem="xj8-Qr-Ov0" secondAttribute="height" multiplier="1:1" id="zE0-t7-shC"/>
@@ -92,6 +120,7 @@
                         <outlet property="chatRoomTable" destination="KDF-Rw-vqy" id="GzP-6r-sLz"/>
                         <outlet property="navbar_t" destination="23s-3T-d6B" id="pTc-uT-WeB"/>
                         <outlet property="returnButton" destination="q0O-TO-tzs" id="1jC-Bd-aO7"/>
+                        <outlet property="scrollButton" destination="Otf-io-FWw" id="WZw-C4-RQu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,7 +129,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
+        <image name="list.star" catalog="system" width="128" height="94"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

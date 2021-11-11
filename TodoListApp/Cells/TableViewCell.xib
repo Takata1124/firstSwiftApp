@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="ここにメッセージを書きます" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wRL-ri-5N4">
-                        <rect key="frame" x="70" y="15" width="240" height="70"/>
+                        <rect key="frame" x="70" y="30" width="240" height="55"/>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="textColor" systemColor="labelColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcO-Wt-THd">
-                        <rect key="frame" x="336.5" y="36" width="43.5" height="43.5"/>
+                        <rect key="frame" x="318.5" y="33.5" width="48.5" height="48.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="TcO-Wt-THd" secondAttribute="height" multiplier="1:1" id="MWd-ea-DT6"/>
@@ -46,26 +46,27 @@
                         </connections>
                     </button>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rL-cD-uPC">
-                        <rect key="frame" x="22" y="45.5" width="24" height="24"/>
+                        <rect key="frame" x="13" y="35.5" width="44" height="44"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="5rL-cD-uPC" secondAttribute="height" multiplier="1:1" id="SOA-sL-qUj"/>
                         </constraints>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain"/>
+                        <buttonConfiguration key="configuration" style="plain" image="checkmark" catalog="system"/>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="5rL-cD-uPC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="2To-xv-j5z"/>
+                    <constraint firstItem="5rL-cD-uPC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="2To-xv-j5z"/>
                     <constraint firstItem="5rL-cD-uPC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5Dz-mV-DFp"/>
                     <constraint firstAttribute="bottom" secondItem="wRL-ri-5N4" secondAttribute="bottom" constant="30" id="6oh-nG-euC"/>
-                    <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="8Ok-Wk-oit"/>
-                    <constraint firstAttribute="trailing" secondItem="TcO-Wt-THd" secondAttribute="trailing" id="9Rj-Pg-7DT"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="8Ok-Wk-oit"/>
+                    <constraint firstAttribute="trailing" secondItem="TcO-Wt-THd" secondAttribute="trailing" constant="13" id="9Rj-Pg-7DT"/>
                     <constraint firstItem="5rL-cD-uPC" firstAttribute="width" secondItem="5rL-cD-uPC" secondAttribute="height" multiplier="1:1" id="XOJ-W1-4G6"/>
                     <constraint firstAttribute="trailing" secondItem="XaW-s6-VPr" secondAttribute="trailing" id="lmN-Um-P1v"/>
                     <constraint firstItem="TcO-Wt-THd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n94-N8-h2r"/>
                     <constraint firstAttribute="trailing" secondItem="wRL-ri-5N4" secondAttribute="trailing" constant="70" id="oTA-gu-Vib"/>
                     <constraint firstAttribute="bottom" secondItem="XaW-s6-VPr" secondAttribute="bottom" constant="5" id="thO-Py-Kfo"/>
+                    <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="5rL-cD-uPC" secondAttribute="trailing" constant="13" id="uQc-xF-WW9"/>
                     <constraint firstItem="wRL-ri-5N4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="yxa-th-fiX"/>
                 </constraints>
             </tableViewCellContentView>
@@ -81,6 +82,7 @@
     </objects>
     <resources>
         <image name="bell" catalog="system" width="128" height="124"/>
+        <image name="checkmark" catalog="system" width="128" height="114"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

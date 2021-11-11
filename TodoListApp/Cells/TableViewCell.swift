@@ -24,6 +24,33 @@ class TableViewCell: UITableViewCell {
                 cellText.text = message.message
                 dateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
                 
+                let checkClick = message.click
+                
+                if checkClick == true {
+                
+    //                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                    print("check")
+                    
+                    backgroundColor = .lightGray
+                    
+    //                    let atr =  NSMutableAttributedString(string: cellText.text!)
+    //                    atr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, atr.length))
+    //                    self.cellText.attributedText = atr
+                    
+    //                    viewcell.accessoryType = .none
+                } else {
+                    
+    //                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+                    print("circle")
+    //                    cellText.text = dolist.dolisttitle
+                    
+                    backgroundColor = .clear
+                    
+    //                    viewcell.accessoryType = .checkmark
+                }
+       
             }
         }
     }
@@ -81,12 +108,54 @@ class TableViewCell: UITableViewCell {
         }
     }
     
+    var click: Bool? {
+        
+        didSet {
+            print("didSet")
+            
+            if let click = click {
+//                cellText.text = dolist.dolisttitle
+//                dateLabel.text = dateFormatterForDateLabel(date: dolist.createdAt.dateValue())
+                
+                let checkClick = click
+                
+                if checkClick == true {
+                
+//                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                    print("check")
+                    
+                    backgroundColor = .lightGray
+                    
+//                    let atr =  NSMutableAttributedString(string: cellText.text!)
+//                    atr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, atr.length))
+//                    self.cellText.attributedText = atr
+                    
+//                    viewcell.accessoryType = .none
+                } else {
+                    
+//                    let viewcell = TableViewCell()
+                    checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+                    print("circle")
+//                    cellText.text = dolist.dolisttitle
+                    
+                    backgroundColor = .clear
+                    
+//                    viewcell.accessoryType = .checkmark
+                }
+            }
+        }
+        
+    }
+    
     @IBOutlet weak var IconImage: UIImageView!
     @IBOutlet weak var cellText: UITextView!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var latestLabel: UILabel!
     @IBOutlet weak var alertButton: UIButton!
+    
+//    var click: Bool = false
     
 //    @IBOutlet weak var viewview: UIView!
     
@@ -104,6 +173,35 @@ class TableViewCell: UITableViewCell {
         cellText.isEditable = false
         cellText.isSelectable = false
         cellText.backgroundColor = .clear
+        
+        dateLabel.isHidden = true
+        
+//        if click == true {
+//        
+////                    let viewcell = TableViewCell()
+//            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+//            print("check")
+//            
+//            backgroundColor = .lightGray
+//            
+////                    let atr =  NSMutableAttributedString(string: cellText.text!)
+////                    atr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, atr.length))
+////                    self.cellText.attributedText = atr
+//            
+////                    viewcell.accessoryType = .none
+//        } else {
+//            
+////                    let viewcell = TableViewCell()
+//            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+//            print("circle")
+////                    cellText.text = dolist.dolisttitle
+//            
+//            backgroundColor = .clear
+//            
+////                    viewcell.accessoryType = .checkmark
+//        }
+        
+        
         
 //        checkButton.layer.cornerRadius = 22
 //        alertButton.addTarget(self, action: #selector(tappedButton), for: .touchUpInside)

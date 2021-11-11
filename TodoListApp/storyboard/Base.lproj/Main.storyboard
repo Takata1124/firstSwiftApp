@@ -25,7 +25,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="abS-Ad-9NH">
                                                 <rect key="frame" x="20" y="5" width="111" height="34.5"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="tintColor" systemColor="tintColor"/>
+                                                <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                                 <connections>
@@ -37,8 +37,12 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="kYA-08-zXb">
                                                 <rect key="frame" x="302" y="5" width="92" height="34.5"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                <connections>
+                                                    <action selector="changemode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CsL-90-c9i"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -75,9 +79,6 @@
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2Y-nU-lfk">
                                         <rect key="frame" x="100" y="0.0" width="30" height="30"/>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyQ-ln-o2D">
-                                        <rect key="frame" x="200" y="0.0" width="30" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zfl-Ng-kRw">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -93,34 +94,47 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyQ-ln-o2D">
+                                        <rect key="frame" x="200" y="0.0" width="30" height="30"/>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ie-cQ-p4w">
                                         <rect key="frame" x="300" y="0.0" width="30" height="30"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Oy6-p9-wRj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="665"/>
+                                <rect key="frame" x="0.0" y="438" width="414" height="315"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mr4-zX-KPp" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="88" width="414" height="350"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Mr4-zX-KPp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3vU-xV-TpV"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bbd-Q6-xVy"/>
+                            <constraint firstItem="Mr4-zX-KPp" firstAttribute="top" secondItem="g6i-ga-XPU" secondAttribute="bottom" id="HqP-j2-qIh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Mr4-zX-KPp" secondAttribute="trailing" id="IVz-G4-VXm"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JdS-Nf-9uI"/>
                             <constraint firstItem="Oy6-p9-wRj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q65-FB-UHY"/>
                             <constraint firstItem="Hcc-sq-ekS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QFK-Nc-lSu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Oy6-p9-wRj" secondAttribute="trailing" id="QX4-CL-ir3"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="TRE-wC-qKQ"/>
-                            <constraint firstItem="Oy6-p9-wRj" firstAttribute="top" secondItem="g6i-ga-XPU" secondAttribute="bottom" id="Va1-2K-5Ye"/>
+                            <constraint firstItem="Oy6-p9-wRj" firstAttribute="top" secondItem="g6i-ga-XPU" secondAttribute="bottom" constant="350" id="Va1-2K-5Ye"/>
                             <constraint firstItem="g6i-ga-XPU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bLD-dM-Ebs"/>
                             <constraint firstItem="Hcc-sq-ekS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="350" id="c8h-ny-iGH"/>
+                            <constraint firstItem="Oy6-p9-wRj" firstAttribute="top" secondItem="Mr4-zX-KPp" secondAttribute="bottom" id="cMO-pA-j4a"/>
                             <constraint firstItem="Hcc-sq-ekS" firstAttribute="top" secondItem="Oy6-p9-wRj" secondAttribute="bottom" constant="30" id="tbz-Rp-gMi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
+                        <outlet property="calender" destination="Mr4-zX-KPp" id="Ydg-W7-Gdd"/>
                         <outlet property="categoryTable" destination="Oy6-p9-wRj" id="VXG-aP-TX8"/>
+                        <outlet property="changebutton" destination="kYA-08-zXb" id="gQQ-3l-wB9"/>
                         <outlet property="delete_b" destination="UY9-IB-BlO" id="ExL-sp-aNi"/>
                         <outlet property="navbar_t" destination="g6i-ga-XPU" id="Cdg-GW-ahP"/>
                     </connections>
@@ -418,9 +432,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -16,6 +16,7 @@ class Message {
     let uid: String
     let createdAt: Timestamp
     let key: Int
+    var click: Bool?
     
     var messageId: String?
     
@@ -26,5 +27,6 @@ class Message {
         self.uid = dic["uid"] as? String ?? ""
         self.createdAt = dic["createdAt"] as? Timestamp ?? Timestamp()
         self.key = dic["key"] as? Int ?? 0
+        self.click = dic["click"] as? Bool ?? false
     }
 }

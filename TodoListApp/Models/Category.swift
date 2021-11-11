@@ -16,6 +16,7 @@ class Category {
     let categorytitle: String
     let createdAt: Timestamp
     
+    
     var categoryId: String?
     
     init(dic: [String: Any]) {
