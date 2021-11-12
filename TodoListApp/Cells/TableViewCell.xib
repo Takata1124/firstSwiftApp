@@ -34,7 +34,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TcO-Wt-THd">
-                        <rect key="frame" x="318.5" y="33.5" width="48.5" height="48.5"/>
+                        <rect key="frame" x="323.5" y="36" width="43.5" height="43.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="TcO-Wt-THd" secondAttribute="height" multiplier="1:1" id="MWd-ea-DT6"/>

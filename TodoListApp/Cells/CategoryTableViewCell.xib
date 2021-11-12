@@ -22,10 +22,26 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bR-Fr-avF">
+                        <rect key="frame" x="15" y="15" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6N-5O-fV5">
+                        <rect key="frame" x="363" y="56" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="2bR-Fr-avF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="1A7-va-UHS"/>
                     <constraint firstItem="LUO-Cq-6Ue" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="9fA-xO-quv"/>
                     <constraint firstItem="LUO-Cq-6Ue" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LLM-XW-Vu3"/>
+                    <constraint firstAttribute="trailing" secondItem="P6N-5O-fV5" secondAttribute="trailing" constant="15" id="Ybq-eH-n4h"/>
+                    <constraint firstItem="2bR-Fr-avF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bAr-Nt-vMN"/>
+                    <constraint firstAttribute="bottom" secondItem="P6N-5O-fV5" secondAttribute="bottom" constant="15" id="y6t-o4-6hK"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

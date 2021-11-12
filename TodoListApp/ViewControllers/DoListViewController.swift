@@ -139,8 +139,7 @@ class DoListViewController: UIViewController, UINavigationBarDelegate {
         self.dismiss(animated: true, completion: nil)
         print("tappeded")
     }
-    
-    
+
 }
 
 var indexList: [Int] = []
@@ -160,7 +159,7 @@ extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! TableViewCell
         cell.dolist = dolists[indexPath.row]
-        cell.delegate = self
+//        cell.delegate = self
         return cell
     }
     
@@ -293,22 +292,22 @@ extension DoListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DoListViewController: TableViewCellDelegate {
-    
-    func tappedButton() {
-        
-        //        chatInputAccessoryViwe.isHidden = true
-        //        dismiss(animated: true, completion: nil)
-        print("dismiss")
-        chatInputAccessoryViwe.isHidden = true
-        
-        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
-        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
-        calenderViewController.modalPresentationStyle = .fullScreen
-        self.present(calenderViewController, animated: true, completion: nil)
-    }
-    
-}
+//extension DoListViewController: TableViewCellDelegate {
+//
+//    func tappedButton() {
+//
+//        //        chatInputAccessoryViwe.isHidden = true
+//        //        dismiss(animated: true, completion: nil)
+//        print("dismiss")
+//        chatInputAccessoryViwe.isHidden = true
+//
+//        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
+//        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
+//        calenderViewController.modalPresentationStyle = .fullScreen
+//        self.present(calenderViewController, animated: true, completion: nil)
+//    }
+//
+//}
 
 extension DoListViewController: ChatInputAccessoryViewDelegate {
     

@@ -11,12 +11,37 @@ import FirebaseFirestore
 import FirebaseAuth
 import SideMenu
 
-class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
+class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate, TableViewCellDelegate {
+    func tappedButton(text: Any) {
+        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
+        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
+//        calenderViewController.taskTitile = Btext
+        calenderViewController.modalPresentationStyle = .fullScreen
+        print(text)
+        print(type(of: text))
+        
+        let hoge: Int = text as! Int
+        print(hoge)
+        
+//        if let unwrapped = text {
+//            print(unwrapped)
+//        }
+        
+        print(messages[hoge].message)
+        
+        calenderViewController.taskTitle = messages[hoge].message
+        calenderViewController.categoTitle = category?.categorytitle
+        
+        print("present")
+        self.present(calenderViewController, animated: true, completion: nil)
+    }
     
     var user: User?
     var category: Category?
     var chatroom: ChatRoom?
     var indexpath: IndexPath?
+    
+    var buttonTag: Int?
     
     var backFlag: Bool = false
     
@@ -69,6 +94,7 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         guard let categoDocId = category?.categoryId else { return  }
         
         let messagecount = messages.count - 1
+        print(messagecount)
         
         messList.removeAll()
         
@@ -261,7 +287,9 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
         
         let messagecount = messages.count - 1
         
-        chatRoomTable.scrollToRow(at: .init(row: messagecount, section: 0), at: .top, animated: false)
+        if messagecount < 1 { return }
+        
+        chatRoomTable.scrollToRow(at: .init(row: messagecount, section: 0), at: .top, animated: true)
         print("scroll")
     }
     
@@ -452,13 +480,13 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate {
     }
 }
 
-
-
 extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        chatRoomTable.estimatedRowHeight = 20
-        return UITableView.automaticDimension
+//        chatRoomTable.estimatedRowHeight = 20
+//        return UITableView.automaticDimension
+        
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -498,14 +526,13 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         //            cell.cellText.text = messages[indexPath.row].message
         //        }
         
-        
-        
         cell.cellText.text = messages[indexPath.row].message
         //
         ////        cell.message = messages[indexPath.row]
         cell.click = checklist[indexPath.row]
-        
-        
+        cell.alertButton.tag = indexPath.row
+    
+        cell.delegate = self
         
         return cell
     }
@@ -535,10 +562,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
             cell.click = checklist[indexPath.row]
             chatRoomTable.reloadData()
         }
-        
-        
-        
-       
         
         //        let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
         //
@@ -652,7 +675,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         if editingStyle == .delete {
             //
             guard let messId = messages[indexPath.row].messageId else { return }
-            //            print(messId)
             
             guard let categoDocId = category?.categoryId else { return  }
             guard let uid = Auth.auth().currentUser?.uid else  { return }
@@ -676,7 +698,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
         
         //        var messList = [String]()
         //        var messIdList = [String]()
-        
         let list = messages[fromIndexPath.row]
         messages.remove(at: fromIndexPath.row)
         messages.insert(list, at: to.row)

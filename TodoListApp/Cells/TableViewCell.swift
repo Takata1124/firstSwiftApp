@@ -8,10 +8,12 @@
 import UIKit
 import Nuke
 
+//var Btext: String?
+
 protocol TableViewCellDelegate: class {
     
 //    func tappedSendButton(text: String)
-    func tappedButton()
+    func tappedButton(text: Any)
 }
 
 class TableViewCell: UITableViewCell {
@@ -21,6 +23,7 @@ class TableViewCell: UITableViewCell {
         didSet {
             
             if let message = message {
+                
                 cellText.text = message.message
                 dateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
                 
@@ -114,6 +117,7 @@ class TableViewCell: UITableViewCell {
             print("didSet")
             
             if let click = click {
+                
 //                cellText.text = dolist.dolisttitle
 //                dateLabel.text = dateFormatterForDateLabel(date: dolist.createdAt.dateValue())
                 
@@ -145,7 +149,6 @@ class TableViewCell: UITableViewCell {
                 }
             }
         }
-        
     }
     
     @IBOutlet weak var IconImage: UIImageView!
@@ -175,6 +178,8 @@ class TableViewCell: UITableViewCell {
         cellText.backgroundColor = .clear
         
         dateLabel.isHidden = true
+//
+//        Btext = cellText.text
         
 //        if click == true {
 //        
@@ -214,21 +219,30 @@ class TableViewCell: UITableViewCell {
     weak var delegate: TableViewCellDelegate?
     
     @IBAction func tappedButton(_ sender: Any) {
-        delegate?.tappedButton()
+        
+        
+        print((sender as AnyObject).tag as Any)
+        
+        let tag = (sender as AnyObject).tag as Any
+//        guard tag != nil else { return }
+        
+        delegate?.tappedButton(text: tag)
+//        let storyboard = UIStoryboard(name: "chatRoomStory", bundle: nil)
+//        let chatroomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as!ChatRoomStoryViewController
+//        chatroomViewController.buttonTag = tag as! Int
 //        print("tapped")
     }
+    
+    
 
 //    @objc func tappedButton() {
 //
 //        print("tapbutton")
 //
-//        let storyboard = UIStoryboard(name: "Calender", bundle: nil)
-//        let calenderViewController = storyboard.instantiateViewController(withIdentifier: "CalenderViewController") as! CalenderViewController
-//        calenderViewController.modalPresentationStyle = .fullScreen
-//        self.present(calenderViewController, animated: true, completion: nil)
 //    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

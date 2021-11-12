@@ -35,6 +35,8 @@ class SignUpViewController: UIViewController {
         profileImageButton.layer.borderWidth = 1
         profileImageButton.layer.borderColor = UIColor.rgb(red: 240, green: 240, blue: 240).cgColor
         
+        profileImageButton.isHidden = true
+        
         profileImageButton.addTarget(self, action: #selector(tappedProfileImageButton), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(tappedRegisterButoon), for: .touchUpInside)
         

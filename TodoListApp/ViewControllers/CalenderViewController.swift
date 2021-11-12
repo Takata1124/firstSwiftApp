@@ -7,7 +7,8 @@
 
 import UIKit
 import FSCalendar
-
+import Firebase
+import FirebaseAuth
 
 
 class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -17,6 +18,7 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
     @IBOutlet weak var selectPicker: UIPickerView!
     @IBOutlet weak var pickerLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     
     //    var dataList : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
@@ -37,12 +39,52 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         
         saveButton.isEnabled = false
         
+        guard let task = task else { return }
+        guard let catego = catego else { return }
+        
+        titleLabel.text = "\(catego) : \(task)"
+        
         // Do any additional setup after loading the view.
     }
+    
+    var taskTitle: String? {
+        
+        didSet {
+//            print("didSet")
+//
+            if let taskTitle = taskTitle {
+                
+                print("task",taskTitle)
+                print(type(of: taskTitle))
+                task = taskTitle
+            }
+            
+        }
+    }
+    
+    var categoTitle: String? {
+        
+        didSet {
+//            print("didSet")
+//
+                if let categoTitle = categoTitle {
+//                    print("task",taskTitle)
+//                    print(type(of: taskTitle))
+                    catego = categoTitle
+                }
+                
+        }
+    }
+    
     
     var year: Int?
     var month: Int?
     var day: Int?
+    
+    var task: String?
+    var catego: String?
+    
+//    var taskTitile: String?
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
@@ -54,6 +96,9 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
 //        print(labelDate.text)
         
         selectPicker.isHidden = false
+        
+//        print("task",taskTitile ?? "")
+        
         
     }
     
@@ -94,15 +139,48 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         guard let day = day else {
             return
         }
+        
+        date_Label = "\(year)/\(month)/\(day)/\(data1!):\(data2!)"
 
-        pickerLabel.text = "\(year)/\(month)/\(day)  \(data1!):\(data2!)"
+        pickerLabel.text = date_Label
         saveButton.isEnabled = true
     }
+    
+    var date_Label: String?
     
     
     @IBAction func saveButtonAction(_ sender: Any) {
         
-        self.dismiss(animated: true, completion: nil)
-        print("tappeded")
+//        self.dismiss(animated: true, completion: nil)
+//        print("tappeded")
+        
+//        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+////        chatRoomViewController.user = user
+////        chatRoomViewController.category = categories[indexPath.row]
+////        chatRoomViewController.indexpath = indexPath
+//        chatRoomViewController.modalPresentationStyle = .fullScreen
+//        self.present(chatRoomViewController, animated: true, completion: nil)
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+    //    guard let partnerUid = self.selectedUser?.uid else { return }
+    //    let members = [uid, partnerUid]
+        
+        let docData = [
+            "uid": uid,
+            "categorytitle": catego ?? "",
+            "newText": task ?? "",
+            "createdAt": date_Label ?? ""
+        ] as [String: Any]
+        
+        Firestore.firestore().collection("users").document(uid).collection("newMessage").addDocument(data: docData) { (err) in
+            if let err = err {
+                print("カテゴリーの保存に失敗しました(\(err)")
+                return
+            }
+            
+            print("カテゴリーの保存が成功しました")
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

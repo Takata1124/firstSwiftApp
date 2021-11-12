@@ -43,6 +43,9 @@
 		68A45FDB272F154500FF755A /* DoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FDA272F154500FF755A /* DoList.swift */; };
 		68A45FDD2730313B00FF755A /* DoList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68A45FDC2730313B00FF755A /* DoList.storyboard */; };
 		68A45FE22730337400FF755A /* DoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A45FE12730337400FF755A /* DoListViewController.swift */; };
+		68CF709C273C694D006C9696 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF709B273C694C006C9696 /* SideMenuViewController.swift */; };
+		68CF709E273EE16B006C9696 /* NewText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CF709D273EE16B006C9696 /* NewText.storyboard */; };
+		68CF70A0273EE345006C9696 /* NewTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF709F273EE345006C9696 /* NewTextViewController.swift */; };
 		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +91,9 @@
 		68A45FDA272F154500FF755A /* DoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoList.swift; sourceTree = "<group>"; };
 		68A45FDC2730313B00FF755A /* DoList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DoList.storyboard; sourceTree = "<group>"; };
 		68A45FE12730337400FF755A /* DoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoListViewController.swift; sourceTree = "<group>"; };
+		68CF709B273C694C006C9696 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		68CF709D273EE16B006C9696 /* NewText.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewText.storyboard; sourceTree = "<group>"; };
+		68CF709F273EE345006C9696 /* NewTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +183,7 @@
 				68A45FBE27290EB300FF755A /* UserList.storyboard */,
 				68A45FC4272B548C00FF755A /* chatRoomStory.storyboard */,
 				68A45FDC2730313B00FF755A /* DoList.storyboard */,
+				68CF709D273EE16B006C9696 /* NewText.storyboard */,
 				6818103E2736674800D39F11 /* Calender.storyboard */,
 			);
 			path = storyboard;
@@ -186,15 +193,17 @@
 			isa = PBXGroup;
 			children = (
 				688895BB271AE3F5002102E7 /* ViewController.swift */,
+				68CF709F273EE345006C9696 /* NewTextViewController.swift */,
 				68A45FC6272B54A700FF755A /* ChatRoomStoryViewController.swift */,
+				68181042273668BE00D39F11 /* CalenderViewController.swift */,
+				68A45FE12730337400FF755A /* DoListViewController.swift */,
 				688895E3272527BB002102E7 /* TableViewController.swift */,
 				68A45FC0272910C000FF755A /* UserListViewController.swift */,
+				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 				68A45FD2272CED3800FF755A /* LoginViewController.swift */,
-				68A45FE12730337400FF755A /* DoListViewController.swift */,
-				68181042273668BE00D39F11 /* CalenderViewController.swift */,
-				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				688895DB271DA173002102E7 /* SettingViewController.swift */,
+				68CF709B273C694C006C9696 /* SideMenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -291,6 +300,7 @@
 				688895BF271AE3F5002102E7 /* Main.storyboard in Resources */,
 				68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */,
 				68A45FC9272B624600FF755A /* ChatInputAccessoryView.xib in Resources */,
+				68CF709E273EE16B006C9696 /* NewText.storyboard in Resources */,
 				68A45FC5272B548D00FF755A /* chatRoomStory.storyboard in Resources */,
 				68A45FD1272CEBCD00FF755A /* Login.storyboard in Resources */,
 				68A45FDD2730313B00FF755A /* DoList.storyboard in Resources */,
@@ -346,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68CF70A0273EE345006C9696 /* NewTextViewController.swift in Sources */,
 				68A45FBD272864CB00FF755A /* User.swift in Sources */,
 				688895BC271AE3F5002102E7 /* ViewController.swift in Sources */,
 				688895CC271B21D3002102E7 /* TaskViewController.swift in Sources */,
@@ -354,6 +365,7 @@
 				68A45FC32729F4CB00FF755A /* ChatRoom.swift in Sources */,
 				688895E22724FFC8002102E7 /* TodoData.swift in Sources */,
 				688895E4272527BC002102E7 /* TableViewController.swift in Sources */,
+				68CF709C273C694D006C9696 /* SideMenuViewController.swift in Sources */,
 				688895DE271EF38D002102E7 /* UIcolor.swift in Sources */,
 				688895B8271AE3F5002102E7 /* AppDelegate.swift in Sources */,
 				68A45FC1272910C000FF755A /* UserListViewController.swift in Sources */,
