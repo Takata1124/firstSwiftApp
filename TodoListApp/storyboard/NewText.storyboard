@@ -30,6 +30,9 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.left.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="returnAction:" destination="pk4-AK-XFi" eventType="touchUpInside" id="wrG-FJ-Z47"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOk-1c-4NJ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -50,6 +53,9 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="changemode:" destination="pk4-AK-XFi" eventType="touchUpInside" id="OXH-kd-wlc"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -102,6 +108,13 @@
                             <constraint firstItem="7oY-SU-krs" firstAttribute="centerX" secondItem="o7A-Hu-wNH" secondAttribute="centerX" id="zcS-gO-5t4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="changeButton" destination="03L-7Q-jmt" id="dAU-bv-W3b"/>
+                        <outlet property="navbar_t" destination="iOk-1c-4NJ" id="DuY-c9-B3x"/>
+                        <outlet property="newTextTable" destination="y6v-Kp-eiL" id="dLv-Qe-W5l"/>
+                        <outlet property="plusButton" destination="9WY-cE-9LB" id="Flw-PS-RrG"/>
+                        <outlet property="returnButton" destination="7oY-SU-krs" id="Qod-ky-Gqe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gj5-4H-uFM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

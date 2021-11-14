@@ -124,6 +124,9 @@
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                     <imageReference key="image" image="timer" catalog="system" symbolScale="large"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="newTextAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GHM-AJ-3WM"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -163,7 +166,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ULz-NW-TVt"/>
                     <connections>
-                        <outlet property="calender" destination="Mr4-zX-KPp" id="Ydg-W7-Gdd"/>
+                        <outlet property="calender" destination="Mr4-zX-KPp" id="Xrg-sU-PFy"/>
                         <outlet property="calenderButton" destination="r9i-Lp-5KY" id="TBb-OM-rBt"/>
                         <outlet property="categoryTable" destination="Oy6-p9-wRj" id="VXG-aP-TX8"/>
                         <outlet property="changebutton" destination="kYA-08-zXb" id="gQQ-3l-wB9"/>

@@ -141,26 +141,18 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
         }
         
         date_Label = "\(year)/\(month)/\(day)/\(data1!):\(data2!)"
+        timeLabel = "\(data1!):\(data2!)"
+        datelabel = "\(year)/\(month)/\(day)"
 
         pickerLabel.text = date_Label
         saveButton.isEnabled = true
     }
     
     var date_Label: String?
-    
+    var timeLabel: String?
+    var datelabel: String?
     
     @IBAction func saveButtonAction(_ sender: Any) {
-        
-//        self.dismiss(animated: true, completion: nil)
-//        print("tappeded")
-        
-//        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-//        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
-////        chatRoomViewController.user = user
-////        chatRoomViewController.category = categories[indexPath.row]
-////        chatRoomViewController.indexpath = indexPath
-//        chatRoomViewController.modalPresentationStyle = .fullScreen
-//        self.present(chatRoomViewController, animated: true, completion: nil)
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
     //    guard let partnerUid = self.selectedUser?.uid else { return }
@@ -170,7 +162,8 @@ class CalenderViewController: UIViewController, FSCalendarDelegate, FSCalendarDa
             "uid": uid,
             "categorytitle": catego ?? "",
             "newText": task ?? "",
-            "createdAt": date_Label ?? ""
+            "DateAt": datelabel ?? "",
+            "TimeAt": timeLabel ?? ""
         ] as [String: Any]
         
         Firestore.firestore().collection("users").document(uid).collection("newMessage").addDocument(data: docData) { (err) in

@@ -33,20 +33,14 @@ class MenuListController: UITableViewController {
         cell.backgroundColor = .rgb(red: 200, green: 200, blue: 200)
         cell.categoryLabel.tintColor = UIColor.red
         
-//        if indexPath.row == 3 {
-//            
-//            cell.categoryLabel.textColor = .white
-//            print(indexPath)
-//            print("white")
-////        } else {
-////            
-//        }
+        cell.categoLabel.isHidden = true
+        cell.timeLabel.isHidden = true
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

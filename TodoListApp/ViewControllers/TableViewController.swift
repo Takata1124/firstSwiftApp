@@ -37,8 +37,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 todoData.todoTitle = textField.text!
                 self.todoList.insert(todoData, at: 0)
 
-//                self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .right)
-
                 let userDefaults = UserDefaults.standard
                 do {
                     let archivedData: Data = try NSKeyedArchiver.archivedData(withRootObject: self.todoList, requiringSecureCoding: false)

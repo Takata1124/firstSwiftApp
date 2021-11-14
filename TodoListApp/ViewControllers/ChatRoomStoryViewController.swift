@@ -75,8 +75,6 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate, Ta
         
 
         //        getFirebaseDoc()
-        
-        //        print("indexpath", indexpath)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -438,45 +436,6 @@ class ChatRoomStoryViewController: UIViewController, UINavigationBarDelegate, Ta
             print("メッセージの保存に成功しました")
         }
         
-        //        let storyboardmain = UIStoryboard.init(name: "Main", bundle: nil)
-        //        let viewController = storyboardmain.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-        
-        
-        //        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-        //        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
-        //        chatRoomViewController.user = user
-        //        chatRoomViewController.category = categories[indexpath]
-        
-        //        chatRoomViewController.user = viewController.user
-        
-        //        guard let indexpath = indexpath else {
-        //            return
-        //        }
-        
-        //        let vc = self.presentingViewController as! ViewController
-        //        vc.again = true
-        //        print(type(of: indexpath.row))
-        //        vc.index = indexpath.row
-        
-        //        self.dismiss(animated: true, completion: nil)
-        
-        
-        //        viewController.tableView(viewController.categoryTable!, didSelectRowAt: indexpath as! IndexPath)
-        
-        //        self.category = viewController.categories[indexpath]
-        
-        //        self.modalPresentationStyle = .fullScreen
-        //        viewController.present(self, animated: true, completion: nil)
-        
-        //        tableView.deselectRow(at: indexPath, animated: true)
-        //        let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
-        //        let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
-        //        dolistViewController.user = user
-        //        dolistViewController.category = category
-        //        dolistViewController.message = messages[0]
-        //        dolistViewController.modalPresentationStyle = .fullScreen
-        //        self.present(dolistViewController, animated: true, completion: nil)
-        //        dolistViewController.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -486,7 +445,7 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
 //        chatRoomTable.estimatedRowHeight = 20
 //        return UITableView.automaticDimension
         
-        return 100
+        return 150
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -562,112 +521,6 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
             cell.click = checklist[indexPath.row]
             chatRoomTable.reloadData()
         }
-        
-        //        let cell = tableView.cellForRow(at: indexPath) as! TableViewCell
-        //
-        //        //        var docId: String?
-        //        var chattext: String?
-        //        chattext = messages[indexPath.row].message
-        //        var clicked = messages[indexPath.row].click!
-        //
-        //        var listId: String?
-        //        listId = messages[indexPath.row].messageId
-        ////        print(listId)
-        //        //        docId = dolists[indexPath.row].dolistId
-        ////        print(clicked ?? "")
-        //
-        //        guard let uid = Auth.auth().currentUser?.uid else  { return }
-        //        guard let categoDocId = category?.categoryId else { return }
-        ////        guard let messageDcId = message?.messageId else { return }
-        //
-        ////        print(indexPath)
-        //
-        //        if clicked == false {
-        //
-        //            let docData = [
-        //                //                "name": name,
-        //                "createdAt": Timestamp(),
-        //                "uid": uid,
-        //                "message": chattext,
-        //                "click": true
-        //            ] as [String : Any]
-        //
-        //            print(listId)
-        //
-        ////            listId = dolists[indexPath.row].dolistId
-        ////            print(listId)
-        //            let dolis = Message(dic: docData)
-        //            messages[indexPath.row] = dolis
-        ////            dolists[indexPath.row].dolistId = listId
-        //            cell.message = dolis
-        //
-        //            print("clickTrue")
-        //            clicked = true
-        //            Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(listId!).updateData([
-        //
-        //                "click": true
-        //
-        //            ])
-        //
-        //            chatRoomTable.reloadData()
-        //
-        //        } else if clicked == true {
-        //
-        //            let docData = [
-        //                //                "name": name,
-        //                "createdAt": Timestamp(),
-        //                "uid": uid,
-        //                "message": chattext,
-        //                "click": false
-        //            ] as [String : Any]
-        //
-        //            print(listId)
-        //
-        ////            listId = dolists[indexPath.row].dolistId
-        ////            print(listId)
-        ////            let dolis = DoList(dic: docData)
-        ////            dolists[indexPath.row] = dolis
-        ////            dolists[indexPath.row].dolistId = listId
-        //
-        ////            listId = dolists[indexPath.row].dolistId
-        ////            print(listId)
-        //
-        //            let dolis = Message(dic: docData)
-        //            messages[indexPath.row] = dolis
-        ////            dolists[indexPath.row].dolistId = listId
-        //            cell.message = dolis
-        //
-        //            print("clickFalse")
-        //            clicked = false
-        //            Firestore.firestore().collection("users").document(uid).collection("category").document(categoDocId).collection("messages").document(listId!).updateData([
-        //
-        //                "click": false
-        //            ])
-        //
-        //            chatRoomTable.reloadData()
-        //        }
-        //
-        ////        let storyboard = UIStoryboard.init(name: "DoList", bundle: nil)
-        ////        let dolistViewController = storyboard.instantiateViewController(withIdentifier: "DoListViewController") as! DoListViewController
-        ////        dolistViewController.user = user
-        ////        dolistViewController.category = category
-        ////        dolistViewController.message = messages[indexPath.row]
-        ////        dolistViewController.modalPresentationStyle = .fullScreen
-        //        self.present(dolistViewController, animated: true, completion: nil)
-        
-        //        let cell = tableView.cellForRow(at: indexPath)
-        //        let selectedIndexPaths = tableView.indexPathsForSelectedRows
-        //        if selectedIndexPaths != nil && (selectedIndexPaths?.contains(indexPath))! {
-        //            if let paths = selectedIndexPaths {
-        //                for path in paths {
-        //                    if indexPath.section == path.section {
-        //                        let checkedCell = tableView.cellForRow(at: path)
-        //                        checkedCell?.accessoryType = .none
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        cell?.accessoryType = .checkmark
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -740,82 +593,7 @@ extension ChatRoomStoryViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    ////
-    //        print(messList)
-    //        let sortedDic = messList.sorted{ $0.key < $1.key }
-    //
-    //        let beforekey = sortedDic[fromIndexPath.row].key
-    //
-    //        let str: String = (sortedDic[fromIndexPath.row].value as? String)!
-    //        let arr:[String] = str.components(separatedBy: "/")
-    //        let beforedoId: String = arr[0]
-    //
-    //        let afterkey = sortedDic[to.row].key
-    //
-    //        let afterstr: String = (sortedDic[to.row].value as? String)!
-    //        let afterarr:[String] = afterstr.components(separatedBy: "/")
-    //        let afterdoId: String = afterarr[0]
-    
-    
-    //        let beforeId: String = sortedDic[fromIndexPath.row].value.components(separatedBy: "/")[0]
-    //        guard let beforedcId = messages[fromIndexPath.row].messageId else { return }
-    //        print(beforemessage)
-    //        print(beforekey)
-    ////        print(beforedcId)
-    //        let aftermessage = messages[to.row].message
-    //        let afterKey = messages[to.row].key
-    //        guard let afterID = messages[to.row].messageId else { return }
-    //        print(aftermessage)
-    //        print(afterKey)
-    //        print(afterID)
-    
-    //
-    //        database.document(afterdoId).updateData([
-    //
-    //            "key": beforekey
-    //        ])
-    //        self.loadView()
-    //
-    //        messages = []
-    //        setUpViews()
-    //        fetchMessages()
-    //
-    //        chatRoomTable.isEditing = true
-    //        addButton.isEnabled = false
-    
-    //        viewDidLoad()
-    
-    //        self.dismiss(animated: false, completion: nil)
-    
-    //        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-    //        let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
-    ////        chatRoomViewController.user = user
-    ////        chatRoomViewController.category = categories[indexPath.row]
-    //
-    //        chatRoomViewController.modalPresentationStyle = .fullScreen
-    //        self.present(chatRoomViewController, animated: true, completion: nil)
-    
-    //        database.document(beforedcId).updateData([
-    //
-    //            "message": aftermessage
-    //        ])
-    //
-    //        database.document(afterID).updateData([
-    //
-    //            "message": beforemessage
-    //        ])
-    
-    //        chatRoomTable.reloadData()
-    
-    
-    
-    //    並び替えを可能にする
-    //    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    //
-    //        return true
-    //    }
-    //
-    
+  
 }
 
 

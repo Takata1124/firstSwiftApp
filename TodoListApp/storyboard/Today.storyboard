@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="L5m-u3-aNu">
+            <objects>
+                <viewController storyboardIdentifier="TodayViewController" id="Bev-E6-jmZ" customClass="TodayViewController" customModule="TodoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0N6-vn-jSW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YWi-s4-hQJ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="699"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czh-Ty-ZP5">
+                                <rect key="frame" x="182" y="807" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="czh-Ty-ZP5" secondAttribute="height" multiplier="1:1" id="Nds-Aj-2nC"/>
+                                    <constraint firstAttribute="width" constant="50" id="SAZ-4K-Gly"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.left.fill" catalog="system"/>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTm-f3-ZeJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="rCf-Ni-bpL">
+                                        <barButtonItem key="leftBarButtonItem" style="plain" id="GRJ-ij-wKg">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="YFb-DK-eNQ">
+                                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="list.star" catalog="system"/>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="iqH-mh-uxQ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="289-zN-5Ii">
+                                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                                <connections>
+                                                    <action selector="changemode:" destination="Bev-E6-jmZ" eventType="touchUpInside" id="FHc-7a-8LK"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz6-6C-e9N">
+                                <rect key="frame" x="30" y="807" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="jOs-X7-d0x"/>
+                                    <constraint firstAttribute="width" secondItem="mz6-6C-e9N" secondAttribute="height" multiplier="1:1" id="ycS-ro-qKa"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NET-1r-SIo">
+                                <rect key="frame" x="334" y="807" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="1h8-1z-yn3"/>
+                                    <constraint firstAttribute="width" secondItem="NET-1r-SIo" secondAttribute="height" multiplier="1:1" id="Obe-xr-evn"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.down" catalog="system"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8dK-UF-5qm"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YWi-s4-hQJ" firstAttribute="leading" secondItem="8dK-UF-5qm" secondAttribute="leading" id="3yU-ah-NaN"/>
+                            <constraint firstItem="8dK-UF-5qm" firstAttribute="bottom" secondItem="YWi-s4-hQJ" secondAttribute="bottom" constant="75" id="5X3-zq-BSa"/>
+                            <constraint firstItem="dTm-f3-ZeJ" firstAttribute="trailing" secondItem="8dK-UF-5qm" secondAttribute="trailing" id="6bp-uM-gcN"/>
+                            <constraint firstItem="mz6-6C-e9N" firstAttribute="top" secondItem="YWi-s4-hQJ" secondAttribute="bottom" constant="20" id="8fD-db-gAY"/>
+                            <constraint firstItem="czh-Ty-ZP5" firstAttribute="width" secondItem="czh-Ty-ZP5" secondAttribute="height" multiplier="1:1" id="9gO-5B-Uav"/>
+                            <constraint firstItem="czh-Ty-ZP5" firstAttribute="centerX" secondItem="0N6-vn-jSW" secondAttribute="centerX" id="HWf-T0-VRW"/>
+                            <constraint firstItem="NET-1r-SIo" firstAttribute="top" secondItem="YWi-s4-hQJ" secondAttribute="bottom" constant="20" id="Swb-QU-nai"/>
+                            <constraint firstItem="NET-1r-SIo" firstAttribute="width" secondItem="NET-1r-SIo" secondAttribute="height" multiplier="1:1" id="UTZ-1E-I6d"/>
+                            <constraint firstItem="8dK-UF-5qm" firstAttribute="trailing" secondItem="NET-1r-SIo" secondAttribute="trailing" constant="30" id="Wui-M9-pC2"/>
+                            <constraint firstItem="YWi-s4-hQJ" firstAttribute="top" secondItem="dTm-f3-ZeJ" secondAttribute="bottom" id="XwE-VI-z10"/>
+                            <constraint firstItem="8dK-UF-5qm" firstAttribute="trailing" secondItem="YWi-s4-hQJ" secondAttribute="trailing" id="YTr-X2-ujr"/>
+                            <constraint firstItem="czh-Ty-ZP5" firstAttribute="top" secondItem="YWi-s4-hQJ" secondAttribute="bottom" constant="20" id="a9o-y8-99j"/>
+                            <constraint firstItem="NET-1r-SIo" firstAttribute="width" secondItem="NET-1r-SIo" secondAttribute="height" multiplier="1:1" id="d4C-tl-ohh"/>
+                            <constraint firstItem="dTm-f3-ZeJ" firstAttribute="top" secondItem="8dK-UF-5qm" secondAttribute="top" id="ixJ-wX-iCx"/>
+                            <constraint firstItem="dTm-f3-ZeJ" firstAttribute="leading" secondItem="8dK-UF-5qm" secondAttribute="leading" id="jj5-zX-QR9"/>
+                            <constraint firstItem="mz6-6C-e9N" firstAttribute="leading" secondItem="8dK-UF-5qm" secondAttribute="leading" constant="30" id="mOi-Ee-WCB"/>
+                            <constraint firstItem="mz6-6C-e9N" firstAttribute="width" secondItem="mz6-6C-e9N" secondAttribute="height" multiplier="1:1" id="qWo-BR-Rs1"/>
+                            <constraint firstItem="NET-1r-SIo" firstAttribute="width" secondItem="NET-1r-SIo" secondAttribute="height" multiplier="1:1" id="rVa-3F-kcf"/>
+                            <constraint firstItem="czh-Ty-ZP5" firstAttribute="width" secondItem="czh-Ty-ZP5" secondAttribute="height" multiplier="1:1" id="uDB-E0-bwm"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kq8-rx-biv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="70" y="72"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="arrow.down" catalog="system" width="120" height="128"/>
+        <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
+        <image name="list.star" catalog="system" width="128" height="94"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

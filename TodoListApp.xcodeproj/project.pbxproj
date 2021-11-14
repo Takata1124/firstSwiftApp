@@ -46,6 +46,9 @@
 		68CF709C273C694D006C9696 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF709B273C694C006C9696 /* SideMenuViewController.swift */; };
 		68CF709E273EE16B006C9696 /* NewText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CF709D273EE16B006C9696 /* NewText.storyboard */; };
 		68CF70A0273EE345006C9696 /* NewTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF709F273EE345006C9696 /* NewTextViewController.swift */; };
+		68CF70A22740983C006C9696 /* NewText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF70A12740983C006C9696 /* NewText.swift */; };
+		68CF70A427412D53006C9696 /* Today.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CF70A327412D53006C9696 /* Today.storyboard */; };
+		68CF70A627412D9A006C9696 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF70A527412D9A006C9696 /* TodayViewController.swift */; };
 		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +97,9 @@
 		68CF709B273C694C006C9696 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		68CF709D273EE16B006C9696 /* NewText.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewText.storyboard; sourceTree = "<group>"; };
 		68CF709F273EE345006C9696 /* NewTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTextViewController.swift; sourceTree = "<group>"; };
+		68CF70A12740983C006C9696 /* NewText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewText.swift; sourceTree = "<group>"; };
+		68CF70A327412D53006C9696 /* Today.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Today.storyboard; sourceTree = "<group>"; };
+		68CF70A527412D9A006C9696 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,11 +143,11 @@
 		688895B6271AE3F5002102E7 /* TodoListApp */ = {
 			isa = PBXGroup;
 			children = (
+				68A45FBB272864A200FF755A /* Models */,
 				68A45FE0273031C100FF755A /* Cells */,
 				68A45FDF2730318100FF755A /* ViewControllers */,
 				68A45FDE2730314700FF755A /* storyboard */,
 				68A45FCA272B644800FF755A /* extension */,
-				68A45FBB272864A200FF755A /* Models */,
 				688895B9271AE3F5002102E7 /* SceneDelegate.swift */,
 				688895B7271AE3F5002102E7 /* AppDelegate.swift */,
 				688895E12724FFC8002102E7 /* TodoData.swift */,
@@ -159,6 +165,7 @@
 				68A45FC22729F4CA00FF755A /* ChatRoom.swift */,
 				68A45FCE272CB01600FF755A /* Message.swift */,
 				68A45FD8272D2EB200FF755A /* Category.swift */,
+				68CF70A12740983C006C9696 /* NewText.swift */,
 				68A45FDA272F154500FF755A /* DoList.swift */,
 			);
 			path = Models;
@@ -180,11 +187,12 @@
 				688895BD271AE3F5002102E7 /* Main.storyboard */,
 				68A45FB52726E78900FF755A /* SignUp.storyboard */,
 				68A45FD0272CEBCD00FF755A /* Login.storyboard */,
-				68A45FBE27290EB300FF755A /* UserList.storyboard */,
 				68A45FC4272B548C00FF755A /* chatRoomStory.storyboard */,
-				68A45FDC2730313B00FF755A /* DoList.storyboard */,
 				68CF709D273EE16B006C9696 /* NewText.storyboard */,
+				68CF70A327412D53006C9696 /* Today.storyboard */,
 				6818103E2736674800D39F11 /* Calender.storyboard */,
+				68A45FBE27290EB300FF755A /* UserList.storyboard */,
+				68A45FDC2730313B00FF755A /* DoList.storyboard */,
 			);
 			path = storyboard;
 			sourceTree = "<group>";
@@ -193,17 +201,18 @@
 			isa = PBXGroup;
 			children = (
 				688895BB271AE3F5002102E7 /* ViewController.swift */,
-				68CF709F273EE345006C9696 /* NewTextViewController.swift */,
 				68A45FC6272B54A700FF755A /* ChatRoomStoryViewController.swift */,
+				68CF709F273EE345006C9696 /* NewTextViewController.swift */,
+				68CF70A527412D9A006C9696 /* TodayViewController.swift */,
 				68181042273668BE00D39F11 /* CalenderViewController.swift */,
-				68A45FE12730337400FF755A /* DoListViewController.swift */,
-				688895E3272527BB002102E7 /* TableViewController.swift */,
-				68A45FC0272910C000FF755A /* UserListViewController.swift */,
-				688895CB271B21D3002102E7 /* TaskViewController.swift */,
 				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 				68A45FD2272CED3800FF755A /* LoginViewController.swift */,
 				688895DB271DA173002102E7 /* SettingViewController.swift */,
 				68CF709B273C694C006C9696 /* SideMenuViewController.swift */,
+				68A45FC0272910C000FF755A /* UserListViewController.swift */,
+				688895E3272527BB002102E7 /* TableViewController.swift */,
+				688895CB271B21D3002102E7 /* TaskViewController.swift */,
+				68A45FE12730337400FF755A /* DoListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -296,6 +305,7 @@
 				688895C1271AE3F6002102E7 /* Assets.xcassets in Resources */,
 				6818103C2733FC8900D39F11 /* TableViewCell.xib in Resources */,
 				6818103F2736674800D39F11 /* Calender.storyboard in Resources */,
+				68CF70A427412D53006C9696 /* Today.storyboard in Resources */,
 				68A45FBF27290EB300FF755A /* UserList.storyboard in Resources */,
 				688895BF271AE3F5002102E7 /* Main.storyboard in Resources */,
 				68A45FBA272707C900FF755A /* GoogleService-Info.plist in Resources */,
@@ -371,10 +381,12 @@
 				68A45FC1272910C000FF755A /* UserListViewController.swift in Sources */,
 				68A45FD9272D2EB200FF755A /* Category.swift in Sources */,
 				68A45FB82726EBF700FF755A /* SignUpViewController.swift in Sources */,
+				68CF70A22740983C006C9696 /* NewText.swift in Sources */,
 				68A45FC7272B54A700FF755A /* ChatRoomStoryViewController.swift in Sources */,
 				688895D9271C9B18002102E7 /* TableViewCell.swift in Sources */,
 				68A45FD6272D278F00FF755A /* CategoryTableViewCell.swift in Sources */,
 				688895DC271DA173002102E7 /* SettingViewController.swift in Sources */,
+				68CF70A627412D9A006C9696 /* TodayViewController.swift in Sources */,
 				68A45FE22730337400FF755A /* DoListViewController.swift in Sources */,
 				688895BA271AE3F5002102E7 /* SceneDelegate.swift in Sources */,
 				68A45FDB272F154500FF755A /* DoList.swift in Sources */,

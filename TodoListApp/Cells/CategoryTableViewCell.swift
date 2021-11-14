@@ -9,7 +9,11 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var categoryLabel: UILabel!
+
+    @IBOutlet weak var categoryLabel: UITextView!
+    
+    @IBOutlet weak var categoLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     var category: Category? {
         didSet {
