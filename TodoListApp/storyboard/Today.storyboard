@@ -30,6 +30,9 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.left.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="returnButtonAction:" destination="Bev-E6-jmZ" eventType="touchUpInside" id="LT5-I3-6E0"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTm-f3-ZeJ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -105,6 +108,11 @@
                             <constraint firstItem="czh-Ty-ZP5" firstAttribute="width" secondItem="czh-Ty-ZP5" secondAttribute="height" multiplier="1:1" id="uDB-E0-bwm"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navbar_t" destination="dTm-f3-ZeJ" id="3cD-KW-fvw"/>
+                        <outlet property="returnButton" destination="czh-Ty-ZP5" id="AKe-bG-WlX"/>
+                        <outlet property="todayTable" destination="YWi-s4-hQJ" id="aJg-3M-s0a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kq8-rx-biv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

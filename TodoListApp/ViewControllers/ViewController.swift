@@ -9,8 +9,9 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FSCalendar
 
-class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDelegate {
+class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDelegate, FSCalendarDelegate, FSCalendarDataSource {
 
 //    var firstArray : [String] = ["apple", "banana","chocolate","chocolate","chocolate"]
 
@@ -21,6 +22,8 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     var delete_count: Int = 0
     var dataList: [String] = []
     
+    @IBOutlet weak var calender: FSCalendar!
+    
 //    let userDefaults = UserDefaults.standard
 //    var testText: String = "default"
 
@@ -30,6 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     @IBOutlet weak var navbar_t: UINavigationBar!
     @IBOutlet weak var delete_b: UIButton!
     @IBOutlet weak var categoryTable: UITableView!
+    @IBOutlet weak var changebutton: UIButton!
+    @IBOutlet weak var calenderButton: UIButton!
     
     var user: User?
     var category: Category?
@@ -40,23 +45,33 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     var again: Bool?
     var index: Int?
     
+    var calender_bool: Bool?
+    
     private var categoryListener: ListenerRegistration?
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        
         setUpViews()
+        
+        firebaseEventCount()
+       
 //        fetchCategoryInfoFromFirestore()
         fetchUserCategory()
         fetchUserInfoFromFirestore()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        
+//        ScrollFirst()
+    }
+    
+//    @IBOutlet weak var tableviewHeight: NSLayoutConstraint!
+    
     private func setUpViews() {
         
 //        selectPicker.layer.cornerRadius = 50
-
         
         categoryTable.delegate = self
         categoryTable.dataSource = self
@@ -72,54 +87,66 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 //                .foregroundColor: UIColor.black
 //            ]
         
-        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-        chatVC = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+//        calender.backgroundColor = .clear
+        calender.appearance.headerTitleColor = .blue
+        calender.appearance.weekdayTextColor = .blue
+        calender.appearance.borderRadius = 0
+//        calender.appearance.todayColor = .white
+        calender.appearance.titleWeekendColor = .red
+        calender.appearance.selectionColor = .clear
+        calender.appearance.borderSelectionColor = .blue
+        
+        calender.scope = .month
+        calender_bool = false
+        
+        calender.delegate = self
+        calender.dataSource = self
+        
+//        tableviewHeight.constant = 100
+        
+//        let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
+//        chatVC = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
 
 //        viewdidloadNext()
+        
         ConfirmUserSign()
-        
-//        print(again)
-       
-        
-       
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-
-        super.viewWillAppear(animated)
-        
-//        print(chatVC?.backFlag)
-        
-//        let flag = chatVC?.backFlag
-//        guard let flag = flag else { return }
-//
-//        print(flag)
-        
-//        if again == false {
-//            
-//            return
-//            
-//        } else {
-//            
-//            let storyboard = UIStoryboard.init(name: "chatRoomStory", bundle: nil)
-//            let chatRoomViewController = storyboard.instantiateViewController(withIdentifier: "ChatRoomStoryViewController") as! ChatRoomStoryViewController
-//            chatRoomViewController.user = user
-////            let row = index
-////            chatRoomViewController.category = categories[index ?? "0"]
-//    //        chatRoomViewController.indexpath = indexPath.row
-//            chatRoomViewController.modalPresentationStyle = .fullScreen
-//            self.present(chatRoomViewController, animated: true, completion: nil)
-////            again = false
-//            
-//        }
-        
-       
-        
     }
     
+//    func ScrollFirst() {
+//        
+//        categoryTable.scrollToRow(at: .init(row: 0, section: 0), at: .top, animated: true)
+//        print("scroll")
+//    }
+    
+    @IBAction func SelsectCalender(_ sender: Any) {
+        
+        if calender_bool == false {
+            
+            calender.scope = .week
+            calender_bool = true
+        } else {
+            
+            calender.scope = .month
+            calender_bool = false
+        }
+    }
+    
+    @IBAction func newTextAction(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "NewText", bundle: nil)
+        let newTextViewController = storyboard.instantiateViewController(withIdentifier: "NewTextViewController") as! NewTextViewController
+        newTextViewController.modalPresentationStyle = .fullScreen
+        self.present(newTextViewController, animated: true, completion: nil)
+    }
+
     private func addCategory(text: String) {
     //    print("tapbutton")
         
@@ -144,6 +171,33 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         }
     }
     
+    var newTexts = [NewText]()
+    var dates = [String]()
+    
+    func firebaseEventCount() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else  { return }
+        
+        Firestore.firestore().collection("users").document(uid).collection("newMessage").order(by: "DateAt", descending: true).getDocuments { [self] (documents, err) in
+            if let err = err {
+                print("err")
+            }
+            
+            documents?.documents.forEach({ (document) in
+                
+                let dic = document.data()
+                let newtext = NewText(dic: dic)
+                newtext.NewtextId = document.documentID
+                
+                self.newTexts.append(newtext)
+                self.dates.append(newtext.DateAt)
+                
+                print(self.dates)
+                
+            })
+        }
+    }
+    
     private func fetchUserCategory() {
         
         guard let uid = Auth.auth().currentUser?.uid else  { return }
@@ -165,8 +219,6 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
                     self.categories.append(catego)
                     self.categoryTable.reloadData()
                     
-//                    print(self.categories)
-                    
                 case .modified:
                     print("nothing")
                 case .removed:
@@ -175,39 +227,6 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
             })
         }
     }
-    
-//    private func handleDolistAddedDocumentChange(documentChange: DocumentChange) {
-//
-//        let dic = documentChange.document.data()
-////        let chatroom = ChatRoom(dic: dic)
-//        category?.categoryId = documentChange.document.documentID
-//
-////        guard let uid = Auth.auth().currentUser?.uid else { return }
-//        chatroom.members.forEach { (memberUid) in
-//
-//            if memberUid != uid {
-//                Firestore.firestore().collection("users").document(memberUid).getDocument { (snapshot, err) in
-//
-//                    if let err = err {
-//                        print("ユーザー情報の取得に失敗しました")
-//                        return
-//                    }
-//
-//                    print("ユーザー情報の取得に成功しました")
-//                    guard let dic = snapshot!.data() else { return }
-//                    let user = User(dic: dic)
-//                    user.uid = snapshot?.documentID
-//
-//                    chatroom.partnerUser = user
-////                    self.chatrooms.append(chatroom)
-////
-////                    self.messageTable.reloadData()
-////                    print(self.chatrooms.count)
-////                    print(self.chatrooms)
-//                }
-//            }
-//        }
-//    }
     
     private func fetchUserInfoFromFirestore() {
         
@@ -222,7 +241,6 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
             guard let snapshot = snapshot else { return }
             guard let dic = snapshot.data() else { return }
             
-//            print("text:", dic)
             let user = User(dic: dic)
             self.user = user
 //            print(user.username)
@@ -241,19 +259,21 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
         }
     }
     
-    @IBAction func deleteButtonfunc(_ sender: Any) {
+    @IBAction func changemode(_ sender: Any) {
         
-        if delete_count == 0 {
+        if (categoryTable.isEditing == true) {
+            categoryTable.isEditing = false
+            //            chatRoomTable.allowsSelectionDuringEditing = false
+//            addButton.isEnabled = true
+//            returnButton.isEnabled = true
+            changebutton.setTitle("Edit", for: .normal)
             
-            delete_button = true
-            delete_b.backgroundColor = UIColor(red:0.96, green:0.55, blue:0.15, alpha:1.0)
-            delete_count = 1
-        }
-        else {
-            
-            delete_button = false
-            delete_b.backgroundColor = UIColor.clear
-            delete_count = 0
+        } else {
+            categoryTable.isEditing = true
+            //            chatRoomTable.allowsSelectionDuringEditing = true
+//            addButton.isEnabled = false
+//            returnButton.isEnabled = false
+            changebutton.setTitle("Editing", for: .normal)
         }
     }
     
@@ -272,9 +292,9 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 
     @IBAction func settingfunc(_ sender: Any) {
         
-//        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
-//        let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController")
-//        self.present(signUpViewController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Setting", bundle: nil)
+        let settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingViewController")
+        self.present(settingViewController, animated: true, completion: nil)
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -286,11 +306,12 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
 
         alertController.addTextField { textField in
             
-            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
             
             textField.addConstraint(heightConstraint)
             textField.placeholder = "入力"
             textField.font = UIFont.systemFont(ofSize: 17)
+            
         }
         
         let okAction = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) in
@@ -323,15 +344,77 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     func printing() {
         print("ppp")
         
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("select")
         
+        let tmpDate = Calendar(identifier: .gregorian)
+        let year = tmpDate.component(.year, from: date)
+        let month = tmpDate.component(.month, from: date)
+        let day = tmpDate.component(.day, from: date)
         
+        let totalDate: String = "\(year)/\(month)/\(day)"
+        
+        print(totalDate)
+        
+        let storyboard = UIStoryboard(name: "Today", bundle: nil)
+        let todayViewController = storyboard.instantiateViewController(withIdentifier: "TodayViewController") as! TodayViewController
+        todayViewController.dateTitle = totalDate
+        todayViewController.modalPresentationStyle = .fullScreen
+        self.present(todayViewController, animated: true, completion: nil)
+    }
+    
+    let dateFormatter = DateFormatter()
+    
+    func dateChange(text: String) -> String {
+        
+        let str:String = text
+        let arr:[String] = str.components(separatedBy: "/")
+
+        let year = arr[0]
+        let month = arr[1]
+        let date = arr[2]
+
+        let changedDate = "\(date)-\(month)-\(year)"
+        return changedDate
+    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
+        var intint: Int = 0
+        
+        if dates.count > 1 {
+            
+            let minusDatesCount: Int = dates.count - 1
+            
+            for i in 0...minusDatesCount {
+                
+                let trydate = dates[i]
+                
+                let dated = dateChange(text: trydate)
+                print("dated",dated)
+                
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                guard let eventDate = dateFormatter.date(from: dated) else { return 0}
+                
+                if date.compare(eventDate) == .orderedSame {
+                    intint = 1
+                }
+            }
+             
+        } else { intint = 0}
+        
+        return intint
     }
 }
 
 extension ViewController:  UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        categoryTable.estimatedRowHeight = 20
+        return UITableView.automaticDimension
+//        return 75
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -339,16 +422,18 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! CategoryTableViewCell
-        cell.categoryLabel.font = UIFont.systemFont(ofSize: 16)
+        cell.categoryLabel.font = UIFont.systemFont(ofSize: 15)
         cell.category = categories[indexPath.row]
         cell.separatorInset = .zero
+        cell.categoLabel.isHidden = true
+        cell.timeLabel.isHidden = true
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("tapped table view")
-        
+
         print("indexpppath", indexPath)
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -361,185 +446,49 @@ extension ViewController:  UITableViewDelegate, UITableViewDataSource {
         chatRoomViewController.modalPresentationStyle = .fullScreen
         self.present(chatRoomViewController, animated: true, completion: nil)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            //
+            guard let cateID = categories[indexPath.row].categoryId else { return }
+            //            print(messId)
+            
+//            guard let categoDocId = category?.categoryId else { return  }
+            guard let uid = Auth.auth().currentUser?.uid else  { return }
+            
+            Firestore.firestore().collection("users").document(uid).collection("category").document(cateID).delete()
+            
+            categories.remove(at: indexPath.row)
+            categoryTable.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    
+        
+        let list = categories[fromIndexPath.row]
+        categories.remove(at: fromIndexPath.row)
+        categories.insert(list, at: to.row)
+        
+        print("編集")
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        
+        if categoryTable.isEditing {
+            return .delete
+        }
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
-
-
-//    func viewdidloadNext() {
-//
-//        performSegue(withIdentifier: "goNext", sender: nil)
-//    }
-
-//    func fetchCategoryInfoFromFirestore() {
-//
-//        Firestore.firestore().collection("category").getDocuments { (snapshots, err) in
-//            if let err = err {
-//                print("カテゴリー情報の取得に失敗しました\(err)")
-//                return
-//            }
-//
-//            //            print(snapshots)
-//            print("カテゴリー情報の取得に成功しました")
-//            snapshots?.documents.forEach({ (snapshot) in
-//                let dic = snapshot.data()
-//                let catego = Category.init(dic: dic)
-//                //                user.uid = snapshot.documentID
-//
-//                //                guard let uid = Auth.auth().currentUser?.uid else { return }
-//
-//                //                //loginUserでなければ
-//                //                if uid == snapshot.documentID {
-//                //                    return
-//                //                }
-//
-//                self.categories.append(catego)
-//                self.categoryTable.reloadData()
-//            })
-//        }
-//    }
-    
-//    func fetchCategory() {
-//
-////        guard let categoryDocId = category?.categoryId else { return }
-//
-//
-//        Firestore.firestore().collection("category").addSnapshotListener { (snapshots, err) in
-//
-//            if let err = err {
-//                print("メッセージの取得に失敗しました")
-//                return
-//            }
-//
-//            snapshots?.documentChanges.forEach({ (documentChange) in
-//                switch documentChange.type {
-//                case .added:
-//                    let dic = documentChange.document.data()
-//                    let catego = Category(dic: dic)
-//                    self.categories.append(catego)
-//                    self.categoryTable.reloadData()
-//
-//                    print(self.categories)
-//
-//                case .modified:
-//                    print("nothing")
-//                case .removed:
-//                    print("nothing")
-//                }
-//            })
-//        }
-//    }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//        if (segue.identifier == "goNext") {
-//            let taskVC = segue.destination as! TaskViewController
-//            taskVC.textVC = select_1
-//        }
-//    }
-
-//    func readData() -> String {
-//
-//        let str: String = userDefaults.object(forKey: "DataStore") as! String
-//        return str
-//    }
-//
-//    func saveData(str: String?) {
-//
-//        userDefaults.set(str, forKey: "DataStore")
-//    }
-//
-//    func arraySave(str: String?){
-//
-//        guard let unstr = str else {return}
-//        print(unstr)
-//        firstArray = userDefaults.array(forKey: "FirstArray") as! [String]
-//        firstArray.append(unstr)
-//        userDefaults.set(firstArray, forKey: "FirstArray")
-//
-//
-//    }
-
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//
-//        textField.resignFirstResponder()
-//
-//        testText = textField.text!
-//
-//        arraySave(str: testText)
-//        textField.text = ""
-//
-//        return true
-//    }
-    
-
-//
-////    var select_0: String?
-//    var select_1: String?
-//
-//    // UIPickerViewのRowが選択された時の挙動
-//    func pickerView(_ pickerView: UIPickerView,
-//                    didSelectRow row: Int,
-//                    inComponent component: Int) {
-//
-//
-//        if delete_button == false {
-//
-//            select_1 = dataList[row]
-//
-//
-//            guard let select_11 = select_1 else {return}
-//
-//            navbar_t.items![0].title = dataList[row]
-//            performSegue(withIdentifier: "goNext", sender: nil)
-//        }
-//
-//        if delete_button == true {
-//
-//            select_1 = dataList[row]
-//            test_alert(select_1)
-//
-//            self.memberVariable = row
-//        }
-//    }
-//
-//    var memberVariable: Int = 0
-//
-//    func test_alert(_ sender: String?) {
-//
-//        let alert: UIAlertController = UIAlertController(title: select_1, message: "削除してもいいですか？", preferredStyle:  UIAlertController.Style.alert)
-//
-//                // ② Actionの設定
-//                // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
-//                // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
-//                // OKボタン
-//            let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:{
-//                // ボタンが押された時の処理を書く（クロージャ実装）
-//                (action: UIAlertAction!) -> Void in
-////                print("OK")
-//                print(self.memberVariable)
-//                print(self.dataList[self.memberVariable])
-////                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
-//
-//                self.dataList.remove(at: self.memberVariable)
-////                self.dataList = self.userDefaults.array(forKey: "FirstArray") as! [String]
-//                self.selectPicker.reloadAllComponents()
-////                self.selectPicker.delegate = self
-////                self.selectPicker.dataSource = self
-//                print(self.dataList)
-//                self.userDefaults.set(self.dataList, forKey: "FirstArray")
-//
-//            })
-//            // キャンセルボタン
-//            let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler:{
-//                // ボタンが押された時の処理を書く（クロージャ実装）
-//                (action: UIAlertAction!) -> Void in
-////                print("Cancel")
-//            })
-//
-//            // ③ UIAlertControllerにActionを追加
-//            alert.addAction(cancelAction)
-//            alert.addAction(defaultAction)
-//
-//            // ④ Alertを表示
-//            present(alert, animated: true, completion: nil)
-//    }
 

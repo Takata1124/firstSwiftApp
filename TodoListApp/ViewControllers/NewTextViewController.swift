@@ -45,8 +45,6 @@ class NewTextViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         changeButton.setTitle("Edit", for: .normal)
         newTextTable.isEditing = false
-        
-        
     }
     
     private func getFirebaseDoc() {
@@ -66,7 +64,6 @@ class NewTextViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 self.newTexts.append(newtext)
                 self.newTextTable.reloadData()
-                
             })
         }
     }
@@ -102,6 +99,12 @@ class NewTextViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         newTexts.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

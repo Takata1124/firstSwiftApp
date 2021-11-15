@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class SettingViewController: UIViewController, UITextFieldDelegate, UINavigationBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var newText: UITextField!
@@ -98,31 +96,3 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
         dismiss(animated: true, completion: nil)
     }
 }
-    
-//    func sendSaveImage(_ image: UIImage?) {
-//       //NSData型にキャスト
-//        guard let unimage = image else {return}
-//        let data = unimage.pngData() as NSData?
-//        if let imageData = data {
-//           saveArray.append(imageData)
-//           defaults.set(saveArray, forKey: "saveImage")
-////           defaults.synchronize()
-//        }
-//        print(saveArray)
-//    }
-//
-//}
-
-//extension UIImage {
-//    func resized() -> UIImage? {
-//
-//        let rect = CGRect(x: 0, y: 0, width: 90, height: 195)
-//
-//        UIGraphicsBeginImageContext(rect.size)
-//        self.draw(in: rect)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//
-//        return image!
-//    }
-//}
