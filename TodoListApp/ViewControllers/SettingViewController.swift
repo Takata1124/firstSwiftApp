@@ -14,6 +14,9 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     @IBOutlet weak var navbar: UINavigationBar!
     @IBOutlet weak var imagePicture: UIImageView!
     
+    @IBOutlet weak var UsernameLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var versionCountLabel: UILabel!
     
     let viewclass = ViewController()
     
@@ -23,6 +26,10 @@ class SettingViewController: UIViewController, UITextFieldDelegate, UINavigation
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UsernameLabel.text = "名前"
+        versionLabel.text = "アプリバージョン"
+        versionCountLabel.text = "1.0"
         
         navbar?.delegate = self
         newText.delegate = viewclass            

@@ -293,7 +293,8 @@ class ViewController: UIViewController, UITextFieldDelegate,  UINavigationBarDel
     @IBAction func settingfunc(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Setting", bundle: nil)
-        let settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingViewController")
+        let settingViewController = storyboard.instantiateViewController(withIdentifier: "SettingTableViewController")
+        settingViewController.modalPresentationStyle = .fullScreen
         self.present(settingViewController, animated: true, completion: nil)
     }
     

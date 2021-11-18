@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var alreadyButton: UIButton!
     
     
     var eyeconClick: Bool = true
@@ -31,17 +32,17 @@ class SignUpViewController: UIViewController {
     
     private func setUpViews() {
         
-//        profileImageButton.layer.cornerRadius = 75
-//        profileImageButton.layer.borderWidth = 1
-//        profileImageButton.layer.borderColor = UIColor.rgb(red: 240, green: 240, blue: 240).cgColor
-//        
-////        profileImageButton.isHidden = true
-//        
-//        profileImageButton.addTarget(self, action: #selector(tappedProfileImageButton), for: .touchUpInside)
-////        registerButton.addTarget(self, action: #selector(tappedRegisterButoon), for: .touchUpInside)
+        //        profileImageButton.layer.cornerRadius = 75
+        //        profileImageButton.layer.borderWidth = 1
+        //        profileImageButton.layer.borderColor = UIColor.rgb(red: 240, green: 240, blue: 240).cgColor
+        //
+        ////        profileImageButton.isHidden = true
+        //
+        //        profileImageButton.addTarget(self, action: #selector(tappedProfileImageButton), for: .touchUpInside)
+        ////        registerButton.addTarget(self, action: #selector(tappedRegisterButoon), for: .touchUpInside)
         ///
         auth = Auth.auth()
-//        
+        //
         emailTextField.delegate = self
         passwordTextField.delegate = self
         usernameTextField.delegate = self
@@ -51,6 +52,8 @@ class SignUpViewController: UIViewController {
         
         //        emailTextField.becomeFirstResponder()
         passwordTextField.isSecureTextEntry = true
+        
+        alreadyButton.isEnabled = true
     }
     
     var auth: Auth!
@@ -69,15 +72,18 @@ class SignUpViewController: UIViewController {
                         viewController.modalPresentationStyle = .fullScreen
                         self.present(viewController, animated: true, completion: nil)
                         
+                        self.alreadyButton.isEnabled = true
                         
                         print("移動")
-//                        self.performSegue(withIdentifier: "Timeline", sender: self.auth().currentUser!)
+                        //                        self.performSegue(withIdentifier: "Timeline", sender: self.auth().currentUser!)
                         
                     } else if self.auth.currentUser?.isEmailVerified == false {
                         
                         let alert = UIAlertController(title: "まだメール認証が完了していません。", message: "確認用メールを送信しているので確認をお願いします。", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
+                        
+                        self.alreadyButton.isEnabled = false
                     }
                 }
             })
@@ -124,56 +130,120 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func registerAccount() {
-            
-            let name = usernameTextField.text ?? ""
-            let email = emailTextField.text!
-            let password = passwordTextField.text!
         
-            Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-                if error == nil, let result = result {
-                    result.user.sendEmailVerification(completion: { (error) in
-                        if error == nil {
-                            let alert = UIAlertController(title: "仮登録を行いました。", message: "入力したメールアドレス宛に確認メールを送信しました。", preferredStyle: .alert)
-                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    })
+        let name = usernameTextField.text ?? ""
+        let email = emailTextField.text!
+        let password = passwordTextField.text!
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+            
+            if err == nil, let res = res {
+                res.user.sendEmailVerification(completion: { (error) in
+                    if error == nil {
+                        let alert = UIAlertController(title: "仮登録を行いました。", message: "入力したメールアドレス宛に確認メールを送信しました。", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                })
+            }
+            
+            if let err = err {
+                print("認証情報の保存に失敗しました\(err)")
+                return
+            }
+            
+            print("認証情報の保存に成功しました")
+            
+            guard let uid = res?.user.uid else { return }
+            guard let username = self.usernameTextField.text else { return }
+            let docData = [
+                "email": email,
+                "username": username,
+                "createdAt": Timestamp(),
+                "profileImageUrl": ""
+            ] as [String : Any]
+            
+            Firestore.firestore().collection("users").document(uid).setData(docData) { (err) in
+                if let err = err {
+                    print("データベースへの保存に失敗しました(\(err)")
+                    return
                 }
+                
+                print("FireStoreへの情報の保存が成功しました")
+                
+                //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                //                    let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                //                    self.present(viewController, animated: true, completion: nil)
             }
         }
+    }
+    
+    @IBAction func reloadAction(_ sender: Any) {
+        
+        print("tapped")
+        
+        if auth.currentUser != nil {
+            auth.currentUser?.reload(completion: { error in
+                if error == nil {
+                    
+                    if self.auth.currentUser?.isEmailVerified == true {
+                        
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                        viewController.modalPresentationStyle = .fullScreen
+                        self.present(viewController, animated: true, completion: nil)
+                        
+                        self.alreadyButton.isEnabled = true
+                        
+                        print("移動")
+                        //                        self.performSegue(withIdentifier: "Timeline", sender: self.auth().currentUser!)
+                        
+                    } else if self.auth.currentUser?.isEmailVerified == false {
+                        
+                        let alert = UIAlertController(title: "まだメール認証が完了していません。", message: "確認用メールを送信しているので確認をお願いします。", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                        self.alreadyButton.isEnabled = false
+                    }
+                }
+            })
+        }
+    }
     
     
-//    @IBAction private func didTapSignUpButton() {
-//
-//        let email = emailTextField.text ?? ""
-//        let password = passwordTextField.text ?? ""
-//        let name = usernameTextField.text ?? ""
-//
-//        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-//            guard let self = self else { return }
-//            if let user = result?.user {
-//                let req = user.createProfileChangeRequest()
-//                req.displayName = name
-//                req.commitChanges() { [weak self] error in
-//                    guard let self = self else { return }
-//                    if error == nil {
-//                        user.sendEmailVerification() { [weak self] error in
-//                            guard let self = self else { return }
-//                            if error == nil {
-//                                // 仮登録完了画面へ遷移する処理
-//                                let storyboard = UIStoryboard(name: "Tempo", bundle: nil)
-//                                let tempoviewController = storyboard.instantiateViewController(withIdentifier: "TempoViewController") as! TempoViewController
-//                                self.present(tempoviewController, animated: true, completion: nil)
-//                            }
-//                            self.showErrorIfNeeded(error)
-//                        }
-//                    }
-//                    self.showErrorIfNeeded(error)
-//                }
-//            }
-//            self.showErrorIfNeeded(error)
-//        }
-//    }
+    
+    //    @IBAction private func didTapSignUpButton() {
+    //
+    //        let email = emailTextField.text ?? ""
+    //        let password = passwordTextField.text ?? ""
+    //        let name = usernameTextField.text ?? ""
+    //
+    //        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+    //            guard let self = self else { return }
+    //            if let user = result?.user {
+    //                let req = user.createProfileChangeRequest()
+    //                req.displayName = name
+    //                req.commitChanges() { [weak self] error in
+    //                    guard let self = self else { return }
+    //                    if error == nil {
+    //                        user.sendEmailVerification() { [weak self] error in
+    //                            guard let self = self else { return }
+    //                            if error == nil {
+    //                                // 仮登録完了画面へ遷移する処理
+    //                                let storyboard = UIStoryboard(name: "Tempo", bundle: nil)
+    //                                let tempoviewController = storyboard.instantiateViewController(withIdentifier: "TempoViewController") as! TempoViewController
+    //                                self.present(tempoviewController, animated: true, completion: nil)
+    //                            }
+    //                            self.showErrorIfNeeded(error)
+    //                        }
+    //                    }
+    //                    self.showErrorIfNeeded(error)
+    //                }
+    //            }
+    //            self.showErrorIfNeeded(error)
+    //        }
+    //    }
     
     @objc private func tappedRegisterButoon() {
         

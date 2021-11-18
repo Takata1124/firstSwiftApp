@@ -52,6 +52,7 @@
 		68CF70A82741515F006C9696 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CF70A72741515F006C9696 /* Setting.storyboard */; };
 		68CF70AA27426E37006C9696 /* Tempo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68CF70A927426E37006C9696 /* Tempo.storyboard */; };
 		68CF70AC27426E57006C9696 /* TempoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF70AB27426E57006C9696 /* TempoViewController.swift */; };
+		68CF70AE27468776006C9696 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CF70AD27468776006C9696 /* SettingTableViewController.swift */; };
 		83BA6C0522C687BAC85FDAEF /* Pods_TodoListApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFAA06CFF6C883CBDDABDDD /* Pods_TodoListApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		68CF70A72741515F006C9696 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		68CF70A927426E37006C9696 /* Tempo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tempo.storyboard; sourceTree = "<group>"; };
 		68CF70AB27426E57006C9696 /* TempoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoViewController.swift; sourceTree = "<group>"; };
+		68CF70AD27468776006C9696 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,11 +218,12 @@
 				68A45FB72726EBF700FF755A /* SignUpViewController.swift */,
 				68CF70AB27426E57006C9696 /* TempoViewController.swift */,
 				68A45FD2272CED3800FF755A /* LoginViewController.swift */,
-				688895DB271DA173002102E7 /* SettingViewController.swift */,
+				68CF70AD27468776006C9696 /* SettingTableViewController.swift */,
 				68CF709B273C694C006C9696 /* SideMenuViewController.swift */,
 				68A45FC0272910C000FF755A /* UserListViewController.swift */,
 				688895E3272527BB002102E7 /* TableViewController.swift */,
 				688895CB271B21D3002102E7 /* TaskViewController.swift */,
+				688895DB271DA173002102E7 /* SettingViewController.swift */,
 				68A45FE12730337400FF755A /* DoListViewController.swift */,
 			);
 			path = ViewControllers;
@@ -380,6 +383,7 @@
 				68CF70A0273EE345006C9696 /* NewTextViewController.swift in Sources */,
 				68A45FBD272864CB00FF755A /* User.swift in Sources */,
 				688895BC271AE3F5002102E7 /* ViewController.swift in Sources */,
+				68CF70AE27468776006C9696 /* SettingTableViewController.swift in Sources */,
 				688895CC271B21D3002102E7 /* TaskViewController.swift in Sources */,
 				68A45FCF272CB01600FF755A /* Message.swift in Sources */,
 				68A45FD3272CED3800FF755A /* LoginViewController.swift in Sources */,

@@ -72,15 +72,11 @@ class NewTextViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if (newTextTable.isEditing == true) {
             newTextTable.isEditing = false
-            //            chatRoomTable.allowsSelectionDuringEditing = false
-//            addButton.isEnabled = true
             returnButton.isEnabled = true
             changeButton.setTitle("Edit", for: .normal)
             
         } else {
             newTextTable.isEditing = true
-            //            chatRoomTable.allowsSelectionDuringEditing = true
-//            addButton.isEnabled = false
             returnButton.isEnabled = false
             changeButton.setTitle("Editing", for: .normal)
         }

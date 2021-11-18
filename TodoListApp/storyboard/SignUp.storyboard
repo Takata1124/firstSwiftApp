@@ -77,7 +77,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mv-hU-AiE">
-                                <rect key="frame" x="157" y="628" width="100" height="50"/>
+                                <rect key="frame" x="157" y="643" width="100" height="50"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="TvJ-kW-gow"/>
@@ -91,7 +91,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3B-aW-S9r">
-                                <rect key="frame" x="102" y="728" width="210" height="31"/>
+                                <rect key="frame" x="102" y="733" width="210" height="31"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="既にアカウントをお持ちの方"/>
@@ -114,13 +114,24 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hk7-Wa-Kb6">
+                                <rect key="frame" x="291" y="643" width="45.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane" catalog="system" imagePlacement="trailing">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="reloadAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="zej-HK-ccC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0Mv-hU-AiE" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="06T-7N-LmT"/>
-                            <constraint firstItem="0Mv-hU-AiE" firstAttribute="top" secondItem="f5P-eo-Kha" secondAttribute="bottom" constant="30" id="ETz-BP-2qX"/>
-                            <constraint firstItem="s3B-aW-S9r" firstAttribute="top" secondItem="0Mv-hU-AiE" secondAttribute="bottom" constant="50" id="LZN-og-KGL"/>
+                            <constraint firstItem="0Mv-hU-AiE" firstAttribute="top" secondItem="f5P-eo-Kha" secondAttribute="bottom" constant="45" id="ETz-BP-2qX"/>
+                            <constraint firstItem="hk7-Wa-Kb6" firstAttribute="top" secondItem="f5P-eo-Kha" secondAttribute="bottom" constant="45" id="Iw5-xG-5IQ"/>
+                            <constraint firstItem="s3B-aW-S9r" firstAttribute="top" secondItem="0Mv-hU-AiE" secondAttribute="bottom" constant="40" id="LZN-og-KGL"/>
                             <constraint firstItem="f5P-eo-Kha" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Qi1-O4-Eb5"/>
                             <constraint firstItem="yhH-xo-dbz" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Yh7-2a-bm9"/>
                             <constraint firstItem="f5P-eo-Kha" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="aGD-BV-7Cn"/>
@@ -129,10 +140,12 @@
                             <constraint firstItem="s3B-aW-S9r" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="dHG-bm-i2X"/>
                             <constraint firstItem="AbK-qR-P1N" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="dvS-jq-YoV"/>
                             <constraint firstItem="yhH-xo-dbz" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="90" id="iS6-ZG-kOC"/>
+                            <constraint firstItem="hk7-Wa-Kb6" firstAttribute="leading" secondItem="0Mv-hU-AiE" secondAttribute="trailing" constant="34" id="qB7-bY-p8w"/>
                             <constraint firstItem="AbK-qR-P1N" firstAttribute="leading" secondItem="f5P-eo-Kha" secondAttribute="trailing" id="sox-Jk-Ksw"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alreadyButton" destination="s3B-aW-S9r" id="QGJ-az-ccd"/>
                         <outlet property="emailTextField" destination="wZP-95-KV6" id="xoy-sX-Ck4"/>
                         <outlet property="passwordTextField" destination="3qP-VQ-gNC" id="oGj-Gw-gFU"/>
                         <outlet property="registerButton" destination="0Mv-hU-AiE" id="eTN-YK-AqX"/>
@@ -146,6 +159,7 @@
     </scenes>
     <resources>
         <image name="eye.fill" catalog="system" width="128" height="78"/>
+        <image name="paperplane" catalog="system" width="128" height="118"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
